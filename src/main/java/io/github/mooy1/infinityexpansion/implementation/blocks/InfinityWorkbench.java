@@ -88,7 +88,7 @@ public class InfinityWorkbench extends AbstractContainer implements EnergyNetCom
         for (int i : STATUS_BORDER) {
             blockMenuPreset.addItem(i, MenuPreset.borderItemStatus, ChestMenuUtils.getEmptyClickHandler());
         }
-        blockMenuPreset.addItem(RECIPE_SLOT, new CustomItem(Material.BOOK, "&6Recipes"), ChestMenuUtils.getEmptyClickHandler());
+        blockMenuPreset.addItem(RECIPE_SLOT, new CustomItem(Material.BOOK, "&6配方"), ChestMenuUtils.getEmptyClickHandler());
         blockMenuPreset.addItem(STATUS_SLOT, MenuPreset.loadingItemBarrier, ChestMenuUtils.getEmptyClickHandler());
     }
 
@@ -118,9 +118,9 @@ public class InfinityWorkbench extends AbstractContainer implements EnergyNetCom
 
                 inv.replaceExistingItem(STATUS_SLOT, new CustomItem(
                         Material.RED_STAINED_GLASS_PANE,
-                        "&cNot enough energy!",
+                        "&c 没有足够的能量!",
                         "",
-                        "&aCharge: " + charge + "/" + ENERGY + " J",
+                        "&a充电: " + charge + "/" + ENERGY + " J",
                         ""
                 ));
 
@@ -152,19 +152,19 @@ public class InfinityWorkbench extends AbstractContainer implements EnergyNetCom
         int charge = getCharge(b.getLocation());
 
         if (charge < ENERGY) { //not enough energy
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "Not enough energy!", ChatColor.GREEN + "Charge: " + ChatColor.RED + charge + ChatColor.GREEN + "/" + ENERGY + " J");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "没有足够的能量!", ChatColor.GREEN + "Charge: " + ChatColor.RED + charge + ChatColor.GREEN + "/" + ENERGY + " J");
             return;
         }
         
         SlimefunItemStack output = getOutput(inv);
         
         if (output == null) { //invalid
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "Invalid Recipe!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "无效的配方!");
             return;
         }
             
         if (!inv.fits(output, OUTPUT_SLOTS)) { //not enough room
-            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "Not enough room!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "没有足够的空间!");
             return;
         }
 
@@ -174,7 +174,7 @@ public class InfinityWorkbench extends AbstractContainer implements EnergyNetCom
             }
         }
         
-        MessageUtils.message(p, ChatColor.GREEN + "Successfully crafted: " + ChatColor.WHITE + output.getDisplayName());
+        MessageUtils.message(p, ChatColor.GREEN + "成功制作: " + ChatColor.WHITE + output.getDisplayName());
 
         inv.pushItem(output.clone(), OUTPUT_SLOTS);
         setCharge(b.getLocation(), 0);
