@@ -159,12 +159,12 @@ public abstract class Crafter extends AbstractContainer {
         if (output == null) { //invalid
 
             inv.replaceExistingItem(STATUS_SLOT, MenuPreset.invalidRecipe);
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "Invalid Recipe!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "无效的配方!");
 
         } else if (!inv.fits(output.getFirstValue(), OUTPUT_SLOTS)) { //not enough room
 
             inv.replaceExistingItem(STATUS_SLOT, MenuPreset.notEnoughRoom);
-            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "Not enough room!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "空间不足!");
 
         } else { //enough room
             
@@ -173,7 +173,7 @@ public abstract class Crafter extends AbstractContainer {
                     inv.consumeItem(INPUT_SLOTS[i], output.getSecondValue()[i]);
                 }
             }
-            MessageUtils.messageWithCD(p, 1000, ChatColor.GREEN + "Crafted: " + ItemUtils.getItemName(output.getFirstValue()));
+            MessageUtils.messageWithCD(p, 1000, ChatColor.GREEN + "已合成: " + ItemUtils.getItemName(output.getFirstValue()));
             
             postCraft(inv.getLocation(), inv, p);
 
