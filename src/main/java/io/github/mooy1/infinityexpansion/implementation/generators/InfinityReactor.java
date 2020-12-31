@@ -74,11 +74,11 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
         }
         for (int i : MenuPreset.slotChunk3) {
             blockMenuPreset.addItem(i, new CustomItem(
-                    Material.BLACK_STAINED_GLASS_PANE, "&8Void Ingot Input"), ChestMenuUtils.getEmptyClickHandler());
+                    Material.BLACK_STAINED_GLASS_PANE, "&8空锭输入"), ChestMenuUtils.getEmptyClickHandler());
         }
         for (int i : MenuPreset.slotChunk1) {
             blockMenuPreset.addItem(i, new CustomItem(
-                    Material.WHITE_STAINED_GLASS_PANE, "&fInfinity Ingot Input"), ChestMenuUtils.getEmptyClickHandler());
+                    Material.WHITE_STAINED_GLASS_PANE, "&f无限锭输入"), ChestMenuUtils.getEmptyClickHandler());
         }
         blockMenuPreset.addItem(STATUS_SLOT, MenuPreset.loadingItemRed, ChestMenuUtils.getEmptyClickHandler());
     }
@@ -135,7 +135,7 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
             if (!Objects.equals(StackUtils.getItemID(inv.getItemInSlot(INPUT_SLOTS[0]), false), "INFINITE_INGOT")) { //wrong input
 
                 if (playerWatching) {
-                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cInput more &fInfinity Ingots"));
+                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.RED_STAINED_GLASS_PANE, "&c放入更多的 &f无限锭"));
                 }
                 return 0;
 
@@ -144,7 +144,7 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
             if (!Objects.equals(StackUtils.getItemID(inv.getItemInSlot(INPUT_SLOTS[1]), false), "VOID_INGOT")) { //wrong input
 
                 if (playerWatching) {
-                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cInput more &8Void Ingots"));
+                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.RED_STAINED_GLASS_PANE, "&c放入更多的 &8空锭"));
                 }
                 return 0;
 
@@ -153,9 +153,9 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
             //correct input
             if (playerWatching) {
                 inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE,
-                                "&aStarting Generation",
-                                "&aTime until infinity ingot needed: " + INFINITY_INTERVAL,
-                                "&aTime until void ingot needed: " + VOID_INTERVAL
+                                "&a开始代",
+                                "&a直到需要无限锭的时间: " + INFINITY_INTERVAL,
+                                "&a直到需要空锭的时间: " + VOID_INTERVAL
                         ));
             }
             inv.consumeItem(INPUT_SLOTS[0]);
@@ -168,7 +168,7 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
         if (progress >= INFINITY_INTERVAL) { //done
 
             if (playerWatching) {
-                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aFinished Generation"));
+                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a成品代"));
             }
             setProgress(b, 0);
             return ENERGY;
@@ -180,7 +180,7 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
             if (!Objects.equals(StackUtils.getItemID(inv.getItemInSlot(INPUT_SLOTS[1]), false), "VOID_INGOT")) { //wrong input
 
                 if (playerWatching) {
-                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.RED_STAINED_GLASS_PANE, "&cInput more &8Void Ingots"));
+                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.RED_STAINED_GLASS_PANE, "&c放入更多的 &8空锭"));
                 }
                 return 0;
 
@@ -189,9 +189,9 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
             //right input
             if (playerWatching) {
                 inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE,
-                                "&aGenerating...",
-                                "&aTime until infinity ingot needed: " + (INFINITY_INTERVAL - progress),
-                                "&aTime until void ingot needed: " + (VOID_INTERVAL - Math.floorMod(progress, VOID_INTERVAL))
+                                "&a发电中...",
+                                "&a直到需要无限锭的时间: " + (INFINITY_INTERVAL - progress),
+                                "&a直到需要空锭的时间: " + (VOID_INTERVAL - Math.floorMod(progress, VOID_INTERVAL))
                         ));
             }
             setProgress(b, progress + 1);
@@ -204,9 +204,9 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
 
         if (playerWatching) {
             inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE,
-                            "&aGenerating...",
-                            "&aTime until infinity ingot needed: " + (INFINITY_INTERVAL - progress),
-                            "&aTime until void ingot needed: " + (VOID_INTERVAL - Math.floorMod(progress, VOID_INTERVAL))
+                            "&a产生中...",
+                            "&a直到需要无限锭的时间: " + (INFINITY_INTERVAL - progress),
+                            "&a直到需要空锭的时间: " + (VOID_INTERVAL - Math.floorMod(progress, VOID_INTERVAL))
                     )
             );
         }
@@ -231,12 +231,12 @@ public class InfinityReactor extends AbstractContainer implements EnergyNetProvi
         List<ItemStack> items = new ArrayList<>();
 
         ItemStack item = Items.INFINITE_INGOT.clone();
-        LoreUtils.addLore(item, "", "Lasts for 1 day");
+        LoreUtils.addLore(item, "", "持续1天");
         items.add(item);
         items.add(null);
 
         item = Items.VOID_INGOT.clone();
-        LoreUtils.addLore(item, "", "Lasts for 4 hours");
+        LoreUtils.addLore(item, "", "持续4小时");
         items.add(item);
         items.add(null);
 
