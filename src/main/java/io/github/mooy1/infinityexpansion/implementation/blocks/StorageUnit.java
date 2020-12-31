@@ -101,7 +101,7 @@ public class StorageUnit extends AbstractContainer implements LoreStorage {
 
                         int i = 0;
                         for (String line : lore) {
-                            if (ChatColor.stripColor(line).equals("Stored Item:")) {
+                            if (ChatColor.stripColor(line).equals("储存物品:")) {
                                 Player p = e.getPlayer();
 
                                 String storedItem = ChatColor.stripColor(lore.get(i + 1));
@@ -110,7 +110,7 @@ public class StorageUnit extends AbstractContainer implements LoreStorage {
                                 String stored = ChatColor.stripColor(lore.get(i + 3));
                                 setStored(b, Integer.parseInt(stored));
 
-                                MessageUtils.message(p, ChatColor.GREEN + "Stored items transferred to placed item");
+                                MessageUtils.message(p, ChatColor.GREEN + "已存储的物料转移到已放置的物料");
 
                                 break;
                             }
@@ -142,9 +142,9 @@ public class StorageUnit extends AbstractContainer implements LoreStorage {
 
                 stored = getStored(b);
 
-                LoreUtils.addLore(drop, "", ChatColor.AQUA + "Stored Item:", ChatColor.GREEN + storedItem, ChatColor.AQUA + "Amount:", ChatColor.GREEN + String.valueOf(stored));
+                LoreUtils.addLore(drop, "", ChatColor.AQUA + "储存物品:", ChatColor.GREEN + storedItem, ChatColor.AQUA + "数量:", ChatColor.GREEN + String.valueOf(stored));
 
-                MessageUtils.message(p, ChatColor.GREEN + "Stored items transferred to dropped item");
+                MessageUtils.message(p, ChatColor.GREEN + "已存储的物料已转移到放置的物料");
 
             } else {
                 inv.dropItems(l, INPUT_SLOTS);
@@ -390,7 +390,7 @@ public class StorageUnit extends AbstractContainer implements LoreStorage {
 
                         lines.setLine(0, ChatColor.AQUA + "------------");
                         lines.setLine(1, ChatColor.WHITE + name);
-                        lines.setLine(2, ChatColor.GRAY + "Stored: " + stored);
+                        lines.setLine(2, ChatColor.GRAY + "已储存: " + stored);
                         lines.setLine(3, ChatColor.AQUA + "------------");
 
                         lines.update();
@@ -427,9 +427,9 @@ public class StorageUnit extends AbstractContainer implements LoreStorage {
     @Nonnull
     public static ItemStack makeDisplayItem(int max, @Nonnull ItemStack storedItemStack, int stored, boolean infinity) {
         
-        String stacksLine = "&7Stacks: " + LorePreset.format(Math.round((float) stored / storedItemStack.getMaxStackSize()));
+        String stacksLine = "&7组: " + LorePreset.format(Math.round((float) stored / storedItemStack.getMaxStackSize()));
         
-        String storedLine = "&6Stored: &e" + LorePreset.format(stored) + (infinity ? "" : "/" + LorePreset.format(max) + " &7(" + Math.round((float) 100 * stored / max )  + "%)");
+        String storedLine = "&6已储存: &e" + LorePreset.format(stored) + (infinity ? "" : "/" + LorePreset.format(max) + " &7(" + Math.round((float) 100 * stored / max )  + "%)");
         
         ItemStack item = new CustomItem(
                 storedItemStack,
