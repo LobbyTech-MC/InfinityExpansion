@@ -138,7 +138,7 @@ public class StrainerBase extends AbstractContainer implements RecipeDisplayItem
             if (!waterlogged.isWaterlogged()) {
 
                 if (playerWatching) {
-                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&cMust be in water!"));
+                    inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&c必须在水中!"));
                 }
 
                 return;
@@ -154,7 +154,7 @@ public class StrainerBase extends AbstractContainer implements RecipeDisplayItem
         if (speed == 0) {
 
             if (playerWatching) {
-                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&cInput a Strainer!"));
+                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&c输入过滤器!"));
             }
 
             return;
@@ -165,7 +165,7 @@ public class StrainerBase extends AbstractContainer implements RecipeDisplayItem
         if (!RandomUtils.chanceIn(TIME / speed)) {
 
             if (playerWatching) {
-                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aCollecting..."));
+                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a收集中..."));
             }
 
             return;
@@ -195,7 +195,7 @@ public class StrainerBase extends AbstractContainer implements RecipeDisplayItem
         inv.pushItem(output, OUTPUT_SLOTS);
 
         if (playerWatching) {
-            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aMaterial Collected!"));
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a物料已收集!"));
         }
 
         //reduce durability
@@ -242,7 +242,7 @@ public class StrainerBase extends AbstractContainer implements RecipeDisplayItem
         return 0;
     }
 
-    private static final ItemStack potato = new CustomItem(Material.POTATO, "&7:&6Potatofish&7:", "&eLucky");
+    private static final ItemStack potato = new CustomItem(Material.POTATO, "&7:&6土豆鱼&7:", "&e幸运的");
 
     /**
      * This method will try to output a lucky potatofish
@@ -252,7 +252,7 @@ public class StrainerBase extends AbstractContainer implements RecipeDisplayItem
     private static void fish(BlockMenu inv) {
         if (inv.fits(potato, OUTPUT_SLOTS)) {
             inv.pushItem(potato, OUTPUT_SLOTS);
-            MessageUtils.messagePlayersInInv(inv, ChatColor.YELLOW + "You caught a lucky fish! ... potato?");
+            MessageUtils.messagePlayersInInv(inv, ChatColor.YELLOW + "你抓到了幸运鱼! ... 土豆?");
         }
     }
 
