@@ -121,14 +121,14 @@ public class VeinMinerRune extends SlimefunItem implements Listener, NotPlaceabl
                         setVeinMiner(itemStack, true);
                         l.getWorld().dropItemNaturally(l, itemStack);
 
-                        MessageUtils.message(p, ChatColor.GREEN + "Added Vein Miner to tool!");
+                        MessageUtils.message(p, ChatColor.GREEN + "向工具添加了矿工!");
                     } else {
-                        MessageUtils.message(p, ChatColor.RED + "Failed to add vein miner!");
+                        MessageUtils.message(p, ChatColor.RED + "添加矿工失败!");
                     }
                 }, 10L);
                 
             } else {
-                MessageUtils.message(p, ChatColor.RED + "Failed to add vein miner!");
+                MessageUtils.message(p, ChatColor.RED + "添加矿工失败!");
             }
         }
     }
@@ -196,7 +196,7 @@ public class VeinMinerRune extends SlimefunItem implements Listener, NotPlaceabl
         }
             
         if (p.getFoodLevel() == 0) {
-            MessageUtils.messageWithCD(p, 500, ChatColor.GOLD + "You are too tired to vein-mine!");
+            MessageUtils.messageWithCD(p, 500, ChatColor.GOLD + "你太累了，无法挖矿!");
             return;
         }
         
@@ -210,7 +210,7 @@ public class VeinMinerRune extends SlimefunItem implements Listener, NotPlaceabl
 
         Long prev = CDS.get(p.getUniqueId());
         if (prev != null && System.currentTimeMillis() - prev < CD) {
-            MessageUtils.messageWithCD(p, 500, ChatColor.GOLD + "Wait " + ChatColor.YELLOW + (CD - (System.currentTimeMillis() - prev)) + ChatColor.GOLD + " ms before using again!");
+            MessageUtils.messageWithCD(p, 500, ChatColor.GOLD + "等待 " + ChatColor.YELLOW + (CD - (System.currentTimeMillis() - prev)) + ChatColor.GOLD + " ms before using again!");
             return;
         }
         CDS.put(p.getUniqueId(), System.currentTimeMillis());
