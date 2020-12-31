@@ -65,6 +65,6 @@ public class StorageForge extends Crafter {
 
     @Override
     public void postCraft(@Nonnull Location l, @Nonnull BlockMenu inv, @Nonnull Player p) {
-        MessageUtils.message(p, ChatColor.GREEN + "Transferred items to upgraded unit");
+        MessageUtils.message(p, ChatColor.GREEN + "将物品转移到升级的单位");
     }
 }
