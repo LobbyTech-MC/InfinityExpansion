@@ -128,7 +128,7 @@ public class ConversionMachine extends AbstractContainer implements RecipeDispla
             inv.pushItem(pair.getFirstValue(), OUTPUT_SLOTS);
             removeCharge(b.getLocation(), energy);
             if (inv.hasViewer()) {
-                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aConverting..."));
+                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a转换中..."));
             }
 
         } else if (inv.hasViewer()) {
