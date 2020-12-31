@@ -130,18 +130,18 @@ public class EnergyGenerator extends AbstractContainer implements EnergyNetProvi
 
                 inv.replaceExistingItem(4, new CustomItem(
                         Material.GREEN_STAINED_GLASS_PANE,
-                        "&cNot generating",
-                        "&7Stored: &6" + LorePreset.format(stored) + " J"
+                        "&c没有发电",
+                        "&7已储存: &6" + LorePreset.format(stored) + " J"
                 ));
 
             } else {
                 
                 inv.replaceExistingItem(4, new CustomItem(
                         Material.GREEN_STAINED_GLASS_PANE,
-                        "&aGeneration",
-                        "&7Type: &6" + pair.getSecondValue(),
-                        "&7Generating: &6" + LorePreset.roundHundreds(rate * PluginUtils.TICK_RATIO) + " J/s ",
-                        "&7Stored: &6" + LorePreset.format(stored) + " J"
+                        "&a代",
+                        "&7类型: &6" + pair.getSecondValue(),
+                        "&7发电中: &6" + LorePreset.roundHundreds(rate * PluginUtils.TICK_RATIO) + " J/s ",
+                        "&7已储存: &6" + LorePreset.format(stored) + " J"
                 ));
             }
         }
@@ -170,34 +170,34 @@ public class EnergyGenerator extends AbstractContainer implements EnergyNetProvi
         } else if (world.getEnvironment() == World.Environment.NETHER) {
             
             if (this.type.isOverworld()) {
-                return new Pair<>(generation * 2, "Geothermal - Nether");
+                return new Pair<>(generation * 2, "地热-下界");
             }
 
             if (this.type.isNight() || this.type.isNether()) {
-                return new Pair<>(generation, "Nether");
+                return new Pair<>(generation, "下界");
             }
             
         } else if (world.getEnvironment() == World.Environment.THE_END) {
             
             if (this.type.isEnd() || this.type.isNight()) {
-                return new Pair<>(generation, "End");
+                return new Pair<>(generation, "末地");
             }
             
         } else if (world.getEnvironment() == World.Environment.NORMAL) {
 
             if (this.type.isOverworld()) {
-                return new Pair<>(generation, "Geothermal");
+                return new Pair<>(generation, "地热");
             }
 
             if (world.getTime() >= 13000 || block.getLocation().add(0, 1, 0).getBlock().getLightFromSky() != 15) {
 
                 if (this.type.isNight()) {
-                    return new Pair<>(generation, "Night");
+                    return new Pair<>(generation, "晚上");
                 }
 
             } else if (this.type.isDay()) {
 
-                return new Pair<>(generation, "Day");
+                return new Pair<>(generation, "白天");
             }
         }
 
