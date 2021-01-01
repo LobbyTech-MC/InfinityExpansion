@@ -34,7 +34,7 @@ public final class RecipeUtils {
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GREEN + "");
         lore.add(ChatColor.GREEN + "-------------------");
-        lore.add(ChatColor.GREEN + "\u21E8 Click to craft");
+        lore.add(ChatColor.GREEN + "\u21E8 点击制作");
         lore.add(ChatColor.GREEN + "-------------------");
         
         LoreUtils.addLore(output, lore);
