@@ -36,7 +36,7 @@ public class InfinityExpansion extends JavaPlugin implements SlimefunAddon {
         instance = this;
         
         PluginUtils.setup(this, "Mooy1/InfinityExpansion/master", getFile());
-        MessageUtils.setPrefix(ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "Infinity" + ChatColor.GRAY + "Expansion" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ");
+        MessageUtils.setPrefix(ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "无限" + ChatColor.GRAY + "拓展" + ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + " ");
         new CommandLib(this, "infinityexpansion", "infinityexpansion.admin", "/ie, /ix, /infinity");
         CommandLib.addCommands(new Changelog(), new GiveRecipe(), new ResetConfig());
         setupConfigOptions(getConfig());
