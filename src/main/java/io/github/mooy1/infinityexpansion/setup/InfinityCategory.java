@@ -82,11 +82,11 @@ public class InfinityCategory extends FlexCategory implements Listener {
             7, 16, 17
     };
     private static final ItemStack BENCH = new CustomItem(Material.NETHER_STAR,
-            "&bCreate the recipe from items in your inventory: ",
-            "&aLeft-Click to move 1 set",
-            "&aRight-Click to move as many sets as possible"
+            "&b从库存中的项目创建配方: ",
+            "&a左键移动1套",
+            "&a右键单击以移动尽可能多的集合"
     );
-    private static final ItemStack INFO = new CustomItem(Material.CYAN_STAINED_GLASS_PANE, "&3Info");
+    private static final ItemStack INFO = new CustomItem(Material.CYAN_STAINED_GLASS_PANE, "&3信息");
     
     private static final HashMap<UUID, String> history = new HashMap<>();
 
