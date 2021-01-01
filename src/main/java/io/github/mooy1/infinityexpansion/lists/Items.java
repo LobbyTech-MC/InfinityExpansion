@@ -78,7 +78,7 @@ public final class Items {
             "&7slimefun物品（如果它们已过时或损坏）",
             "&收费和可升级物品将被重置!",
             "",
-            LorePreset.energy(ItemUpdater.ENERGY) + "每个物品"
+            LorePreset.energy(ItemUpdater.ENERGY) + "per item"
     );
     public static final SlimefunItemStack POWERED_BEDROCK = new SlimefunItemStack(
             "POWERED_BEDROCK",
@@ -102,7 +102,7 @@ public final class Items {
     public static final SlimefunItemStack INFINITE_VOID_HARVESTER = new SlimefunItemStack(
             "INFINITE_VOID_HARVESTER",
             Material.CRYING_OBSIDIAN,
-            "&b无尽 &8虚空收割机",
+            "&b无尽&8虚空收割机",
             "&7收集 &8虚空&7碎片...",
             "",
             LorePreset.speed(VoidHarvester.INFINITY_SPEED),
@@ -121,7 +121,7 @@ public final class Items {
     public static final SlimefunItemStack INFINITY_CONSTRUCTOR = new SlimefunItemStack(
             "INFINITY_CONSTRUCTOR",
             Material.CHISELED_QUARTZ_BLOCK,
-            "&b无尽 &f构造机",
+            "&b无尽&f构造机",
             "&7快速的聚集大量能源",
             "",
             LorePreset.speed(SingularityConstructor.INFINITY_SPEED),
@@ -134,7 +134,7 @@ public final class Items {
             "&6资源合成器",
             "&7非同寻常地创造资源",
             "",
-            LorePreset.energy(ResourceSynthesizer.ENERGY) + "每次使用"
+            LorePreset.energy(ResourceSynthesizer.ENERGY) + "per use"
     );
 
     public static final SlimefunItemStack INFINITY_REACTOR = new SlimefunItemStack(
@@ -164,13 +164,13 @@ public final class Items {
             "&7即时收费项目",
             "",
             LorePreset.speed(SlimefunConstructors.INFINITY_CHARGER_SPEED),
-            LorePreset.energy(SlimefunConstructors.INFINITY_CHARGER_ENERGY) + "每次使用"
+            LorePreset.energy(SlimefunConstructors.INFINITY_CHARGER_ENERGY) + "per use"
     );
     public static final SlimefunItemStack ADVANCED_NETHER_STAR_REACTOR = new SlimefunItemStack(
             "ADVANCED_NETHER_STAR_REACTOR",
             HeadTexture.NETHER_STAR_REACTOR,
             "&c高级下届反应堆",
-            "&f幽冥之星",
+            "&f需要下界之星",
             "&b必须被水包围",
             "&b必须配备低温冷却液电池",
             "&4导致附近的实体枯萎",
@@ -248,7 +248,7 @@ public final class Items {
     public static final SlimefunItemStack ADVANCED_ENCHANTER = new SlimefunItemStack(
             "ADVANCED_ENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&c高级附魔器",
+            "&c高级附魔师",
             "",
             LorePreset.speed(SlimefunConstructors.ADVANCED_EN_SPEED),
             LorePreset.energyPerSecond(SlimefunConstructors.ADVANCED_EN_ENERGY)
@@ -256,7 +256,7 @@ public final class Items {
     public static final SlimefunItemStack ADVANCED_DISENCHANTER = new SlimefunItemStack(
             "ADVANCED_DISENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&c高级祛魔器",
+            "&c高级祛魔者",
             "",
             LorePreset.speed(SlimefunConstructors.ADVANCED_DIS_SPEED),
             LorePreset.energyPerSecond(SlimefunConstructors.ADVANCED_DIS_ENERGY)
@@ -264,18 +264,18 @@ public final class Items {
     public static final SlimefunItemStack INFINITY_ENCHANTER = new SlimefunItemStack(
             "INFINITY_ENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&b无限附魔器",
+            "&b无限附魔师",
             "",
             LorePreset.speed(SlimefunConstructors.INFINITY_EN_SPEED),
-            LorePreset.energy(SlimefunConstructors.INFINITY_EN_ENERGY) + "每次使用"
+            LorePreset.energy(SlimefunConstructors.INFINITY_EN_ENERGY) + "per use"
     );
     public static final SlimefunItemStack INFINITY_DISENCHANTER = new SlimefunItemStack(
             "INFINITY_DISENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&b无限驱魔器",
+            "&b无限驱魔者",
             "",
             LorePreset.speed(SlimefunConstructors.INFINITY_DIS_SPEED),
-            LorePreset.energy(SlimefunConstructors.INFINITY_DIS_ENERGY) + "每次使用"
+            LorePreset.energy(SlimefunConstructors.INFINITY_DIS_ENERGY) + "per use"
     );
     public static final SlimefunItemStack INFINITY_WORKBENCH = new SlimefunItemStack(
             "INFINITY_FORGE",
@@ -283,7 +283,7 @@ public final class Items {
             "&6无限工作台",
             "&7用来制作无限的物品",
             "",
-            LorePreset.energy(InfinityWorkbench.ENERGY) + "每个物品"
+            LorePreset.energy(InfinityWorkbench.ENERGY) + "per item"
     );
 
     public static final SlimefunItemStack ADVANCED_ANVIL = new SlimefunItemStack(
@@ -293,7 +293,7 @@ public final class Items {
             "&7组合工具和装备附魔，有时还会升级",
             "&b使用Slimefun项目",
             "",
-            LorePreset.energy(AdvancedAnvil.ENERGY) + "每次使用"
+            LorePreset.energy(AdvancedAnvil.ENERGY) + "per use"
 
     );
     public static final SlimefunItemStack DECOMPRESSOR = new SlimefunItemStack(
@@ -310,17 +310,17 @@ public final class Items {
             "INFINITY_CAPACITOR",
             HeadTexture.CAPACITOR_25,
             "&b无限电容",
-            "&c&o懂得都懂md累死了 ",
+            "&c&o无&a&o限&b&o电&e&o量",
             "&c&o1 懒得译了电容嘛懂得都懂",
             "",
-            "&8\u21E8 &e\u26A1 &b无限 &7J 容量"
+            "&8\u21E8 &e\u26A1 &bInfinite &7J Capacity"
     );
     public static final SlimefunItemStack VOID_CAPACITOR = new SlimefunItemStack(
             "VOID_CAPACITOR",
             HeadTexture.CAPACITOR_25,
-            "&8虚空电容",
+            "&8空电容器",
             "",
-            "&8\u21E8 &e\u26A1 " + LorePreset.roundHundreds(SlimefunConstructors.VOID_CAPACITOR) + " &7J 容量"
+            "&8\u21E8 &e\u26A1 " + LorePreset.roundHundreds(SlimefunConstructors.VOID_CAPACITOR) + " &7J Capacity"
     );
     public static final SlimefunItemStack HYDRO_GENERATOR = new SlimefunItemStack(
             "HYDRO_GENERATOR",
@@ -334,7 +334,7 @@ public final class Items {
     public static final SlimefunItemStack REINFORCED_HYDRO_GENERATOR = new SlimefunItemStack(
             "REINFORCED_HYDRO_GENERATOR",
             Material.END_STONE_BRICK_WALL,
-            "&f加筋的 &9水合作用",
+            "&f强化&9水轮发电机",
             "&7产生大量的能量。",
             "&7从水的运动",
             "",
@@ -353,7 +353,7 @@ public final class Items {
     public static final SlimefunItemStack REINFORCED_GEOTHERMAL_GENERATOR = new SlimefunItemStack(
             "REINFORCED_GEOTHERMAL_GENERATOR",
             Material.SHROOMLIGHT,
-            "&f加强的 &c地热生成",
+            "&f强化&c地热发电机",
             "&7产生大量的能量。",
             "&7从世界的热量。",
             "",
@@ -363,7 +363,7 @@ public final class Items {
     public static final SlimefunItemStack BASIC_PANEL = new SlimefunItemStack(
             "BASIC_PANEL",
             Material.BLUE_GLAZED_TERRACOTTA,
-            "&9基本太阳能电池板",
+            "&9初级太阳能电池板",
             "&7从太阳产生能量。",
             "",
             LorePreset.energyBuffer(EnergyGenerator.BASIC_STORAGE),
@@ -381,7 +381,7 @@ public final class Items {
     public static final SlimefunItemStack CELESTIAL_PANEL = new SlimefunItemStack(
             "CELESTIAL_PANEL",
             Material.YELLOW_GLAZED_TERRACOTTA,
-            "&e天体板",
+            "&e太阳能电池板",
             "&7从太阳产生能量。",
             "",
             LorePreset.energyBuffer(EnergyGenerator.CELE_STORAGE),
@@ -409,7 +409,7 @@ public final class Items {
     public static final SlimefunItemStack BASIC_TREE_GROWER = new SlimefunItemStack(
             "BASIC_TREE_GROWER",
             Material.STRIPPED_OAK_WOOD,
-            "&9基本的 &2种树人",
+            "&9初级 &2种树机器人",
             "&7自动生长、收获和重新种植树木",
             "",
             LorePreset.speed(TreeGrower.SPEED1),
@@ -418,7 +418,7 @@ public final class Items {
     public static final SlimefunItemStack ADVANCED_TREE_GROWER = new SlimefunItemStack(
             "ADVANCED_TREE_GROWER",
             Material.STRIPPED_ACACIA_WOOD,
-            "&c高级的 &2种树机",
+            "&c高级&2种树机器人",
             "&7自动生长、收获和重新种植树木",
             "",
             LorePreset.speed(TreeGrower.SPEED2),
@@ -427,7 +427,7 @@ public final class Items {
     public static final SlimefunItemStack INFINITY_TREE_GROWER = new SlimefunItemStack(
             "INFINITY_TREE_GROWER",
             Material.STRIPPED_WARPED_HYPHAE,
-            "&b无尽 &2种树机",
+            "&b无尽&2种树机器人",
             "&7自动生长、收获和重新种植树木",
             "",
             LorePreset.speed(TreeGrower.SPEED3),
@@ -437,7 +437,7 @@ public final class Items {
     public static final SlimefunItemStack BASIC_VIRTUAL_FARM = new SlimefunItemStack(
             "BASIC_VIRTUAL_FARM",
             Material.GRASS_BLOCK,
-            "&9基本的 &a虚拟农场",
+            "&9初级&a虚拟农场",
             "&7自动生长、收获和再植作物自动生长、收获和再植作物",
             "",
             LorePreset.speed(VirtualFarm.SPEED1),
@@ -446,7 +446,7 @@ public final class Items {
     public static final SlimefunItemStack ADVANCED_VIRTUAL_FARM = new SlimefunItemStack(
             "ADVANCED_VIRTUAL_FARM",
             Material.CRIMSON_NYLIUM,
-            "&c高级的 &a虚拟农场",
+            "&c高级&a虚拟农场",
             "&7自动生长、收获和重新种植作物",
             "",
             LorePreset.speed(VirtualFarm.SPEED2),
@@ -455,7 +455,7 @@ public final class Items {
     public static final SlimefunItemStack INFINITY_VIRTUAL_FARM = new SlimefunItemStack(
             "INFINITY_VIRTUAL_FARM",
             Material.WARPED_NYLIUM,
-            "&b无尽 &a虚拟农场",
+            "&b无尽&a虚拟农场",
             "&7自动生长、收获和重新种植作物",
             "",
             LorePreset.speed(VirtualFarm.SPEED3),
@@ -476,7 +476,7 @@ public final class Items {
     public static final SlimefunItemStack BASIC_COBBLE_GEN = new SlimefunItemStack(
             "BASIC_COBBLE_GEN",
             Material.LIGHT_GRAY_CONCRETE,
-            "&9基本的 &8圆石发电机",
+            "&9初级&8圆石发电机",
             "",
             LorePreset.speed(MaterialGenerator.COBBLE_SPEED),
             LorePreset.energyPerSecond(MaterialGenerator.COBBLE_ENERGY)
@@ -484,7 +484,7 @@ public final class Items {
     public static final SlimefunItemStack ADVANCED_COBBLE_GEN = new SlimefunItemStack(
             "ADVANCED_COBBLE_GEN",
             Material.GRAY_CONCRETE,
-            "&c高级的 &8圆石发电机",
+            "&c高级&8鹅卵石发电机",
             "",
             LorePreset.speed(MaterialGenerator.COBBLE2_SPEED),
             LorePreset.energyPerSecond(MaterialGenerator.COBBLE2_ENERGY)
@@ -503,31 +503,31 @@ public final class Items {
     public static final SlimefunItemStack BASIC_STORAGE = new SlimefunItemStack(
             "BASIC_STORAGE",
             Material.OAK_WOOD,
-            "&9基本的 &8存储单元",
+            "&9初级&8存储单元",
             LorePreset.storesItem(StorageUnit.BASIC)
     );
     public static final SlimefunItemStack ADVANCED_STORAGE = new SlimefunItemStack(
             "ADVANCED_STORAGE",
             Material.DARK_OAK_WOOD,
-            "&c高级的 &8存储单元",
+            "&c高级&8存储单元",
             LorePreset.storesItem(StorageUnit.ADVANCED)
     );
     public static final SlimefunItemStack REINFORCED_STORAGE = new SlimefunItemStack(
             "REINFORCED_STORAGE",
             Material.ACACIA_WOOD,
-            "&f加强的 &8存储单元",
+            "&f强化&8存储单元",
             LorePreset.storesItem(StorageUnit.REINFORCED)
     );
     public static final SlimefunItemStack VOID_STORAGE = new SlimefunItemStack(
             "VOID_STORAGE",
             Material.CRIMSON_HYPHAE,
-            "&8OID存储单元",
+            "&8量子存储单元",
             LorePreset.storesItem(StorageUnit.VOID)
     );
     public static final SlimefunItemStack INFINITY_STORAGE = new SlimefunItemStack(
             "INFINITY_STORAGE",
             Material.WARPED_HYPHAE,
-            "&b无穷的 &8存储单元",
+            "&b无限&8存储单元",
             "&6容量:&e无限"
             "&a神级储存单元！"
     );
@@ -542,7 +542,7 @@ public final class Items {
     public static final SlimefunItemStack ADVANCED_GEO_MINER = new SlimefunItemStack(
             "ADVANCED_GEO_MINER",
             HeadTexture.GEO_MINER,
-            "&c高级的 &f地质采矿机",
+            "&c高级&f地质采矿机",
             "&7速度更快的地质采矿机",
             "",
             LorePreset.speed(SlimefunConstructors.ADVANCED_GEO_SPEED),
@@ -586,16 +586,16 @@ public final class Items {
     public static final SlimefunItemStack DATA_INFUSER = new SlimefunItemStack(
             "DATA_INFUSER",
             Material.LODESTONE,
-            "&8实体数据注入程序",
-            "&7注入空数据卡与实体物品。",
+            "&8MOB数据注入程序",
+            "&7注入空数据卡与暴徒项目。",
             "",
-            LorePreset.energy(MobDataInfuser.ENERGY) + "每次使用"
+            LorePreset.energy(MobDataInfuser.ENERGY) + "per use"
     );
     public static final SlimefunItemStack MOB_SIMULATION_CHAMBER = new SlimefunItemStack(
             "MOB_SIMULATION_CHAMBER",
             Material.GILDED_BLACKSTONE,
-            "&8实体模拟室",
-            "&7使用实体数据卡激活",
+            "&8MOB模拟室",
+            "&7使用Mob数据卡激活",
             "",
             LorePreset.energyBuffer(MobSimulationChamber.BUFFER),
             LorePreset.energyPerSecond(MobSimulationChamber.ENERGY)
@@ -604,7 +604,7 @@ public final class Items {
             "EMPTY_DATA_CARD",
             Material.CHAINMAIL_CHESTPLATE,
             "&8空数据卡",
-            "&7注入实体的物品来填充。"
+            "&7注入暴民的物品来填充。"
     );
 
     
@@ -617,6 +617,8 @@ public final class Items {
             InfinityExpansion.getInstance().getName().toUpperCase(Locale.ROOT) + "_ADDON_INFO",
             Material.NETHER_STAR,
             "&b附加信息",
+            "&c汉化者:&amc"
+            "&e翻译有什么问题请联系翻译者"
             "&f版本: &7" + InfinityExpansion.getInstance().getPluginVersion(),
             "",
             "&bDiscord: &b@&7Riley&8#5911",
@@ -636,7 +638,7 @@ public final class Items {
     public static final SlimefunItemStack MAGNONIUM = new SlimefunItemStack(
             "MAGNONIUM",
             Material.NETHER_BRICK,
-            "&5马格诺宁"
+            "&5强化奇点锭"
     );
     public static final SlimefunItemStack TITANIUM = new SlimefunItemStack(
             "TITANIUM",
@@ -646,7 +648,7 @@ public final class Items {
     public static final SlimefunItemStack MYTHRIL = new SlimefunItemStack(
             "MYTHRIL",
             Material.IRON_INGOT,
-            "&b米什里尔"
+            "&b强化奇点锭"
     );
     public static final SlimefunItemStack ADAMANTITE = new SlimefunItemStack(
             "ADAMANTITE",
@@ -664,7 +666,7 @@ public final class Items {
     public static final SlimefunItemStack VOID_BIT = new SlimefunItemStack(
             "VOID_BIT",
             Material.IRON_NUGGET,
-            "&8空位",
+            "&8虚空粒子",
             "&7&感觉.很空虚。"
     );
     public static final SlimefunItemStack VOID_DUST = new SlimefunItemStack(
@@ -684,7 +686,7 @@ public final class Items {
     public static final SlimefunItemStack ENDER_ESSENCE = new SlimefunItemStack(
             "END_ESSENCE",
             Material.BLAZE_POWDER,
-            "&5恩德香精",
+            "&5赤焰",
             "&8&o从尽头的深处."
     );
 
@@ -709,7 +711,7 @@ public final class Items {
     public static final SlimefunItemStack INFINITE_MACHINE_CIRCUIT = new SlimefunItemStack(
             "INFINITE_MACHINE_CIRCUIT",
             Material.DIAMOND,
-            "&b无限的&6机器电路",
+            "&b无限&6机器电路",
             "&7机器部件"
     );
     public static final SlimefunItemStack MACHINE_CORE = new SlimefunItemStack(
@@ -730,20 +732,20 @@ public final class Items {
     public static final SlimefunItemStack COMPRESSED_COBBLESTONE_1 = new SlimefunItemStack(
             "COMPRESSED_COBBLESTONE_1",
             Material.ANDESITE,
-            "&7单层压缩圆石",
-            "&89.圆石组合"
+            "&7一层压缩圆石",
+            "&89块圆石"
     );
     public static final SlimefunItemStack COMPRESSED_COBBLESTONE_2 = new SlimefunItemStack(
             "COMPRESSED_COBBLESTONE_2",
             Material.ANDESITE,
-            "&7双压缩圆石",
-            "&881组合圆石"
+            "&7二层压缩圆石",
+            "&881块圆石"
     );
     public static final SlimefunItemStack COMPRESSED_COBBLESTONE_3 = new SlimefunItemStack(
             "COMPRESSED_COBBLESTONE_3",
             Material.STONE,
             "&7三层压缩圆石",
-            "&8243组合圆石。"
+            "&8243块圆石。"
     );
     public static final SlimefunItemStack COMPRESSED_COBBLESTONE_4 = new SlimefunItemStack(
             "COMPRESSED_COBBLESTONE_4",
@@ -754,8 +756,8 @@ public final class Items {
     public static final SlimefunItemStack COMPRESSED_COBBLESTONE_5 = new SlimefunItemStack(
             "COMPRESSED_COBBLESTONE_5",
             Material.POLISHED_ANDESITE,
-            "&7五层压缩圈石",
-            "&859，049组合圆石"
+            "&7五层压缩圆石",
+            "&859049块圆石"
     );
 
     //singularities
@@ -799,68 +801,68 @@ public final class Items {
     public static final SlimefunItemStack LEAD_SINGULARITY = new SlimefunItemStack(
             "LEAD_SINGULARITY",
             Material.IRON_BLOCK,
-            "&8铅奇异性"
+            "&8铅奇点"
     );
 
 
     public static final SlimefunItemStack GOLD_SINGULARITY = new SlimefunItemStack(
             "GOLD_SINGULARITY",
             Material.GOLD_BLOCK,
-            "&6金奇点"
+            "&6金块奇点"
     );
 
     public static final SlimefunItemStack IRON_SINGULARITY = new SlimefunItemStack(
             "IRON_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7铁奇点"
+            "&7铁块奇点"
     );
 
     public static final SlimefunItemStack DIAMOND_SINGULARITY = new SlimefunItemStack(
             "DIAMOND_SINGULARITY",
             Material.DIAMOND_BLOCK,
-            "&b钻石奇点"
+            "&b钻石块奇点"
     );
 
     public static final SlimefunItemStack EMERALD_SINGULARITY = new SlimefunItemStack(
             "EMERALD_SINGULARITY",
             Material.EMERALD_BLOCK,
-            "&a绿宝石奇点"
+            "&a绿宝石块奇点"
     );
 
     public static final SlimefunItemStack NETHERITE_SINGULARITY = new SlimefunItemStack(
             "NETHERITE_SINGULARITY",
             Material.NETHERITE_BLOCK,
-            "&4水磷铝石奇点"
+            "&4下界合金块奇点"
     );
 
     public static final SlimefunItemStack COAL_SINGULARITY = new SlimefunItemStack(
             "COAL_SINGULARITY",
             Material.COAL_BLOCK,
-            "&8煤奇点"
+            "&8煤碳块奇点"
     );
 
     public static final SlimefunItemStack REDSTONE_SINGULARITY = new SlimefunItemStack(
             "REDSTONE_SINGULARITY",
             Material.REDSTONE_BLOCK,
-            "&c红石奇点"
+            "&c红石块奇点"
     );
 
     public static final SlimefunItemStack LAPIS_SINGULARITY = new SlimefunItemStack(
             "LAPIS_SINGULARITY",
             Material.LAPIS_BLOCK,
-            "&9拉皮斯奇点"
+            "&9青金石块奇点"
     );
 
     public static final SlimefunItemStack QUARTZ_SINGULARITY = new SlimefunItemStack(
             "QUARTZ_SINGULARITY",
             Material.QUARTZ_BLOCK,
-            "&f石英奇点"
+            "&f石英块奇点"
     );
 
     public static final SlimefunItemStack INFINITY_SINGULARITY = new SlimefunItemStack(
             "INFINITY_SINGULARITY",
             Material.SMOOTH_QUARTZ,
-            "&b无穷奇点"
+            "&b无限奇点块"
     );
 
     public static final SlimefunItemStack FORTUNE_SINGULARITY = new SlimefunItemStack(
@@ -889,7 +891,7 @@ public final class Items {
     public static final SlimefunItemStack ENDER_FLAME = new SlimefunItemStack(
             "ENDER_FLAME",
             Material.ENCHANTED_BOOK,
-            "&c恩德火焰"
+            "&c附魔火焰"
     );
 
     public static final SlimefunItemStack INFINITY_CROWN = new SlimefunItemStack(
@@ -946,7 +948,7 @@ public final class Items {
             "INFINITY_SHOVEL",
             Material.NETHERITE_SHOVEL,
             "&a山食者",
-            "&2&o好吃的"
+            "&2&o恐怖"
     );
     public static final SlimefunItemStack INFINITY_BOW = new SlimefunItemStack(
             "INFINITY_BOW",
@@ -965,7 +967,7 @@ public final class Items {
     public static final SlimefunItemStack INFINITY_SHIELD = new SlimefunItemStack(
             "INFINITY_SHIELD",
             Material.SHIELD,
-            "&b宇宙庇护",
+            "&b虚空庇护",
             "&7&obong"
     );
     
