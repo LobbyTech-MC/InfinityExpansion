@@ -11,7 +11,7 @@ import org.bukkit.NamespacedKey;
  */
 public final class RecipeTypes {
 
-    public static final RecipeType INFINITY_WORKBENCH = new RecipeType(new NamespacedKey(InfinityExpansion.getInstance(), "infinity_workbench"), Items.INFINITY_WORKBENCH, "", "&cUse the infinity recipes category to see the correct recipe!");
+    public static final RecipeType INFINITY_WORKBENCH = new RecipeType(new NamespacedKey(InfinityExpansion.getInstance(), "infinity_workbench"), Items.INFINITY_WORKBENCH, "", "&c使用无限配方类别查看正确的配方!");
 
     public static final RecipeType VOID_HARVESTER = new RecipeType(new NamespacedKey(InfinityExpansion.getInstance(), "void_harvester"), Items.VOID_HARVESTER);
 
