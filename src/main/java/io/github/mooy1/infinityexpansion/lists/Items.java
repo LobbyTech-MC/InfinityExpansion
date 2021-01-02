@@ -142,7 +142,7 @@ public final class Items {
             Material.BEACON,
             "&b有限反应堆",
             "&7通过压缩产生能量",
-            "&7属于 &8虚空 &7和 &b无限 &7铸锭; 钢锭; 多晶硅块",
+            "&7需要 &8虚空 &7和 &b无限 &7铸锭; 钢锭; 多晶硅块",
             "",
             LorePreset.energyBuffer(InfinityReactor.STORAGE),
             LorePreset.energyPerSecond(InfinityReactor.ENERGY)
@@ -466,7 +466,7 @@ public final class Items {
             "GEAR_TRANSFORMER",
             Material.EMERALD_BLOCK,
             "&7齿轮变压器",
-            "&7更换工具和齿轮的材料",
+            "&7Changes the material of tools and gear",
             "",
             LorePreset.energy(GearTransformer.ENERGY) + "Per Use"
     );
