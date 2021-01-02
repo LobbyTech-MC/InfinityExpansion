@@ -27,15 +27,15 @@ public final class Categories {
     );
 
     public static final Category BASIC_MACHINES = new SubCategory(new NamespacedKey(instance, "basic_machines"),
-            new CustomItem(Material.LOOM, "&9基础&7动力机械"), 2
+            new CustomItem(Material.LOOM, "&9基础&7机械"), 2
     );
 
     public static final Category ADVANCED_MACHINES = new SubCategory(new NamespacedKey(instance, "advanced_machines"),
-            new CustomItem(Material.BLAST_FURNACE, "&c高级的&7动力机械"), 2
+            new CustomItem(Material.BLAST_FURNACE, "&c高级的&7机械"), 2
     );
 
     public static final Category STORAGE_TRANSPORT = new SubCategory(new NamespacedKey(instance, "storage_transport"),
-            new CustomItem(Material.ENDER_CHEST, "&6储存和运输"), 2
+            new CustomItem(Material.ENDER_CHEST, "&6储存"), 2
     );
     
     public static final Category MOB_SIMULATION = new SubCategory(new NamespacedKey(instance, "mob_simulation"),
