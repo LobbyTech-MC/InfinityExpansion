@@ -466,7 +466,7 @@ public final class Items {
             "GEAR_TRANSFORMER",
             Material.EMERALD_BLOCK,
             "&7齿轮变压器",
-            "&7更换工具和齿轮的材料",
+            "&7Changes the material of tools and gear",
             "",
             LorePreset.energy(GearTransformer.ENERGY) + "Per Use"
     );
