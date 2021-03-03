@@ -345,7 +345,12 @@ public class InfinityCategory extends FlexCategory implements Listener {
     @AllArgsConstructor
     public static class BackEntry {
 
-        @Nullable
+        public BackEntry(BlockMenu workBench, PlayerProfile profile, SlimefunGuideMode mode) {
+			this.workBench = workBench;
+			this.profile = profile;
+			this.mode = mode;
+		}
+		@Nullable
         private final BlockMenu workBench;
         @Nullable
         private final PlayerProfile profile;

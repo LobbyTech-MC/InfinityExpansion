@@ -5,6 +5,7 @@ import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench
 import io.github.mooy1.infinityexpansion.implementation.machines.VoidHarvester;
 import io.github.mooy1.infinityexpansion.setup.categories.Categories;
 import io.github.mooy1.infinitylib.presets.RecipePreset;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import lombok.experimental.UtilityClass;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -89,7 +90,7 @@ public final class Items {
     }
     
     private static void register(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        new SlimefunItem(category, item, recipeType, recipe).register(InfinityExpansion.getInstance());
+        new SlimefunItem(category, item, recipeType, recipe).register((SlimefunAddon) InfinityExpansion.getInstance());
     }
     
     public static final SlimefunItemStack INFINITE_CIRCUIT = new SlimefunItemStack(
