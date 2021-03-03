@@ -101,7 +101,7 @@ public final class InfinityWorkbench extends AbstractEnergyCrafter {
         for (int i : STATUS_BORDER) {
             blockMenuPreset.addItem(i, MenuPreset.borderItemStatus, ChestMenuUtils.getEmptyClickHandler());
         }
-        blockMenuPreset.addItem(RECIPE_SLOT, new CustomItem(Material.BOOK, "&6Recipes"), ChestMenuUtils.getEmptyClickHandler());
+        blockMenuPreset.addItem(RECIPE_SLOT, new CustomItem(Material.BOOK, "&6配方"), ChestMenuUtils.getEmptyClickHandler());
         blockMenuPreset.addItem(STATUS_SLOT, MenuPreset.invalidInput, ChestMenuUtils.getEmptyClickHandler());
     }
     
@@ -122,8 +122,8 @@ public final class InfinityWorkbench extends AbstractEnergyCrafter {
          
         if (charge < ENERGY) { //not enough energy
             MessageUtils.messageWithCD(p, 1000,
-                    ChatColor.RED + "Not enough energy!",
-                    ChatColor.GREEN + "Charge: " + ChatColor.RED + charge + ChatColor.GREEN + "/" + ENERGY + " J"
+                    ChatColor.RED + "电力不足!",
+                    ChatColor.GREEN + "电力: " + ChatColor.RED + charge + ChatColor.GREEN + "/" + ENERGY + " J"
             );
             return;
         }
@@ -131,12 +131,12 @@ public final class InfinityWorkbench extends AbstractEnergyCrafter {
         ItemStack output = RECIPES.get(inv, INPUT_SLOTS);
         
         if (output == null) { //invalid
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "Invalid Recipe!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "无效的配方!");
             return;
         }
             
         if (!inv.fits(output, OUTPUT_SLOTS)) { //not enough room
-            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "Not enough room!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "没有足够的空间!");
             return;
         }
 
@@ -146,7 +146,7 @@ public final class InfinityWorkbench extends AbstractEnergyCrafter {
             }
         }
         
-        MessageUtils.message(p, ChatColor.GREEN + "Successfully crafted: " + ChatColor.WHITE + output.getItemMeta().getDisplayName());
+        MessageUtils.message(p, ChatColor.GREEN + "成功合成: " + ChatColor.WHITE + output.getItemMeta().getDisplayName());
 
         inv.pushItem(output.clone(), OUTPUT_SLOTS);
         setCharge(b.getLocation(), 0);

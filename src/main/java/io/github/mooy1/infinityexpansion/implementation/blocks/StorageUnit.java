@@ -151,7 +151,7 @@ public final class StorageUnit extends AbstractTicker {
 
                 drop.setItemMeta(saveData(drop.getItemMeta(), id, storedItem, tryToStoreOrDrop(menu, stored, storedItem, INPUT_SLOT, OUTPUT_SLOT)));
 
-                MessageUtils.message(e.getPlayer(), ChatColor.GREEN + "Stored items transferred to dropped item");
+                MessageUtils.message(e.getPlayer(), ChatColor.GREEN + "存储的物品转化为掉落物");
 
                 e.getBlock().getWorld().dropItemNaturally(l, drop);
             }
@@ -166,7 +166,7 @@ public final class StorageUnit extends AbstractTicker {
         BlockStorage.addBlockInfo(b, STORED_ITEM, data.getFirstValue());
         BlockStorage.addBlockInfo(b, STORED_AMOUNT, String.valueOf(data.getSecondValue()));
         if (data.getFirstValue() != null) {
-            MessageUtils.message(e.getPlayer(), ChatColor.GREEN + "Stored items transferred to block");
+            MessageUtils.message(e.getPlayer(), ChatColor.GREEN + "存储的物品转化为方块");
         }
     }
 
@@ -385,7 +385,7 @@ public final class StorageUnit extends AbstractTicker {
     private static void writeToSign(Block b, ItemStack item, int amount) {
         Sign sign = (Sign) b.getState();
         sign.setLine(0, ChatColor.GRAY + "--------------");
-        sign.setLine(1, ChatColor.WHITE +  (item == null ? "None" : ItemUtils.getItemName(item)));
+        sign.setLine(1, ChatColor.WHITE +  (item == null ? "无" : ItemUtils.getItemName(item)));
         sign.setLine(2, ChatColor.YELLOW.toString() + amount);
         sign.setLine(3, ChatColor.GRAY + "--------------");
         sign.update();

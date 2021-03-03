@@ -140,7 +140,7 @@ public final class StrainerBase extends AbstractTicker implements RecipeDisplayI
     @Nonnull
     @Override
     public String getRecipeSectionLabel(@Nonnull Player p) {
-        return "&7Collects:";
+        return "&7需要收集:";
     }
 
     @Override
@@ -159,7 +159,7 @@ public final class StrainerBase extends AbstractTicker implements RecipeDisplayI
         if (speed == 0) {
 
             if (inv.hasViewer()) {
-                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&cInput a Strainer!"));
+                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&c放入滤网!"));
             }
 
             return;
@@ -172,7 +172,7 @@ public final class StrainerBase extends AbstractTicker implements RecipeDisplayI
         if (random.nextInt(TIME / speed) != 0) {
 
             if (inv.hasViewer()) {
-                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aCollecting..."));
+                inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a收集中..."));
             }
 
             return;
@@ -200,9 +200,8 @@ public final class StrainerBase extends AbstractTicker implements RecipeDisplayI
         //output
 
         inv.pushItem(output.clone(), OUTPUT_SLOTS);
-
         if (inv.hasViewer()) {
-            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aMaterial Collected!"));
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a材料已被成功收集!"));
         }
 
         //reduce durability
