@@ -257,12 +257,7 @@ public final class StoneworksFactory extends AbstractMachine implements RecipeDi
                 new Material[]{Material.ANDESITE, Material.DIORITE, Material.GRANITE}
         );
 
-        Choice(CustomItem item, Material[] inputs, Material[] outputs) {
-			this.item = item;
-			this.inputs = inputs;
-			this.outputs = outputs;
-		}
-		private final ItemStack item;
+        private final ItemStack item;
         private final Material[] inputs;
         private final Material[] outputs;
     }

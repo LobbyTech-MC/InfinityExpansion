@@ -114,6 +114,7 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         }
         blockMenuPreset.addItem(STATUS_SLOT, MenuPreset.invalidInput, ChestMenuUtils.getEmptyClickHandler());
     }
+    
     @Override
     public void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
         menu.addMenuClickHandler(STATUS_SLOT, (player, i, itemStack, clickAction) -> {
