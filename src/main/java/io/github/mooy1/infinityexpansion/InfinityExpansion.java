@@ -85,4 +85,14 @@ public class InfinityExpansion extends JavaPlugin implements SlimefunAddon {
         return this;
     }
 
+	public static double getDifficulty() {
+		// TODO Auto-generated method stub
+		return difficulty;
+	}
+
+	public static JavaPlugin getInstance() {
+		// TODO Auto-generated method stub
+		return instance;
+	}
+
 }

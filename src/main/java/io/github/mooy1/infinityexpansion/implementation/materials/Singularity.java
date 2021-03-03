@@ -187,4 +187,8 @@ public final class Singularity extends UnplaceableBlock {
         
         return recipe.toArray(new ItemStack[9]);
     }
+
+	public static List<Triplet<SlimefunItemStack, String, Integer>> getRECIPES() {
+		return RECIPES;
+	}
 }

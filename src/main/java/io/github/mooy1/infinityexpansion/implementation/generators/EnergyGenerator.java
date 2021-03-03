@@ -316,7 +316,11 @@ public final class EnergyGenerator extends AbstractGenerator {
         
         NETHER("Nether (2x)", true);
         
-        private final String status;
+        Type(String status, boolean more) {
+			this.status = status;
+			this.more = more;
+		}
+		private final String status;
         private final boolean more;
         
     }

@@ -3,14 +3,32 @@ package io.github.mooy1.infinityexpansion.utils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public final class Triplet<A, B, C> {
 
-    private A a;
-    private B b;
-    private C c;
+    private SlimefunItemStack a;
+    private String b;
+    private int c;
+    public Triplet(SlimefunItemStack item, String id, int i) {
+		this.a = item;
+		this.b = id;
+		this.c = i;
+	}
+	public SlimefunItemStack getA() {
+		// TODO Auto-generated method stub
+		return a;
+	}
+	public String getB() {
+		// TODO Auto-generated method stub
+		return b;
+	}
+	public int getC() {
+		// TODO Auto-generated method stub
+		return c;
+	}
     
 }
