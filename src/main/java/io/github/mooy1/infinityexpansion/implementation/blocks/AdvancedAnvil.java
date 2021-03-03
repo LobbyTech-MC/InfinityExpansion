@@ -46,11 +46,11 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "ADVANCED_ANVIL",
             Material.SMITHING_TABLE,
-            "&cAdvanced Anvil",
-            "&7Combines tools and gear enchants and sometimes upgrades them",
-            "&bWorks with Slimefun items",
+            "&c高级铁砧",
+            "&7升级附魔",
+            "&b对粘液科技物品有效",
             "",
-            LorePreset.energy(ENERGY) + "per use"
+            LorePreset.energy(ENERGY) + "每次使用"
 
     );
     
@@ -126,8 +126,8 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         Location l = b.getLocation();
         if (getCharge(l) < ENERGY) { //not enough energy
             MessageUtils.messageWithCD(p, 1000,
-                    ChatColor.RED + "Not enough energy!",
-                    ChatColor.GREEN + "Charge: " + ChatColor.RED + getCharge(l) + ChatColor.GREEN + "/" + ENERGY + " J"
+                    ChatColor.RED + "电力不足!",
+                    ChatColor.GREEN + "当前电力: " + ChatColor.RED + getCharge(l) + ChatColor.GREEN + "/" + ENERGY + " J"
             );
             return;
         }
@@ -136,19 +136,19 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         ItemStack item2 = inv.getItemInSlot(INPUT_SLOT2);
 
         if (item1 == null || item2 == null || (item2.getType() != Material.ENCHANTED_BOOK && item1.getType() != item2.getType())) {
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "Invalid items!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "不存在的物品!");
             return;
         }
 
         ItemStack output = getOutput(item1, item2);
 
         if (output == null) {
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "No upgrades!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "无法升级!");
             return;
         }
 
         if (!inv.fits(output, OUTPUT_SLOTS)) {
-            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "Not enough room!");
+            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "空间不足!");
             return;
         }
 
@@ -251,14 +251,14 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         ItemStack item2 = inv.getItemInSlot(INPUT_SLOT2);
 
         if (item1 == null || item2 == null || (item2.getType() != Material.ENCHANTED_BOOK && item1.getType() != item2.getType())) {
-            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&cInvalid items!"));
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&c不存在的物品!"));
             return;
         }
 
         ItemStack output = getOutput(item1, item2);
 
         if (output == null) {
-            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&cNo upgrades!"));
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.BARRIER, "&c无法升级!"));
             return;
         }
 

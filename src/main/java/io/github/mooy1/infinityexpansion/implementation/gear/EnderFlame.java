@@ -22,7 +22,7 @@ public final class EnderFlame extends UnplaceableBlock {
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "ENDER_FLAME",
             Material.ENCHANTED_BOOK,
-            "&cEnder Flame"
+            "&c末影火焰"
     );
     
     public EnderFlame() {

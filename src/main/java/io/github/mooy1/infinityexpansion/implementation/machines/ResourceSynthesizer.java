@@ -39,10 +39,10 @@ public final class ResourceSynthesizer extends AbstractMachine implements Recipe
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "RESOURCE_SYNTHESIZER",
             Material.LODESTONE,
-            "&6Resource Synthesizer",
-            "&7Creates resources by combining 2 Singularities",
+            "&6结构合成器",
+            "&7将两种结构合成成各种资源",
             "",
-            LorePreset.energy(ResourceSynthesizer.ENERGY) + "per use"
+            LorePreset.energy(ResourceSynthesizer.ENERGY) + "每次使用"
     );
     
     private static final int[] OUTPUT_SLOTS = {

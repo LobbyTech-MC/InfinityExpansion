@@ -63,8 +63,8 @@ public final class VirtualFarm extends AbstractMachine implements RecipeDisplayI
     public static final SlimefunItemStack BASIC = new SlimefunItemStack(
             "BASIC_VIRTUAL_FARM",
             Material.GRASS_BLOCK,
-            "&9Basic &aVirtual Farm",
-            "&7Automatically grows, harvests, and replants crops",
+            "&9基础 &a农场",
+            "&7自动生长, 收获, 再种植作物",
             "",
             LorePreset.speed(1),
             LorePreset.energyPerSecond(18)
@@ -72,8 +72,8 @@ public final class VirtualFarm extends AbstractMachine implements RecipeDisplayI
     public static final SlimefunItemStack ADVANCED = new SlimefunItemStack(
             "ADVANCED_VIRTUAL_FARM",
             Material.CRIMSON_NYLIUM,
-            "&cAdvanced &aVirtual Farm",
-            "&7Automatically grows, harvests, and replants crops",
+            "&c高级 &a农场",
+            "&7自动生长, 收获, 再种植作物",
             "",
             LorePreset.speed(5),
             LorePreset.energyPerSecond(90)
@@ -81,8 +81,8 @@ public final class VirtualFarm extends AbstractMachine implements RecipeDisplayI
     public static final SlimefunItemStack INFINITY = new SlimefunItemStack(
             "INFINITY_VIRTUAL_FARM",
             Material.WARPED_NYLIUM,
-            "&bInfinity &aVirtual Farm",
-            "&7Automatically grows, harvests, and replants crops",
+            "&b无尽 &a农场",
+            "&7自动生长, 收获, 再种植作物",
             "",
             LorePreset.speed(25),
             LorePreset.energyPerSecond(900)

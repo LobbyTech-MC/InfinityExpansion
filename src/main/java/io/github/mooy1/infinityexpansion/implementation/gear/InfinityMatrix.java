@@ -30,11 +30,10 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "INFINITY_MATRIX",
             Material.NETHER_STAR,
-            "&fInfinity Matrix",
-            "&6Gives Unlimited Flight",
-            "&7Right-Click to enable/disable and claim",
-            "&7Crouch and Right-Click to remove ownership",
-            "&bSoulbound"
+            "&f无尽飞行",
+            "&6给予你永久飞行能力",
+            "&7右键开/关飞行并绑定于你",
+            "&7蹲下右键移除绑定"
     );
     
     public InfinityMatrix() {

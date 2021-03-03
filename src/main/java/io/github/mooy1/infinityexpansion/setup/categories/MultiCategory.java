@@ -31,7 +31,7 @@ import java.util.List;
 public final class MultiCategory extends FlexCategory {
     
     public static final MultiCategory CATEGORY = new MultiCategory(PluginUtils.getKey("main"),
-            new CustomItem(Material.NETHER_STAR, "&bInfinity &7Expansion"), 3
+            new CustomItem(Material.NETHER_STAR, "&b无尽 &7科技"), 3
     );
     
     private final List<Category> categories = new ArrayList<>();

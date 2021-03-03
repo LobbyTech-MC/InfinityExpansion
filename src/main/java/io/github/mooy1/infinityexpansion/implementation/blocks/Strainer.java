@@ -45,24 +45,24 @@ public final class Strainer extends SlimefunItem implements NotPlaceable {
     public static final SlimefunItemStack BASIC = new SlimefunItemStack(
             "BASIC_STRAINER",
             Material.FISHING_ROD,
-            "&9Basic Strainer",
-            "&7Collects materials from flowing water",
+            "&9基础滤网",
+            "&7从流动的水中收集材料",
             "",
             LoreBuilder.speed(1)
     );
     public static final SlimefunItemStack ADVANCED = new SlimefunItemStack(
             "ADVANCED_STRAINER",
             Material.FISHING_ROD,
-            "&cAdvanced Strainer",
-            "&7Collects materials from flowing water",
+            "&c高级滤网",
+            "&7从流动的水中收集材料",
             "",
             LoreBuilder.speed(4)
     );
     public static final SlimefunItemStack REINFORCED = new SlimefunItemStack(
             "REINFORCED_STRAINER",
             Material.FISHING_ROD,
-            "&fReinforced Strainer",
-            "&7Collects materials from flowing water",
+            "&f强化滤网",
+            "&7从流动的水中收集材料",
             "",
             LoreBuilder.speed(20)
     );

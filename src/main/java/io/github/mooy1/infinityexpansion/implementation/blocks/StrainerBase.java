@@ -43,7 +43,7 @@ public final class StrainerBase extends AbstractTicker implements RecipeDisplayI
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "STRAINER_BASE",
             Material.SANDSTONE_WALL,
-            "&7Strainer Base"
+            "&7滤网基座"
     );
     
     private static final int STATUS_SLOT = MenuPreset.slot1;
@@ -122,7 +122,7 @@ public final class StrainerBase extends AbstractTicker implements RecipeDisplayI
         
     }
     
-    private static final ItemStack POTATO = new CustomItem(Material.POTATO, "&7:&6Potatofish&7:", "&eLucky");
+    private static final ItemStack POTATO = new CustomItem(Material.POTATO, "&7:&6土豆鱼&7:", "&e真幸运");
 
     @Nonnull
     @Override

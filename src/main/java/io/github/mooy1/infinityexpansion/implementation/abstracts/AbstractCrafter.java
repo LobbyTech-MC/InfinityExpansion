@@ -150,7 +150,7 @@ public abstract class AbstractCrafter extends AbstractTicker {
                         inv.consumeItem(INPUT_SLOTS[i], amount);
                     }
                 }
-                MessageUtils.messageWithCD(p, 1000, ChatColor.GREEN + "Crafted: " + ItemUtils.getItemName(output.getFirstValue()));
+                MessageUtils.messageWithCD(p, 1000, ChatColor.GREEN + "已合成: " + ItemUtils.getItemName(output.getFirstValue()));
 
                 postCraft(inv.getLocation(), inv, p);
 

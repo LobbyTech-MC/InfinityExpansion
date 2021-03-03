@@ -60,8 +60,8 @@ public final class SingularityConstructor extends AbstractMachine implements Rec
     public static final SlimefunItemStack BASIC = new SlimefunItemStack(
             "SINGULARITY_CONSTRUCTOR",
             Material.QUARTZ_BRICKS,
-            "&fSingularity Constructor",
-            "&7Condenses large amounts of resources",
+            "&f奇异结构",
+            "&7用于生产大量资源",
             "",
             LorePreset.speed(1),
             LorePreset.energyPerSecond(120)
@@ -69,8 +69,8 @@ public final class SingularityConstructor extends AbstractMachine implements Rec
     public static final SlimefunItemStack INFINITY = new SlimefunItemStack(
             "INFINITY_CONSTRUCTOR",
             Material.CHISELED_QUARTZ_BLOCK,
-            "&bInfinity &fConstructor",
-            "&7Quickly condenses large amounts of resources",
+            "&b无尽 &f结构",
+            "&7用于生产大量资源",
             "",
             LorePreset.speed(32),
             LorePreset.energyPerSecond(1200)
@@ -189,14 +189,14 @@ public final class SingularityConstructor extends AbstractMachine implements Rec
                 if (menu.hasViewer()) {
                     menu.replaceExistingItem(STATUS_SLOT, new CustomItem(
                             Material.LIME_STAINED_GLASS_PANE,
-                            "&aConstructing " + triplet.getA().getDisplayName() + "...",
-                            "&7Complete"
+                            "&a生产 " + triplet.getA().getDisplayName() + "...",
+                            "&7完成"
                     ));
                 }
             } else if (menu.hasViewer()) {
                 menu.replaceExistingItem(STATUS_SLOT, new CustomItem(
                         Material.LIME_STAINED_GLASS_PANE,
-                        "&aConstructing " + triplet.getA().getDisplayName() + "...",
+                        "&a生产 " + triplet.getA().getDisplayName() + "...",
                         "&7" + progress + " / " + triplet.getC()
                 ));
             }
@@ -247,7 +247,7 @@ public final class SingularityConstructor extends AbstractMachine implements Rec
     private static void invalidInput(BlockMenu menu) {
         menu.replaceExistingItem(STATUS_SLOT, new CustomItem(
                 Material.RED_STAINED_GLASS_PANE,
-                "&cInput a valid material to start"
+                "&c清放入正确的一对结构"
         ));
     }
     

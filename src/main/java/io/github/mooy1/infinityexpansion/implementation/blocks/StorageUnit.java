@@ -88,32 +88,32 @@ public final class StorageUnit extends AbstractTicker {
     public static final SlimefunItemStack BASIC = new SlimefunItemStack(
             "BASIC_STORAGE",
             Material.OAK_WOOD,
-            "&9Basic &8Storage Unit",
+            "&9基础 &8存储单元",
             LorePreset.storesItem(StorageUnit.BASIC_STORAGE)
     );
     public static final SlimefunItemStack ADVANCED = new SlimefunItemStack(
             "ADVANCED_STORAGE",
             Material.DARK_OAK_WOOD,
-            "&cAdvanced &8Storage Unit",
+            "&高级 &8存储单元",
             LorePreset.storesItem(StorageUnit.ADVANCED_STORAGE)
     );
     public static final SlimefunItemStack REINFORCED = new SlimefunItemStack(
             "REINFORCED_STORAGE",
             Material.ACACIA_WOOD,
-            "&fReinforced &8Storage Unit",
+            "&f强化 &8存储单元",
             LorePreset.storesItem(StorageUnit.REINFORCED_STORAGE)
     );
     public static final SlimefunItemStack VOID = new SlimefunItemStack(
             "VOID_STORAGE",
             Material.CRIMSON_HYPHAE,
-            "&8Void &8Storage Unit",
+            "&8虚空 &8存储单元",
             LorePreset.storesItem(StorageUnit.VOID_STORAGE)
     );
     public static final SlimefunItemStack INFINITY = new SlimefunItemStack(
             "INFINITY_STORAGE",
             Material.WARPED_HYPHAE,
-            "&bInfinity &8Storage Unit",
-            "&6Capacity: &eInfinite items"
+            "&b无尽 &8存储单元",
+            "&6容量: &e无限"
     );
     
     private static final boolean DISPLAY_SIGNS = InfinityExpansion.getInstance().getConfig().getBoolean("storage-unit-options.display-signs");

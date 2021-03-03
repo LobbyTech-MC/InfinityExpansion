@@ -39,8 +39,8 @@ public final class GeoQuarry extends AbstractMachine implements RecipeDisplayIte
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "GEO_QUARRY",
             Material.QUARTZ_BRICKS,
-            "&fGeo Quarry",
-            "&7Slowly harvests geo resources from the void using power",
+            "&f无尽Geo矿机",
+            "&7缓慢从虚空中收集矿物",
             "",
             LorePreset.energyPerSecond(GeoQuarry.ENERGY)
     );

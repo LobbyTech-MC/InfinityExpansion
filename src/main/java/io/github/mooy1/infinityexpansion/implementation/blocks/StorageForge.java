@@ -26,9 +26,9 @@ public final class StorageForge extends AbstractCrafter {
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "STORAGE_FORGE",
             Material.BEEHIVE,
-            "&6Storage Forge",
-            "&7Upgrades the tier of Storage Units",
-            "&7Retains stored items"
+            "&6存储铁砧",
+            "&7升级存储单元",
+            "&7里面存储的物品保留"
     );
     
     public static final DelayedRecipeType TYPE = new DelayedRecipeType(ITEM);

@@ -30,87 +30,87 @@ public final class Singularity extends UnplaceableBlock {
     public static final SlimefunItemStack COPPER = new SlimefunItemStack(
             "COPPER_SINGULARITY",
             Material.BRICKS,
-            "&6Copper Singularity"
+            "&6作物结构"
     );
     public static final SlimefunItemStack ZINC= new SlimefunItemStack(
             "ZINC_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Zinc Singularity"
+            "&7锌结构"
     );
     public static final SlimefunItemStack TIN = new SlimefunItemStack(
             "TIN_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Tin Singularity"
+            "&7锡结构"
     );
     public static final SlimefunItemStack ALUMINUM = new SlimefunItemStack(
             "ALUMINUM_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Aluminum Singularity"
+            "&7铝结构"
     );
     public static final SlimefunItemStack SILVER = new SlimefunItemStack(
             "SILVER_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Silver Singularity"
+            "&7银结构"
     );
     public static final SlimefunItemStack MAGNESIUM = new SlimefunItemStack(
             "MAGNESIUM_SINGULARITY",
             Material.NETHER_BRICKS,
-            "&5Magnesium Singularity"
+            "&5镁结构"
     );
     public static final SlimefunItemStack LEAD = new SlimefunItemStack(
             "LEAD_SINGULARITY",
             Material.IRON_BLOCK,
-            "&8Lead Singularity"
+            "&8铅结构"
     );
     public static final SlimefunItemStack GOLD = new SlimefunItemStack(
             "GOLD_SINGULARITY",
             Material.GOLD_BLOCK,
-            "&6Gold Singularity"
+            "&6金结构"
     );
     public static final SlimefunItemStack IRON = new SlimefunItemStack(
             "IRON_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Iron Singularity"
+            "&7铁结构"
     );
     public static final SlimefunItemStack DIAMOND = new SlimefunItemStack(
             "DIAMOND_SINGULARITY",
             Material.DIAMOND_BLOCK,
-            "&bDiamond Singularity"
+            "&b钻石结构"
     );
     public static final SlimefunItemStack EMERALD = new SlimefunItemStack(
             "EMERALD_SINGULARITY",
             Material.EMERALD_BLOCK,
-            "&aEmerald Singularity"
+            "&a绿宝石结构"
     );
     public static final SlimefunItemStack NETHERITE = new SlimefunItemStack(
             "NETHERITE_SINGULARITY",
             Material.NETHERITE_BLOCK,
-            "&4Netherite Singularity"
+            "&4下界合金结构"
     );
     public static final SlimefunItemStack COAL = new SlimefunItemStack(
             "COAL_SINGULARITY",
             Material.COAL_BLOCK,
-            "&8Coal Singularity"
+            "&8煤炭结构"
     );
     public static final SlimefunItemStack REDSTONE = new SlimefunItemStack(
             "REDSTONE_SINGULARITY",
             Material.REDSTONE_BLOCK,
-            "&cRedstone Singularity"
+            "&c红石结构"
     );
     public static final SlimefunItemStack LAPIS= new SlimefunItemStack(
             "LAPIS_SINGULARITY",
             Material.LAPIS_BLOCK,
-            "&9Lapis Singularity"
+            "&9青金石结构"
     );
     public static final SlimefunItemStack QUARTZ = new SlimefunItemStack(
             "QUARTZ_SINGULARITY",
             Material.QUARTZ_BLOCK,
-            "&fQuartz Singularity"
+            "&f石英结构"
     );
     public static final SlimefunItemStack INFINITY = new SlimefunItemStack(
             "INFINITY_SINGULARITY",
             Material.SMOOTH_QUARTZ,
-            "&bInfinity Singularity"
+            "&b无尽锭结构"
     );
     
     @Getter

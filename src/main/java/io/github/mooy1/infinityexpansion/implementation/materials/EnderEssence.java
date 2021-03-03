@@ -25,8 +25,8 @@ public final class EnderEssence extends SlimefunItem implements NotPlaceable, GE
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "END_ESSENCE",
             Material.BLAZE_POWDER,
-            "&5Ender Essence",
-            "&8&oFrom the depths of the end..."
+            "&5末影精华",
+            "&8&o从死亡到末地..."
     );
     private static final NamespacedKey key = PluginUtils.getKey("ender_essence");
      

@@ -139,8 +139,8 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
     public static final SlimefunItemStack BASIC = new SlimefunItemStack(
             "BASIC_QUARRY",
             Material.CHISELED_SANDSTONE,
-            "&9Basic Quarry",
-            "&7Automatically mines vanilla overworld ores",
+            "&9基础矿机",
+            "&7自动收集原矿",
             "",
             LorePreset.speed(1),
             LorePreset.energyPerSecond(300)
@@ -148,8 +148,8 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
     public static final SlimefunItemStack ADVANCED = new SlimefunItemStack(
             "ADVANCED_QUARRY",
             Material.CHISELED_RED_SANDSTONE,
-            "&cAdvanced Quarry",
-            "&7Smelts vanilla ores and can mine nether ores",
+            "&c高级矿机",
+            "&7将原矿烧成锭并收集地狱矿物",
             "",
             LorePreset.speed(2),
             LorePreset.energyPerSecond(900)
@@ -157,8 +157,8 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
     public static final SlimefunItemStack VOID = new SlimefunItemStack(
             "VOID_QUARRY",
             Material.CHISELED_NETHER_BRICKS,
-            "&8Void Quarry",
-            "&7Can mine sifted ores or 24 karat gold occasionally",
+            "&8虚空矿机",
+            "&7可以开采筛矿或24克拉的金",
             "",
             LorePreset.speed(4),
             LorePreset.energyPerSecond(3600)
@@ -166,8 +166,8 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
     public static final SlimefunItemStack INFINITY = new SlimefunItemStack(
             "INFINITY_QUARRY",
             Material.CHISELED_POLISHED_BLACKSTONE,
-            "&bInfinity Quarry",
-            "&7Can mine and smelt Slimefun ingots",
+            "&b无尽矿机",
+            "&7可以挖矿并烧制粘液科技的矿物锭",
             "",
             LorePreset.speed(16),
             LorePreset.energyPerSecond(36000)
@@ -261,10 +261,10 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
     @Nonnull
     @Override
     public String getRecipeSectionLabel(@Nonnull Player p) {
-        return "&7Mines:";
+        return "&7挖矿:";
     }
     
-    private static final ItemStack MINING = new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aMining...");
+    private static final ItemStack MINING = new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a挖矿中...");
     
     @Override
     protected boolean process(@Nonnull BlockMenu inv, @Nonnull Block b, @Nonnull Config data) {

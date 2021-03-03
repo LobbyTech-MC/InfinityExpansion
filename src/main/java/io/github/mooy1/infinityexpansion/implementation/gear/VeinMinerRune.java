@@ -62,15 +62,15 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "VEIN_MINER_RUNE",
             Material.DIAMOND,
-            "&bVein Miner Rune",
-            "&7Upgrades a tool to vein-mine certain materials"
+            "&b超级矿脉稿",
+            "&7升级版的对指定物品有效的矿脉稿"
     );
     private static final double RANGE = 1.5;
     private static final int MAX = 64;
     private static final long CD = 1000;
     private static final NamespacedKey key = PluginUtils.getKey("vein_miner");
     private static final Map<UUID, Long> CDS = new HashMap<>();
-    private static final String LORE = ChatColor.AQUA + "Veinminer - Crouch to use";
+    private static final String LORE = ChatColor.AQUA + "超级矿脉挖矿 - 下蹲使用";
     private static final Set<String> ALLOWED = new HashSet<>(Arrays.asList(
             "_ORE", "_LOG", "_WOOD", "GILDED", "SOUL", "GRAVEL",
             "MAGMA", "OBSIDIAN", "DIORITE", "ANDESITE", "GRANITE", "_LEAVES",

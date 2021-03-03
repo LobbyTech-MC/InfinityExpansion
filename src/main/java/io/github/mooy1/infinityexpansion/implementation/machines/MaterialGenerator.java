@@ -56,7 +56,7 @@ public final class MaterialGenerator extends AbstractMachine implements RecipeDi
     public static final SlimefunItemStack BASIC_COBBLE = new SlimefunItemStack(
             "BASIC_COBBLE_GEN",
             Material.SMOOTH_STONE,
-            "&9Basic &8Cobble Generator",
+            "&9基础 &8原石生成器",
             "",
             LorePreset.speed(1),
             LorePreset.energyPerSecond(24)
@@ -64,7 +64,7 @@ public final class MaterialGenerator extends AbstractMachine implements RecipeDi
     public static final SlimefunItemStack ADVANCED_COBBLE = new SlimefunItemStack(
             "ADVANCED_COBBLE_GEN",
             Material.SMOOTH_STONE,
-            "&cAdvanced &8Cobble Generator",
+            "&c高级 &8原石生成器",
             "",
             LorePreset.speed(4),
             LorePreset.energyPerSecond(120)
@@ -72,7 +72,7 @@ public final class MaterialGenerator extends AbstractMachine implements RecipeDi
     public static final SlimefunItemStack BASIC_OBSIDIAN = new SlimefunItemStack(
             "BASIC_OBSIDIAN_GEN",
             Material.SMOOTH_STONE,
-            "&8Obsidian Generator",
+            "&8黑曜石生成器",
             "",
             LorePreset.speed(1),
             LorePreset.energyPerSecond(240)

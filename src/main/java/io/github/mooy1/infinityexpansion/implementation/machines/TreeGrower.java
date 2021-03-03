@@ -67,8 +67,8 @@ public final class TreeGrower extends AbstractMachine implements RecipeDisplayIt
     public static final SlimefunItemStack BASIC = new SlimefunItemStack(
             "BASIC_TREE_GROWER",
             Material.STRIPPED_OAK_WOOD,
-            "&9Basic &2Tree Grower",
-            "&7Automatically grows, harvests, and replants trees",
+            "&9基础 &2树木生长器",
+            "&7自动生长, 收获, 再种植树木",
             "",
             LorePreset.speed(1),
             LorePreset.energyPerSecond(36)
@@ -76,8 +76,8 @@ public final class TreeGrower extends AbstractMachine implements RecipeDisplayIt
     public static final SlimefunItemStack ADVANCED = new SlimefunItemStack(
             "ADVANCED_TREE_GROWER",
             Material.STRIPPED_ACACIA_WOOD,
-            "&cAdvanced &2Tree Grower",
-            "&7Automatically grows, harvests, and replants trees",
+            "&c高级 &2树木生长器",
+            "&7自动生长, 收获, 再种植树木",
             "",
             LorePreset.speed(5),
             LorePreset.energyPerSecond(180)
@@ -85,8 +85,8 @@ public final class TreeGrower extends AbstractMachine implements RecipeDisplayIt
     public static final SlimefunItemStack INFINITY = new SlimefunItemStack(
             "INFINITY_TREE_GROWER",
             Material.STRIPPED_WARPED_HYPHAE,
-            "&bInfinity &2Tree Grower",
-            "&7Automatically grows, harvests, and replants trees",
+            "&b无尽 &2树木生长器",
+            "&7自动生长, 收获, 再种植树木",
             "",
             LorePreset.speed(25),
             LorePreset.energyPerSecond(1800)
@@ -178,7 +178,7 @@ public final class TreeGrower extends AbstractMachine implements RecipeDisplayIt
 
                     if (inv.hasViewer()) {
                         inv.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.LIME_STAINED_GLASS_PANE,
-                                "&aPlanting... (" + this.speed + "/" + TIME + ")"));
+                                "&a种植中... (" + this.speed + "/" + TIME + ")"));
                     }
 
                     return true;

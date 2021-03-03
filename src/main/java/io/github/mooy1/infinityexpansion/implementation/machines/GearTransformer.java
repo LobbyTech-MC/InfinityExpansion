@@ -35,10 +35,10 @@ public final class GearTransformer extends AbstractEnergyCrafter implements Reci
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "GEAR_TRANSFORMER",
             Material.EMERALD_BLOCK,
-            "&7Gear Transformer",
-            "&7Changes the material of vanilla tools and gear",
+            "&7齿轮变压器",
+            "&7将物品变的更多",
             "",
-            LorePreset.energy(GearTransformer.ENERGY) + "Per Use"
+            LorePreset.energy(GearTransformer.ENERGY) + "每次使用"
     );
 
     public static final int ENERGY = 12000;
