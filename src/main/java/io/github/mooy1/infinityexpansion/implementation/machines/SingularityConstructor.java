@@ -4,7 +4,7 @@ import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
 import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench;
 import io.github.mooy1.infinityexpansion.implementation.materials.Singularity;
-import io.github.mooy1.infinityexpansion.setup.categories.Categories;
+import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.utils.Triplet;
 import io.github.mooy1.infinitylib.PluginUtils;
 import io.github.mooy1.infinitylib.abstracts.AbstractMachine;
@@ -137,7 +137,12 @@ public final class SingularityConstructor extends AbstractMachine implements Rec
     @Override
     protected boolean process(@Nonnull BlockMenu menu, @Nonnull Block b, @Nonnull Config data) {
         ItemStack input = menu.getItemInSlot(INPUT_SLOT);
-        String inputID = StackUtils.getIDorTypeOfNullable(input);
+        String  inputID;
+        if (input == null) {
+            inputID = null;
+        } else {
+            inputID = StackUtils.getIDorType(input);
+        }
 
         // load data
         Integer progressID = getProgressID(b);

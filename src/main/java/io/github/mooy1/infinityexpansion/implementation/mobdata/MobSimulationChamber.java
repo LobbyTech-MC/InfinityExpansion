@@ -1,9 +1,9 @@
 package io.github.mooy1.infinityexpansion.implementation.mobdata;
 
+import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinityexpansion.setup.categories.Categories;
+import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.utils.Util;
-import io.github.mooy1.infinitylib.ConfigUtils;
 import io.github.mooy1.infinitylib.PluginUtils;
 import io.github.mooy1.infinitylib.abstracts.AbstractTicker;
 import io.github.mooy1.infinitylib.items.StackUtils;
@@ -21,6 +21,7 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
+import me.mrCookieSlime.Slimefun.cscorelib2.collections.Pair;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -29,7 +30,6 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class MobSimulationChamber extends AbstractTicker implements EnergyNetComponent {
@@ -44,15 +44,14 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
             LorePreset.energyPerSecond(MobSimulationChamber.ENERGY)
     );
     
+    private static final int INTERVAL = 10 + (int) (10 * InfinityExpansion.getDifficulty());
+    
     private static final int CARD_SLOT = MenuPreset.slot1 + 27;
-    private static final int INTERVAL = 24;
     private static final int STATUS_SLOT = MenuPreset.slot1;
     private static final int[] OUTPUT_SLOTS = Util.largeOutput;
     private static final int XP_Slot = 46;
-    public static final int BUFFER = 16000;
-    public static final int ENERGY = 360;
-    private static final int CHANCE = ConfigUtils.getInt("balance-options.mob-simulation-xp-chance", 1, 10, 2);
-
+    public static final int BUFFER = 15000;
+    public static final int ENERGY = 150;
     private static final ItemStack NO_CARD = new CustomItem(Material.BARRIER, "&cInput a Mob Data Card!");
     
     public MobSimulationChamber() {
@@ -71,8 +70,8 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
                 inv.dropItems(l, CARD_SLOT);
             }
             
-            p.giveExp(getXP(l));
-            setXp(l, 0);
+            p.giveExp(Util.getIntData("xp", l));
+            BlockStorage.addBlockInfo(l, "xp", "0");
 
             return true;
         });
@@ -122,15 +121,15 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
     public void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
         Location l = b.getLocation();
         if (BlockStorage.getLocationInfo(l, "xp") == null) {
-            setXp(l, 0);
+            BlockStorage.addBlockInfo(l, "xp", "O");
         }
         menu.replaceExistingItem(XP_Slot, makeXpItem(0));
         menu.addMenuClickHandler(XP_Slot, (p, slot, item, action) -> {
-            int xp = getXP(l);
+            int xp = Util.getIntData("xp", l);
             if (xp > 0) {
                 p.giveExp(xp);
                 p.playSound(l, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                setXp(l, 0);
+                BlockStorage.addBlockInfo(l, "xp", "O");
                 menu.replaceExistingItem(XP_Slot, makeXpItem(0));
             }
             return false;
@@ -141,22 +140,15 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
         return new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a储存的经验值: " + stored, "", "&a> 点击领取");
     }
 
-    private static void setXp(Location l, int xp) {
-        BlockStorage.addBlockInfo(l, "xp", String.valueOf(xp));
-    }
-    
-    private static int getXP(Location l) {
-        try {
-            return Integer.parseInt(BlockStorage.getLocationInfo(l, "xp"));
-        } catch (NumberFormatException e) {
-            setXp(l, 0);
-            return 0;
-        }
-    }
-
     @Override
     protected void tick(@Nonnull BlockMenu inv, @Nonnull Block b, @Nonnull Config data) {
-        MobDataType card = MobDataCard.CARDS.get(StackUtils.getIDofNullable(inv.getItemInSlot(CARD_SLOT)));
+        ItemStack input = inv.getItemInSlot(CARD_SLOT);
+        
+        if (input == null) {
+            return;
+        }
+        
+        MobDataCard card = MobDataCard.CARDS.get(StackUtils.getID(input));
 
         if (card == null) {
             if (inv.hasViewer()) {
@@ -165,7 +157,7 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
             return;
         }
 
-        int energy = card.energy + ENERGY;
+        int energy = card.tier.energy + ENERGY;
 
         if (getCharge(b.getLocation()) < energy) {
             if (inv.hasViewer()) {
@@ -174,23 +166,24 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
             return;
         }
         
-         removeCharge(b.getLocation(), energy);
-
+        removeCharge(b.getLocation(), energy);
+        
+        int xp = Util.getIntData("xp", b.getLocation());
+        
         if (inv.hasViewer()) {
             inv.replaceExistingItem(STATUS_SLOT, makeSimulating(energy));
-            inv.replaceExistingItem(XP_Slot, makeXpItem(getXP(b.getLocation())));
+            inv.replaceExistingItem(XP_Slot, makeXpItem(xp));
         }
 
         if (PluginUtils.getCurrentTick() % INTERVAL != 0) return;
 
-        if (ThreadLocalRandom.current().nextInt(CHANCE) == 0) {
-            int xp = getXP(b.getLocation()) + card.xp;
-            setXp(b.getLocation(), xp);
+        if (ThreadLocalRandom.current().nextBoolean()) {
+            BlockStorage.addBlockInfo(b.getLocation(), "xp", String.valueOf(xp + card.tier.xp));
         }
 
-        for (Map.Entry<Integer, ItemStack> entry : card.drops.entrySet()) {
-            if (ThreadLocalRandom.current().nextInt(entry.getKey()) == 0) {
-                ItemStack output = entry.getValue();
+        for (Pair<ItemStack, Integer> entry : card.drops) {
+            if (ThreadLocalRandom.current().nextInt(entry.getSecondValue()) == 0) {
+                ItemStack output = entry.getFirstValue();
                 if (inv.fits(output, OUTPUT_SLOTS)) {
                     inv.pushItem(output.clone(), OUTPUT_SLOTS);
                 } else if (inv.hasViewer()) {
