@@ -426,7 +426,12 @@ public class StorageUnit extends AbstractTicker {
         private final BlockMenu menu;
         private final Location location;
 
-        @Override
+        public InteractionHandler(BlockMenu menu, Location location) {
+			this.menu = menu;
+			this.location = location;
+		}
+
+		@Override
         public boolean onClick(Player p, int slot, ItemStack item, ClickAction action) {
             CachedItemMeta meta = cachedMetas.get(this.location);
             if (meta == null) {

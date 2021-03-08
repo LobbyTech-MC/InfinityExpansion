@@ -42,10 +42,10 @@ public final class InfinityWorkbench extends AbstractEnergyCrafter {
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "INFINITY_FORGE",
             Material.RESPAWN_ANCHOR,
-            "&6Infinity Workbench",
-            "&7Used to craft infinity items",
+            "&6无尽工作台",
+            "&7用于合成无尽物品",
             "",
-            LorePreset.energy(ENERGY) + "per item"
+            LorePreset.energy(ENERGY) + "每个物品"
     );
     
     public static final int[] INPUT_SLOTS = {
@@ -71,7 +71,7 @@ public final class InfinityWorkbench extends AbstractEnergyCrafter {
         RECIPES.put(stacks, item);
         ITEMS.put(item.getItemId(), new Pair<>(item, stacks));
         IDS.add(item.getItemId());
-    }, "", "&cUse the infinity recipes category to see the correct recipe!");
+    }, "", "&c请放入正确的无尽配方!");
     
     public InfinityWorkbench() {
         super(Categories.MAIN_MATERIALS, ITEM, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {

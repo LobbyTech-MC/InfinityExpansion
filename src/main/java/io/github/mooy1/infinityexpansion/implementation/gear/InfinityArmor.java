@@ -108,7 +108,7 @@ public final class InfinityArmor extends SlimefunArmorPiece implements Protectiv
             Material.NETHERITE_BOOTS,
             "&b无尽靴子",
             "&7速度 III",
-            "&7海豚恩惠 I",
+            "&7海豚恩惠 I"
     );
     
     private InfinityArmor(SlimefunItemStack item, PotionEffect[] effects, ItemStack[] recipe) {
