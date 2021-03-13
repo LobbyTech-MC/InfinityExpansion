@@ -53,13 +53,9 @@ public final class SetData extends AbstractCommand {
             return;
         }
         
-        if (strings[2].equals("\\null")) {
-            p.sendMessage(ChatColor.GREEN + "Successfully set key '" + strings[1] + "' to null in " + id);
-            BlockStorage.addBlockInfo(target, strings[1], null);
-        } else {
-            p.sendMessage(ChatColor.GREEN + "Successfully set key '" + strings[1] + "' to value '" + strings[2] + "' in " + id);
-            BlockStorage.addBlockInfo(target, strings[1], strings[2]);
-        }
+        p.sendMessage(ChatColor.GREEN + "Successfully set key '" + strings[1] + "' to value '" + strings[2] + "' in " + id);
+        
+        BlockStorage.addBlockInfo(target, strings[1], strings[2]);
     }
 
     @Nonnull

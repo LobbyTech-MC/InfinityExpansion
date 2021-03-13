@@ -1,11 +1,11 @@
 package io.github.mooy1.infinityexpansion.implementation.gear;
 
-import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinitylib.core.PluginUtils;
+import io.github.mooy1.infinityexpansion.categories.Categories;
+import io.github.mooy1.infinitylib.PluginUtils;
 import io.github.mooy1.infinitylib.items.LoreUtils;
-import io.github.mooy1.infinitylib.players.CoolDownMap;
-import io.github.mooy1.infinitylib.players.MessageUtils;
+import io.github.mooy1.infinitylib.player.LeaveListener;
+import io.github.mooy1.infinitylib.player.MessageUtils;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.magical.runes.SoulboundRune;
@@ -41,11 +41,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -62,18 +65,18 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
             "&b超级矿脉稿",
             "&7升级版的对指定物品有效的矿脉稿"
     );
+    private static final double RANGE = 1.5;
+    private static final int MAX = 64;
+    private static final long CD = 1000;
+    private static final NamespacedKey key = PluginUtils.getKey("vein_miner");
+    private static final Map<UUID, Long> CDS = new HashMap<>();
+    private static final String LORE = ChatColor.AQUA + "超级矿脉挖矿 - 下蹲使用";
     private static final Set<String> ALLOWED = new HashSet<>(Arrays.asList(
             "_ORE", "_LOG", "_WOOD", "GILDED", "SOUL", "GRAVEL",
             "MAGMA", "OBSIDIAN", "DIORITE", "ANDESITE", "GRANITE", "_LEAVES",
             "GLASS", "DIRT", "GRASS", "DEBRIS", "GLOWSTONE"
     ));
-    private static final double RANGE = 1.5;
-    private static final int MAX = 64;
-    private static final String LORE = ChatColor.AQUA + "超级矿脉挖矿 - 下蹲使用";
-    private static final NamespacedKey key = PluginUtils.getKey("vein_miner");
-    
-    private final CoolDownMap cooldowns = new CoolDownMap();
-    private final Set<Block> processing = new HashSet<>();
+    private static final Set<Block> PROCESSING = new HashSet<>();
     
     public VeinMinerRune() {
         super(Categories.MAIN_MATERIALS, ITEM, RecipeType.MAGIC_WORKBENCH, new ItemStack[] {
@@ -81,6 +84,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
                 new ItemStack(Material.REDSTONE_ORE), SlimefunItems.BLANK_RUNE, new ItemStack(Material.LAPIS_ORE),
                 Items.MAGSTEEL, SlimefunItems.MAGIC_LUMP_3, Items.MAGSTEEL,
         });
+        LeaveListener.add(CDS);
         PluginUtils.registerListener(this);
     }
     
@@ -170,8 +174,8 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
 
         if (!makeVeinMiner && isVeinMiner) {
             container.remove(key);
-            if (meta.hasLore()) {
-                List<String> lore = meta.getLore();
+            List<String> lore = meta.getLore();
+            if (lore != null) {
                 lore.remove(LORE);
                 meta.setLore(lore);
                 item.setItemMeta(meta);
@@ -183,7 +187,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
     public void onBlockBreak(BlockBreakEvent e) {
         Block b = e.getBlock();
         
-        if (this.processing.contains(b)) return;
+        if (PROCESSING.contains(b)) return;
 
         Player p = e.getPlayer();
         
@@ -208,14 +212,12 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
 
         if (BlockStorage.hasBlockInfo(l)) return;
 
-        boolean cd = this.cooldowns.check(p.getUniqueId(), 1000);
-        
-        if (!cd) {
-            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "请等待1秒冷却!");
+        Long prev = CDS.get(p.getUniqueId());
+        if (prev != null && System.currentTimeMillis() - prev < CD) {
+            MessageUtils.messageWithCD(p, 500, ChatColor.GOLD + "请等待 " + ChatColor.YELLOW + (CD - (System.currentTimeMillis() - prev)) + ChatColor.GOLD + " 毫秒冷却!");
             return;
         }
-
-        this.cooldowns.put(p.getUniqueId());
+        CDS.put(p.getUniqueId(), System.currentTimeMillis());
         
         Set<Block> found = new HashSet<>();
         Set<Location> checked = new HashSet<>();
@@ -225,10 +227,10 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         World w = b.getWorld();
         
         for (Block mine : found) {
-            this.processing.add(mine);
+            PROCESSING.add(mine);
             BlockBreakEvent event = new BlockBreakEvent(mine, p);
-            Bukkit.getPluginManager().callEvent(event);
-            this.processing.remove(mine);
+            Bukkit.getServer().getPluginManager().callEvent(event);
+            PROCESSING.remove(mine);
             if (!event.isCancelled()) {
                 for (ItemStack drop : mine.getDrops(item)) {
                     w.dropItemNaturally(l, drop);
