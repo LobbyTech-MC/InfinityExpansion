@@ -1,10 +1,10 @@
 package io.github.mooy1.infinityexpansion.implementation.mobdata;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
+import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.materials.EnderEssence;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinityexpansion.categories.Categories;
-import io.github.mooy1.infinitylib.presets.LorePreset;
+import io.github.mooy1.infinitylib.slimefun.presets.LorePreset;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -138,7 +138,7 @@ public final class MobDataCard extends SlimefunItem implements RecipeDisplayItem
                 new ItemStack(Material.WITHER_SKELETON_SKULL, 8), new ItemStack(Material.BONE, 64), new ItemStack(Material.WITHER_SKELETON_SKULL, 8),
                 new ItemStack(Material.COAL_BLOCK, 64), EmptyDataCard.ITEM, new ItemStack(Material.COAL_BLOCK, 64),
                 new ItemStack(Material.STONE_SWORD, 1), new ItemStack(Material.BONE, 64), new ItemStack(Material.STONE_SWORD, 1)
-        }, new ItemStack(Material.COAL), 1, new ItemStack(Material.BONE), 2, new ItemStack(Material.COAL), 3).register(plugin);
+        }, new ItemStack(Material.COAL), 1, new ItemStack(Material.BONE), 2, new ItemStack(Material.WITHER_SKELETON_SKULL), 5).register(plugin);
         new MobDataCard("Endermen", MobDataTier.ADVANCED, new ItemStack[] {
                 new ItemStack(Material.ENDER_EYE, 16), new ItemStack(Material.OBSIDIAN, 64), new ItemStack(Material.ENDER_EYE, 16),
                 new ItemStack(Material.ENDER_PEARL, 16), EmptyDataCard.ITEM, new ItemStack(Material.ENDER_PEARL, 16),
@@ -164,7 +164,7 @@ public final class MobDataCard extends SlimefunItem implements RecipeDisplayItem
                 new ItemStack(Material.IRON_BLOCK, 64), new ItemStack(Material.PUMPKIN, 16), new ItemStack(Material.IRON_BLOCK, 64),
                 new ItemStack(Material.POPPY, 16), EmptyDataCard.ITEM, new ItemStack(Material.POPPY, 16),
                 new ItemStack(Material.IRON_BLOCK, 64), new ItemStack(Material.PUMPKIN, 16), new ItemStack(Material.IRON_BLOCK, 64)
-        }, new ItemStack(Material.IRON_INGOT), 1, new ItemStack(Material.POPPY), 2, new ItemStack(Material.IRON_INGOT), 3).register(plugin);
+        }, new ItemStack(Material.IRON_INGOT), 1, new ItemStack(Material.POPPY), 2, SlimefunItems.BASIC_CIRCUIT_BOARD, 3).register(plugin);
         new MobDataCard("Blaze", MobDataTier.ADVANCED, new ItemStack[] {
                 new ItemStack(Material.MAGMA_BLOCK, 64), new ItemStack(Material.BLAZE_ROD, 64), new ItemStack(Material.MAGMA_BLOCK, 64),
                 new ItemStack(Material.BLAZE_ROD, 64), EmptyDataCard.ITEM, new ItemStack(Material.BLAZE_ROD, 64),

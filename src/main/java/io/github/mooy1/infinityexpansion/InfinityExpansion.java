@@ -1,12 +1,13 @@
 package io.github.mooy1.infinityexpansion;
 
+import io.github.mooy1.infinityexpansion.commands.GiveRecipe;
+import io.github.mooy1.infinityexpansion.commands.PrintItem;
 import io.github.mooy1.infinityexpansion.commands.SetData;
 import io.github.mooy1.infinityexpansion.implementation.Setup;
-import io.github.mooy1.infinityexpansion.commands.GiveRecipe;
-import io.github.mooy1.infinitylib.ConfigUtils;
-import io.github.mooy1.infinitylib.PluginUtils;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
 import io.github.mooy1.infinitylib.command.CommandManager;
+import io.github.mooy1.infinitylib.core.ConfigUtils;
+import io.github.mooy1.infinitylib.core.PluginUtils;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -29,7 +30,7 @@ public final class InfinityExpansion extends JavaPlugin implements SlimefunAddon
         PluginUtils.setup(ChatColor.AQUA + "Infinity" + ChatColor.GRAY + "Expansion", this, "Mooy1/InfinityExpansion/master", getFile());
         
         CommandManager.setup("infinityexpansion", "infinityexpansion.admin", "/ie, /ix, /infinity",
-                new GiveRecipe(), new SetData()
+                new GiveRecipe(), new SetData(), new PrintItem()
         );
         
         Metrics metrics = PluginUtils.setupMetrics(8991);
