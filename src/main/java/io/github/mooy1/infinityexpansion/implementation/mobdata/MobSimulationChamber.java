@@ -37,8 +37,8 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "MOB_SIMULATION_CHAMBER",
             Material.GILDED_BLACKSTONE,
-            "&8怪物数据分析仪",
-            "&7放入怪物数据卡来激活",
+            "&8Mob Simulation Chamber",
+            "&7Use mob data cards to activate",
             "",
             LorePreset.energyBuffer(MobSimulationChamber.BUFFER),
             LorePreset.energyPerSecond(MobSimulationChamber.ENERGY)
@@ -79,7 +79,7 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
     
     @Nonnull
     private static ItemStack makeSimulating(int energy) {
-        return new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a激活中... (" + Math.round(energy * PluginUtils.TICK_RATIO) + " J/s)");
+        return new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aSimulating... (" + Math.round(energy * PluginUtils.TICK_RATIO) + " J/s)");
     }
 
     @Nonnull
@@ -137,7 +137,7 @@ public final class MobSimulationChamber extends AbstractTicker implements Energy
     }
     
     private static ItemStack makeXpItem(int stored) {
-        return new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&a储存的经验值: " + stored, "", "&a> 点击领取");
+        return new CustomItem(Material.LIME_STAINED_GLASS_PANE, "&aStored xp: " + stored, "", "&a> Click to claim");
     }
 
     @Override
