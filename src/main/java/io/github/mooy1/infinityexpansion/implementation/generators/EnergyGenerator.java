@@ -1,10 +1,21 @@
 package io.github.mooy1.infinityexpansion.implementation.generators;
 
+import java.util.Objects;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
+
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
-import io.github.mooy1.infinityexpansion.implementation.materials.Items;
+import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.abstracts.AbstractGenerator;
 import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench;
-import io.github.mooy1.infinityexpansion.categories.Categories;
+import io.github.mooy1.infinityexpansion.implementation.materials.Items;
 import io.github.mooy1.infinityexpansion.utils.Util;
 import io.github.mooy1.infinitylib.PluginUtils;
 import io.github.mooy1.infinitylib.presets.LorePreset;
@@ -23,15 +34,6 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * Solar panels and some other basic generators
@@ -230,8 +232,8 @@ public final class EnergyGenerator extends AbstractGenerator {
             if (inv.hasViewer()) {
                 inv.replaceExistingItem(4, new CustomItem(
                         Material.GREEN_STAINED_GLASS_PANE,
-                        "&c不发电时",
-                        "&7可储存: &6" + LorePreset.format(getCharge(l)) + " J"
+                        "&c不在发电",
+                        "&7已储存: &6" + LorePreset.format(getCharge(l)) + " J"
                 ));
             }
             return 0;
@@ -240,10 +242,10 @@ public final class EnergyGenerator extends AbstractGenerator {
             if (inv.hasViewer()) {
                 inv.replaceExistingItem(4, new CustomItem(
                         Material.GREEN_STAINED_GLASS_PANE,
-                        "&a发电时",
-                        "&7类型: &6" + type.status,
+                        "&a正在发电",
+                        "&7发电机类型: &6" + type.status,
                         "&7发电量: &6" + LorePreset.roundHundreds(gen * PluginUtils.TICK_RATIO) + " J/s ",
-                        "&7可储存: &6" + LorePreset.format(getCharge(l)) + " J"
+                        "&7已储存: &6" + LorePreset.format(getCharge(l)) + " J"
                 ));
             }
             return gen;

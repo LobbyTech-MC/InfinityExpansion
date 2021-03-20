@@ -31,7 +31,7 @@
 # 
 # -----
 balance-options:
-  difficulty: 1.0
+  difficulty: 10.0
   allow-sf-item-transform: false
 storage-unit-options:
   display-signs: true
