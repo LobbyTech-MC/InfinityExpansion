@@ -52,7 +52,7 @@ public final class EnergyGenerator extends AbstractGenerator {
     private static final int ADVANCED_SOLAR_ENERGY = 150;
     private static final int CELESTIAL_ENERGY = 750;
     private static final int VOID_ENERGY = 3000;
-    private static final int INFINITY_ENERGY = 60000;
+    private static final int INFINITY_ENERGY = 100000;
     
     public static void setup(InfinityExpansion plugin) {
         new EnergyGenerator(Categories.BASIC_MACHINES, HYDRO, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
@@ -318,11 +318,11 @@ public final class EnergyGenerator extends AbstractGenerator {
 
     @AllArgsConstructor
     private enum Type {
-        WATER("水力", false),
-        GEOTHERMAL("热力", false),
-        SOLAR("太阳能", false),
-        LUNAR("暗能", false),
-        INFINITY("无尽", false),
+        WATER("水力", true),
+        GEOTHERMAL("热力", true),
+        SOLAR("太阳能", true),
+        LUNAR("暗能", true),
+        INFINITY("无尽", true),
         
         NETHER("下界 (2x)", true);
         
