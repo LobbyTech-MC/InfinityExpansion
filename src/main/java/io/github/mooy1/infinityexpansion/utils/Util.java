@@ -39,7 +39,7 @@ public final class Util {
     
     @Nonnull
     public static ItemStack getDisplayItem(@Nonnull ItemStack output) {
-        LoreUtils.addLore(output, "", "&a-------------------", "&a\u21E8 点击合成", "&a-------------------");
+        LoreUtils.addLore(output, "", "&a-------------------", "&a\u21E8 Click to craft", "&a-------------------");
         return output;
     }
     

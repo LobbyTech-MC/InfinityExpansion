@@ -47,7 +47,7 @@ public final class InfinityReactor extends AbstractGenerator implements RecipeDi
             LorePreset.energyPerSecond(InfinityReactor.ENERGY)
     );
     
-    public static final int ENERGY = 150_000;
+    public static final int ENERGY = 90_000;
     public static final int STORAGE = 90_000_000;
     public static final int INFINITY_INTERVAL = (int) (86400 * PluginUtils.TICK_RATIO); 
     public static final int VOID_INTERVAL = (int) (14400 * PluginUtils.TICK_RATIO);

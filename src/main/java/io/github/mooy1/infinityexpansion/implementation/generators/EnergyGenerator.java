@@ -50,7 +50,7 @@ public final class EnergyGenerator extends AbstractGenerator {
     private static final int ADVANCED_SOLAR_ENERGY = 150;
     private static final int CELESTIAL_ENERGY = 750;
     private static final int VOID_ENERGY = 3000;
-    private static final int INFINITY_ENERGY = 100000;
+    private static final int INFINITY_ENERGY = 60000;
     
     public static void setup(InfinityExpansion plugin) {
         new EnergyGenerator(Categories.BASIC_MACHINES, HYDRO, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
@@ -242,7 +242,7 @@ public final class EnergyGenerator extends AbstractGenerator {
                         Material.GREEN_STAINED_GLASS_PANE,
                         "&a发电时",
                         "&7类型: &6" + type.status,
-                        "&7发电量: &6" + LorePreset.roundHundreds(gen) + " J/s ",
+                        "&7发电量: &6" + LorePreset.roundHundreds(gen * PluginUtils.TICK_RATIO) + " J/s ",
                         "&7可储存: &6" + LorePreset.format(getCharge(l)) + " J"
                 ));
             }
@@ -323,15 +323,13 @@ public final class EnergyGenerator extends AbstractGenerator {
         INFINITY("无尽", false),
         
         NETHER("下界 (2x)", true);
-    	
-        private final String status;
-        private final boolean more;
         
         Type(String status, boolean more) {
 			this.status = status;
 			this.more = more;
 		}
-		
+		private final String status;
+        private final boolean more;
         
     }
 
