@@ -1,5 +1,16 @@
 package io.github.mooy1.infinityexpansion.implementation;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+
+import javax.annotation.Nonnull;
+
+import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.categories.InfinityCategory;
@@ -39,15 +50,6 @@ import io.github.mooy1.infinityexpansion.implementation.mobdata.MobSimulationCha
 import io.github.mooy1.infinityexpansion.utils.Util;
 import io.github.mooy1.infinitylib.PluginUtils;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Sets up items
@@ -115,6 +117,7 @@ public final class Setup {
         InfinityTool.setup(plugin);
         new InfinityMatrix().register(plugin);
         new EnderFlame().register(plugin);
+        
         
         SlimefunExtension.setup(plugin);
     }

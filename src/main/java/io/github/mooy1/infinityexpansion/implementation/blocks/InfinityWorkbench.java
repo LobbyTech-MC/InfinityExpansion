@@ -45,7 +45,7 @@ public final class InfinityWorkbench extends AbstractEnergyCrafter {
             "&6无尽工作台",
             "&7用于合成无尽物品",
             "",
-            LorePreset.energy(ENERGY) + "每个物品"
+            "&8\u21E8 &e\u26A1 &7100,000 J " + "/个物品"
     );
     
     public static final int[] INPUT_SLOTS = {

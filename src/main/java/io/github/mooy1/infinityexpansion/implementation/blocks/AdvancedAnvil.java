@@ -50,7 +50,7 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
             "&7升级附魔",
             "&b对粘液科技物品有效",
             "",
-            LorePreset.energy(ENERGY) + "每次使用"
+            "&8\u21E8 &e\u26A1 &7100,000 J " + "/次使用"
 
     );
     
