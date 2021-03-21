@@ -43,12 +43,12 @@ public final class InfinityReactor extends AbstractGenerator implements RecipeDi
             "&b无尽锭发电机",
             "&7使用一个无尽锭和一个虚空锭发电",
             "",
-            "&8\u21E8 &e\u26A1 &7 90,000,000J 可储存",
-            "&8\u21E8 &e\u26A1 &7 90,000 J/s"
+            "&8\u21E8 &e\u26A1 &7 150,000,000J 可储存",
+            "&8\u21E8 &e\u26A1 &7 150,000 J/s"
     );
     
-    public static final int ENERGY = 90_000;
-    public static final int STORAGE = 90_000_000;
+    public static final int ENERGY = 150_000;
+    public static final int STORAGE = 150_000_000;
     public static final int INFINITY_INTERVAL = (int) (86400 * PluginUtils.TICK_RATIO); 
     public static final int VOID_INTERVAL = (int) (14400 * PluginUtils.TICK_RATIO);
     public static final int[] INPUT_SLOTS = {

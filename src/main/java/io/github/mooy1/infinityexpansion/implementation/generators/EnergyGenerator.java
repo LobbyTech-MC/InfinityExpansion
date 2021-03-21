@@ -51,7 +51,7 @@ public final class EnergyGenerator extends AbstractGenerator {
     private static final int ADVANCED_SOLAR_ENERGY = 150;
     private static final int CELESTIAL_ENERGY = 750;
     private static final int VOID_ENERGY = 3000;
-    private static final int INFINITY_ENERGY = 60000;
+    private static final int INFINITY_ENERGY = 100000;
     
     public final static void setup(InfinityExpansion plugin) {
     	new EnergyGenerator(Categories.BASIC_MACHINES, HYDRO_GENERATOR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
@@ -187,8 +187,8 @@ public final class EnergyGenerator extends AbstractGenerator {
             "&b无尽发电机",
             "&7使用宇宙能量发电",
             "",
-            "&8\u21E8 &e\u26A1 &7 6,000,000 J 可储存",
-            "&8\u21E8 &e\u26A1 &7 60,000 J/s"
+            "&8\u21E8 &e\u26A1 &7 10,000,000 J 可储存",
+            "&8\u21E8 &e\u26A1 &7 100,000 J/s"
     );
 
     private final Type type;
