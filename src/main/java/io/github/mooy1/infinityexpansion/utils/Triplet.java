@@ -1,12 +1,10 @@
 package io.github.mooy1.infinityexpansion.utils;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public final class Triplet<A, B, C> {
 

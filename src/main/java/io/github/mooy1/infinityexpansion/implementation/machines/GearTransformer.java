@@ -16,9 +16,9 @@ import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.abstracts.AbstractEnergyCrafter;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinityexpansion.infinitylib.presets.LorePreset;
-import io.github.mooy1.infinityexpansion.infinitylib.presets.MenuPreset;
 import io.github.mooy1.infinitylib.items.StackUtils;
+import io.github.mooy1.infinitylib.slimefun.presets.LorePreset;
+import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -84,10 +84,10 @@ public final class GearTransformer extends AbstractEnergyCrafter implements Reci
             blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
         for (int i : MenuPreset.slotChunk1) {
-            blockMenuPreset.addItem(i, new CustomItem(Material.BLUE_STAINED_GLASS_PANE, "&9Tool Input"), ChestMenuUtils.getEmptyClickHandler());
+            blockMenuPreset.addItem(i, new CustomItem(Material.BLUE_STAINED_GLASS_PANE, "&9放入工具"), ChestMenuUtils.getEmptyClickHandler());
         }
         for (int i : MenuPreset.slotChunk3) {
-            blockMenuPreset.addItem(i, new CustomItem(Material.BLUE_STAINED_GLASS_PANE, "&9Material Input"), ChestMenuUtils.getEmptyClickHandler());
+            blockMenuPreset.addItem(i, new CustomItem(Material.BLUE_STAINED_GLASS_PANE, "&9放入材料"), ChestMenuUtils.getEmptyClickHandler());
         }
         for (int i : OUTPUT_BORDER) {
             blockMenuPreset.addItem(i, MenuPreset.borderItemOutput, ChestMenuUtils.getEmptyClickHandler());

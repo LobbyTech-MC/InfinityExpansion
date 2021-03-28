@@ -1,17 +1,16 @@
 package io.github.mooy1.infinityexpansion;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Level;
-
 import io.github.mooy1.infinityexpansion.commands.GiveRecipe;
 import io.github.mooy1.infinityexpansion.commands.PrintItem;
 import io.github.mooy1.infinityexpansion.commands.SetData;
-import io.github.mooy1.infinityexpansion.implementation.Setup;
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
 import io.github.mooy1.infinitylib.commands.AbstractCommand;
 import lombok.Getter;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
 
 public final class InfinityExpansion extends AbstractAddon {
     
@@ -67,7 +66,7 @@ public final class InfinityExpansion extends AbstractAddon {
         return Arrays.asList(new GiveRecipe(), new SetData(), new PrintItem());        
     }
 
-    public void loadDifficulty() {
+    private void loadDifficulty() {
         double val = getConfig().getDouble("balance-options.difficulty");
         // round to .1 .2 .3 or 1 2 3 etc
         if (val >= .1 && val < 1) {
@@ -89,7 +88,7 @@ public final class InfinityExpansion extends AbstractAddon {
 
 	public double getDifficulty() {
 		// TODO Auto-generated method stub
-		return this.difficulty;
+		return difficulty;
 	}
     
 }

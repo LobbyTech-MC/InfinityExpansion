@@ -1,20 +1,12 @@
 package io.github.mooy1.infinityexpansion.implementation.blocks;
 
-import com.google.common.collect.MapDifference;
-import com.google.common.collect.Maps;
-import io.github.mooy1.infinityexpansion.InfinityExpansion;
-import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinityexpansion.implementation.abstracts.AbstractEnergyCrafter;
-import io.github.mooy1.infinityexpansion.categories.Categories;
-import io.github.mooy1.infinityexpansion.utils.Util;
-import io.github.mooy1.infinitylib.slimefun.presets.LorePreset;
-import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
-import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,11 +19,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import com.google.common.collect.MapDifference;
+import com.google.common.collect.Maps;
+
+import io.github.mooy1.infinityexpansion.InfinityExpansion;
+import io.github.mooy1.infinityexpansion.categories.Categories;
+import io.github.mooy1.infinityexpansion.implementation.abstracts.AbstractEnergyCrafter;
+import io.github.mooy1.infinityexpansion.implementation.materials.Items;
+import io.github.mooy1.infinityexpansion.utils.Util;
+import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
+import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
 /**
  * Combines slimefun items, exceeds vanilla anvil limits

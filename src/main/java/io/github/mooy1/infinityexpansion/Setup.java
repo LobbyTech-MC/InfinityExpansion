@@ -105,7 +105,6 @@ public final class Setup {
         new InfinityMatrix().register(plugin);
         new EnderFlame().register(plugin);
         
-        
         SlimefunExtension.setup(plugin);
     }
     

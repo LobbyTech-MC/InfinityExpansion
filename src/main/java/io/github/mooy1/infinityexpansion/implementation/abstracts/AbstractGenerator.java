@@ -5,8 +5,8 @@ import javax.annotation.Nonnull;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.infinityexpansion.infinitylib.abstracts.AbstractTicker;
-import io.github.mooy1.infinityexpansion.infinitylib.presets.MenuPreset;
+import io.github.mooy1.infinitylib.slimefun.abstracts.AbstractTicker;
+import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNet;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
@@ -22,7 +22,6 @@ public abstract class AbstractGenerator extends AbstractTicker implements Energy
         super(category, item, recipeType, recipe);
     }
 
-    @Override
     public final void tick(@Nonnull BlockMenu inv, @Nonnull Block block, @Nonnull Config config) {
         if (inv.hasViewer() && !SlimefunPlugin.getNetworkManager().getNetworkFromLocation(block.getLocation(), EnergyNet.class).isPresent()) {
             inv.replaceExistingItem(getStatus(), MenuPreset.connectToEnergyNet);

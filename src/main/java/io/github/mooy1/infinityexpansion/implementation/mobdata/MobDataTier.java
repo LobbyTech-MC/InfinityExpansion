@@ -1,9 +1,7 @@
 package io.github.mooy1.infinityexpansion.implementation.mobdata;
 
-import lombok.AllArgsConstructor;
 import org.bukkit.Material;
 
-@AllArgsConstructor
 public enum MobDataTier {
     
     // chicken

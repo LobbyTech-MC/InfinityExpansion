@@ -1,3 +1,4 @@
+
 package io.github.mooy1.infinityexpansion.implementation.gear;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;

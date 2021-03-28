@@ -48,12 +48,12 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
     }
 
     private static void disableFlight(Player p) {
-        p.sendMessage( ChatColor.RED + "Infinity Flight Disabled!");
+        p.sendMessage( ChatColor.RED + "无尽飞行已关闭!");
         p.setAllowFlight(false);
     }
 
     private static void enableFlight(Player p) {
-        p.sendMessage( ChatColor.GREEN + "Infinity Flight Enabled!");
+        p.sendMessage( ChatColor.GREEN + "无尽飞行已开启!");
         p.setAllowFlight(true);
     }
 
