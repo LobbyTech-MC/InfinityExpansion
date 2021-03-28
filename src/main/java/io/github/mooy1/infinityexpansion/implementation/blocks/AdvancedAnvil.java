@@ -7,12 +7,10 @@ import io.github.mooy1.infinityexpansion.implementation.materials.Items;
 import io.github.mooy1.infinityexpansion.implementation.abstracts.AbstractEnergyCrafter;
 import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.utils.Util;
-import io.github.mooy1.infinitylib.player.MessageUtils;
-import io.github.mooy1.infinitylib.presets.LorePreset;
-import io.github.mooy1.infinitylib.presets.MenuPreset;
+import io.github.mooy1.infinitylib.slimefun.presets.LorePreset;
+import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -24,6 +22,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -53,8 +52,10 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
             "&8\u21E8 &e\u26A1 &7100,000 J " + "/次使用"
 
     );
-    
-    private static final Map<Enchantment, Integer> MAX_LEVELS = Util.getEnchants(Objects.requireNonNull(InfinityExpansion.getInstance().getConfig().getConfigurationSection("advanced-anvil-max-levels")));
+
+    private static final Map<Enchantment, Integer> MAX_LEVELS = Util.getEnchants(Objects.requireNonNull(
+            InfinityExpansion.inst().getConfig().getConfigurationSection("advanced-anvil-max-levels")
+    ));
 
     private static final int[] INPUT_SLOTS = {
             MenuPreset.slot1, MenuPreset.slot2
@@ -78,18 +79,12 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
                 Items.MACHINE_PLATE, new ItemStack(Material.ANVIL), Items.MACHINE_PLATE,
                 Items.MACHINE_CIRCUIT, Items.MACHINE_CORE, Items.MACHINE_CIRCUIT
         }, ENERGY, STATUS_SLOT);
+    }
 
-        registerBlockHandler(getId(), (p, b, stack, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
-
-            if (inv != null) {
-                Location l = b.getLocation();
-                inv.dropItems(l, INPUT_SLOTS);
-                inv.dropItems(l, OUTPUT_SLOTS);
-            }
-
-            return true;
-        });
+    @Override
+    protected void onBreak(@Nonnull BlockBreakEvent e, @Nonnull BlockMenu inv, @Nonnull Location l) {
+        inv.dropItems(l, INPUT_SLOTS);
+        inv.dropItems(l, OUTPUT_SLOTS);
     }
 
     @Override
@@ -125,10 +120,10 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
     private void craft(BlockMenu inv, Block b, Player p) {
         Location l = b.getLocation();
         if (getCharge(l) < ENERGY) { //not enough energy
-            MessageUtils.messageWithCD(p, 1000,
+            p.sendMessage(new String[] {
                     ChatColor.RED + "电力不足!",
                     ChatColor.GREEN + "当前电力: " + ChatColor.RED + getCharge(l) + ChatColor.GREEN + "/" + ENERGY + " J"
-            );
+            });
             return;
         }
 
@@ -136,19 +131,19 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         ItemStack item2 = inv.getItemInSlot(INPUT_SLOT2);
 
         if (item1 == null || item2 == null || (item2.getType() != Material.ENCHANTED_BOOK && item1.getType() != item2.getType())) {
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "不存在的物品!");
+            p.sendMessage(ChatColor.RED + "物品不存在!");
             return;
         }
 
         ItemStack output = getOutput(item1, item2);
 
         if (output == null) {
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "无法升级!");
+            p.sendMessage(ChatColor.RED + "无法升级!");
             return;
         }
 
         if (!inv.fits(output, OUTPUT_SLOTS)) {
-            MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "空间不足!");
+            p.sendMessage(ChatColor.GOLD + "空间不足!");
             return;
         }
 

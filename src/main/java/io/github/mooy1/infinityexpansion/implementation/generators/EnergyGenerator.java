@@ -13,11 +13,14 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.categories.Categories;
-import io.github.mooy1.infinityexpansion.implementation.abstracts.AbstractGenerator;
 import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
 import io.github.mooy1.infinityexpansion.utils.Util;
-import io.github.mooy1.infinitylib.presets.MenuPreset;
+import io.github.mooy1.infinitylib.slimefun.abstracts.AbstractContainer;
+import io.github.mooy1.infinitylib.slimefun.presets.LorePreset;
+import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
+import io.github.mooy1.infinitylib.slimefun.utils.TickerUtils;
+import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
@@ -40,7 +43,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
  *
  * Thanks to panda for some stuff to work off of
  */
-public final class EnergyGenerator extends AbstractGenerator {
+public final class EnergyGenerator extends AbstractContainer implements EnergyNetProvider {
     
 
 	private static final int HYDRO_ENERGY = 5;
@@ -231,8 +234,8 @@ public final class EnergyGenerator extends AbstractGenerator {
                         Material.GREEN_STAINED_GLASS_PANE,
                         "&a正在发电",
                         "&7发电机类型: &6" + type.status,
-                        "&7发电量: &6" + gen + " J/s ",
-                        "&7已储存: &6" + getCharge(l) + " J"
+                        "&7发电量: &6" + LorePreset.roundHundreds(gen * TickerUtils.TPS) + " J/s ",
+                        "&7已储存: &6" + LorePreset.format(getCharge(l)) + " J"
                 ));
             }
             return gen;
@@ -307,10 +310,6 @@ public final class EnergyGenerator extends AbstractGenerator {
     @Override
     public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.GENERATOR;
-    }
-
-    public int getStatus() {
-        return 4;
     }
 
     @AllArgsConstructor

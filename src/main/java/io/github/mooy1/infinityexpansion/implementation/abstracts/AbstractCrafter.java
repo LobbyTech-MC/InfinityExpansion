@@ -1,17 +1,17 @@
 package io.github.mooy1.infinityexpansion.implementation.abstracts;
 
 import io.github.mooy1.infinityexpansion.utils.Util;
-import io.github.mooy1.infinitylib.abstracts.AbstractTicker;
-import io.github.mooy1.infinitylib.delayed.DelayedRecipeType;
-import io.github.mooy1.infinitylib.player.MessageUtils;
-import io.github.mooy1.infinitylib.presets.MenuPreset;
-import io.github.mooy1.infinitylib.recipes.largestrict.StrictLargeOutput;
-import io.github.mooy1.infinitylib.recipes.largestrict.StrictLargeRecipeMap;
+import io.github.mooy1.infinitylib.slimefun.abstracts.TickingContainer;
+import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
+import io.github.mooy1.infinitylib.slimefun.recipes.AdvancedRecipeMap;
+import io.github.mooy1.infinitylib.slimefun.recipes.RecipeMap;
+import io.github.mooy1.infinitylib.slimefun.recipes.inputs.StrictMultiInput;
+import io.github.mooy1.infinitylib.slimefun.recipes.outputs.StrictMultiOutput;
+import io.github.mooy1.infinitylib.slimefun.utils.DelayedRecipeType;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -23,6 +23,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -34,7 +35,7 @@ import javax.annotation.Nullable;
  * @author Mooy1
  *
  */
-public abstract class AbstractCrafter extends AbstractTicker {
+public abstract class AbstractCrafter extends TickingContainer {
     
     protected static final int[] INPUT_SLOTS = MenuPreset.craftingInput;
     private static final int[] OUTPUT_SLOT = MenuPreset.craftingOutput;
@@ -42,21 +43,18 @@ public abstract class AbstractCrafter extends AbstractTicker {
     private static final int[] STATUS_BORDER = {14, 32};
     private static final int STATUS_SLOT = 23;
 
-    private final StrictLargeRecipeMap recipes = new StrictLargeRecipeMap(9);
+    private final RecipeMap<StrictMultiInput, StrictMultiOutput> recipes = new AdvancedRecipeMap<>();
     
     public AbstractCrafter(Category category, SlimefunItemStack stack, DelayedRecipeType recipeType, RecipeType type, ItemStack[] recipe) {
         super(category, stack, type, recipe);
+        recipeType.accept((stacks, itemStack) -> this.recipes.put(new StrictMultiInput(stacks), new StrictMultiOutput(itemStack)));
+    }
 
-        recipeType.acceptEach(this.recipes::put);
 
-        registerBlockHandler(getId(), (p, b, slimefunItem, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
-            if (inv != null) {
-                inv.dropItems(b.getLocation(), OUTPUT_SLOT);
-                inv.dropItems(b.getLocation(), INPUT_SLOTS);
-            }
-            return true;
-        });
+	@Override
+    protected void onBreak(@Nonnull BlockBreakEvent e, @Nonnull BlockMenu menu, @Nonnull Location l) {
+        menu.dropItems(l, OUTPUT_SLOT);
+        menu.dropItems(l, INPUT_SLOTS);
     }
 
     @Nonnull
@@ -124,7 +122,9 @@ public abstract class AbstractCrafter extends AbstractTicker {
         if (preCraftFail(inv.getLocation(), inv)) {
             inv.replaceExistingItem(STATUS_SLOT, preCraftItem(inv.getLocation(), inv));
             String msg = preCraftMessage(inv.getLocation(), inv);
-            if (msg != null) MessageUtils.messageWithCD(p, 1000, msg);
+            if (msg != null) {
+                p.sendMessage(msg);
+            }
             return;
         }
         
@@ -133,14 +133,14 @@ public abstract class AbstractCrafter extends AbstractTicker {
         if (output == null) { //invalid
 
             inv.replaceExistingItem(STATUS_SLOT, MenuPreset.invalidRecipe);
-            MessageUtils.messageWithCD(p, 1000, ChatColor.RED + "Invalid Recipe!");
+            p.sendMessage( ChatColor.RED + "Invalid Recipe!");
 
         } else {
             
             if (!inv.fits(output.getFirstValue(), OUTPUT_SLOT)) { //not enough room
 
                 inv.replaceExistingItem(STATUS_SLOT, MenuPreset.notEnoughRoom);
-                MessageUtils.messageWithCD(p, 1000, ChatColor.GOLD + "Not enough room!");
+                p.sendMessage(  ChatColor.GOLD + "Not enough room!");
 
             } else { //enough room
 
@@ -150,8 +150,7 @@ public abstract class AbstractCrafter extends AbstractTicker {
                         inv.consumeItem(INPUT_SLOTS[i], amount);
                     }
                 }
-                MessageUtils.messageWithCD(p, 1000, ChatColor.GREEN + "已合成: " + ItemUtils.getItemName(output.getFirstValue()));
-
+                p.sendMessage(  ChatColor.GREEN + "合成的物品: " + ItemUtils.getItemName(output.getFirstValue()));
                 postCraft(inv.getLocation(), inv, p);
 
                 inv.pushItem(output.getFirstValue(), OUTPUT_SLOT);
@@ -162,7 +161,7 @@ public abstract class AbstractCrafter extends AbstractTicker {
     
     @Nullable
     private Pair<ItemStack, int[]> getOutput(@Nonnull BlockMenu inv) {
-        StrictLargeOutput output = this.recipes.get(inv, INPUT_SLOTS);
+        StrictMultiOutput output = this.recipes.get(new StrictMultiInput(inv, INPUT_SLOTS));
         if (output == null) {
             return null;
         }

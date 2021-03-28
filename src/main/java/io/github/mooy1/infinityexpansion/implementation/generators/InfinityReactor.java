@@ -1,15 +1,27 @@
 package io.github.mooy1.infinityexpansion.implementation.generators;
 
-import io.github.mooy1.infinityexpansion.implementation.abstracts.AbstractGenerator;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.ItemStack;
+
+import io.github.mooy1.infinityexpansion.categories.Categories;
+import io.github.mooy1.infinityexpansion.implementation.SlimefunExtension;
 import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinityexpansion.implementation.SlimefunExtension;
-import io.github.mooy1.infinityexpansion.categories.Categories;
-import io.github.mooy1.infinitylib.PluginUtils;
 import io.github.mooy1.infinitylib.items.LoreUtils;
 import io.github.mooy1.infinitylib.items.StackUtils;
-import io.github.mooy1.infinitylib.presets.LorePreset;
-import io.github.mooy1.infinitylib.presets.MenuPreset;
+import io.github.mooy1.infinitylib.slimefun.abstracts.AbstractContainer;
+import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
+import io.github.mooy1.infinitylib.slimefun.utils.TickerUtils;
+import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
@@ -20,22 +32,13 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A reactor that generates huge power but costs infinity ingots and void ingots
  *
  * @author Mooy1
  */
-public final class InfinityReactor extends AbstractGenerator implements RecipeDisplayItem {
+public final class InfinityReactor extends AbstractContainer implements EnergyNetProvider, RecipeDisplayItem {
     
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "INFINITY_REACTOR",
@@ -49,8 +52,8 @@ public final class InfinityReactor extends AbstractGenerator implements RecipeDi
     
     public static final int ENERGY = 150_000;
     public static final int STORAGE = 150_000_000;
-    public static final int INFINITY_INTERVAL = (int) (86400 * PluginUtils.TICK_RATIO); 
-    public static final int VOID_INTERVAL = (int) (14400 * PluginUtils.TICK_RATIO);
+    public static final int INFINITY_INTERVAL = (int) (86400 * TickerUtils.TPS); 
+    public static final int VOID_INTERVAL = (int) (14400 * TickerUtils.TPS);
     public static final int[] INPUT_SLOTS = {
             MenuPreset.slot1, MenuPreset.slot3
     };
@@ -65,17 +68,6 @@ public final class InfinityReactor extends AbstractGenerator implements RecipeDi
                 Items.INFINITY, Items.MACHINE_PLATE, Items.MACHINE_PLATE, Items.MACHINE_PLATE, Items.MACHINE_PLATE, Items.INFINITY,
                 Items.INFINITY, Items.INFINITE_CIRCUIT, Items.INFINITE_CORE, Items.INFINITE_CORE, Items.INFINITE_CIRCUIT, Items.INFINITY
         });
-        
-        registerBlockHandler(getId(), (p, b, stack, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
-
-            if (inv != null) {
-                Location l = b.getLocation();
-                inv.dropItems(l, INPUT_SLOTS);
-            }
-
-            return true;
-        });
     }
     
     @Override
@@ -83,6 +75,11 @@ public final class InfinityReactor extends AbstractGenerator implements RecipeDi
         if (BlockStorage.getLocationInfo(b.getLocation(), "progress") == null) {
             BlockStorage.addBlockInfo(b, "progress", "0");
         }
+    }
+
+    @Override
+    protected void onBreak(@Nonnull BlockBreakEvent e, @Nonnull BlockMenu inv, @Nonnull Location l) {
+        inv.dropItems(l, INPUT_SLOTS);
     }
 
     @Override
@@ -205,11 +202,6 @@ public final class InfinityReactor extends AbstractGenerator implements RecipeDi
         }
         BlockStorage.addBlockInfo(l, "progress", String.valueOf(progress + 1));
         return ENERGY;
-    }
-
-    @Override
-    public int getStatus() {
-        return STATUS_SLOT;
     }
 
     @Override

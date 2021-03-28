@@ -1,11 +1,10 @@
 package io.github.mooy1.infinityexpansion.implementation.gear;
 
-import io.github.mooy1.infinityexpansion.implementation.materials.Items;
+import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.categories.Categories;
-import io.github.mooy1.infinitylib.PluginUtils;
+import io.github.mooy1.infinityexpansion.implementation.materials.Items;
 import io.github.mooy1.infinitylib.items.LoreUtils;
-import io.github.mooy1.infinitylib.player.LeaveListener;
-import io.github.mooy1.infinitylib.player.MessageUtils;
+import io.github.mooy1.infinitylib.players.CoolDownMap;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.magical.runes.SoulboundRune;
@@ -65,18 +64,19 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
             "&b超级矿脉稿",
             "&7升级版的对指定物品有效的矿脉稿"
     );
-    private static final double RANGE = 1.5;
-    private static final int MAX = 64;
-    private static final long CD = 1000;
-    private static final NamespacedKey key = PluginUtils.getKey("vein_miner");
     private static final Map<UUID, Long> CDS = new HashMap<>();
-    private static final String LORE = ChatColor.AQUA + "超级矿脉挖矿 - 下蹲使用";
     private static final Set<String> ALLOWED = new HashSet<>(Arrays.asList(
             "_ORE", "_LOG", "_WOOD", "GILDED", "SOUL", "GRAVEL",
             "MAGMA", "OBSIDIAN", "DIORITE", "ANDESITE", "GRANITE", "_LEAVES",
             "GLASS", "DIRT", "GRASS", "DEBRIS", "GLOWSTONE"
     ));
-    private static final Set<Block> PROCESSING = new HashSet<>();
+    private static final double RANGE = 1.5;
+    private static final int MAX = 64;
+    private static final String LORE = ChatColor.AQUA + "超级矿脉挖矿";
+    private static final NamespacedKey key = InfinityExpansion.inst().getKey("vein_miner");
+    
+    private final CoolDownMap cooldowns = new CoolDownMap(InfinityExpansion.inst());
+    private final Set<Block> PROCESSING = new HashSet<>();
     
     public VeinMinerRune() {
         super(Categories.MAIN_MATERIALS, ITEM, RecipeType.MAGIC_WORKBENCH, new ItemStack[] {
@@ -84,14 +84,13 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
                 new ItemStack(Material.REDSTONE_ORE), SlimefunItems.BLANK_RUNE, new ItemStack(Material.LAPIS_ORE),
                 Items.MAGSTEEL, SlimefunItems.MAGIC_LUMP_3, Items.MAGSTEEL,
         });
-        LeaveListener.add(CDS);
-        PluginUtils.registerListener(this);
+        InfinityExpansion.inst().registerListener(this);
     }
     
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {
         if (isItem(e.getItemDrop().getItemStack()) && e.getItemDrop().getItemStack().getAmount() == 1) {
-            PluginUtils.runSync(() -> activate(e.getPlayer(), e.getItemDrop()), 20L);
+            InfinityExpansion.inst().runSync(() -> activate(e.getPlayer(), e.getItemDrop()), 20L);
         }
     }
 
@@ -114,7 +113,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
                 // This lightning is just an effect, it deals no damage.
                 l.getWorld().strikeLightningEffect(l);
 
-                PluginUtils.runSync(() -> {
+                InfinityExpansion.inst().runSync(() -> {
                     // Being sure entities are still valid and not picked up or whatsoever.
                     if (rune.isValid() && item.isValid() && rune.getItemStack().getAmount() == 1) {
 
@@ -127,14 +126,14 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
                         setVeinMiner(itemStack, true);
                         l.getWorld().dropItemNaturally(l, itemStack);
 
-                        MessageUtils.message(p, ChatColor.GREEN + "向工具添加了矿工!");
+                        p.sendMessage(ChatColor.GREEN + "成功应用矿脉!");
                     } else {
-                        MessageUtils.message(p, ChatColor.RED + "添加矿工失败!");
+                        p.sendMessage(ChatColor.RED + "矿脉模式加载失败!");
                     }
                 }, 10L);
                 
             } else {
-                MessageUtils.message(p, ChatColor.RED + "添加矿工失败!");
+                p.sendMessage(ChatColor.RED + "矿脉模式加载失败!");
             }
         }
     }
@@ -200,7 +199,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         }
             
         if (p.getFoodLevel() == 0) {
-            MessageUtils.messageWithCD(p, 500, ChatColor.GOLD + "你太累了，无法挖矿!");
+            p.sendMessage(ChatColor.GOLD + "你太饿了，无法使用矿脉!");
             return;
         }
         
@@ -212,9 +211,10 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
 
         if (BlockStorage.hasBlockInfo(l)) return;
 
-        Long prev = CDS.get(p.getUniqueId());
-        if (prev != null && System.currentTimeMillis() - prev < CD) {
-            MessageUtils.messageWithCD(p, 500, ChatColor.GOLD + "请等待 " + ChatColor.YELLOW + (CD - (System.currentTimeMillis() - prev)) + ChatColor.GOLD + " 毫秒冷却!");
+        boolean cd = this.cooldowns.check(p.getUniqueId(), 1000);
+        
+        if (!cd) {
+            p.sendMessage(ChatColor.GOLD + "请等待一秒再次使用");
             return;
         }
         CDS.put(p.getUniqueId(), System.currentTimeMillis());
@@ -266,14 +266,9 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
     private static void getVein(Set<Location> checked, Set<Block> found, Location l, Block b) {
         if (found.size() >= MAX) return;
         
-        found.add(b);
-        
         for (Location check : getAdjacentLocations(l)) {
-            if (checked.contains(check) || BlockStorage.hasBlockInfo(check)) continue;
-
-            checked.add(check);
-
-            if (check.getBlock().getType() == b.getType()) {
+            if (checked.add(check) && check.getBlock().getType() == b.getType() && !BlockStorage.hasBlockInfo(b)) {
+                found.add(b);
                 getVein(checked, found, check, check.getBlock());
             }
         }

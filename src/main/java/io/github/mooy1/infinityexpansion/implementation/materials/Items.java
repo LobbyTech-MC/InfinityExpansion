@@ -1,21 +1,21 @@
 package io.github.mooy1.infinityexpansion.implementation.materials;
 
+import java.util.Arrays;
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
+import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench;
 import io.github.mooy1.infinityexpansion.implementation.machines.VoidHarvester;
-import io.github.mooy1.infinityexpansion.categories.Categories;
-import io.github.mooy1.infinitylib.presets.RecipePreset;
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.mooy1.infinityexpansion.infinitylib.presets.RecipePreset;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import lombok.experimental.UtilityClass;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 @UtilityClass
 public final class Items {
@@ -90,7 +90,7 @@ public final class Items {
     }
     
     private static void register(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        new SlimefunItem(category, item, recipeType, recipe).register((SlimefunAddon) InfinityExpansion.getInstance());
+        new SlimefunItem(category, item, recipeType, recipe).register(InfinityExpansion.inst());
     }
     
     public static final SlimefunItemStack INFINITE_CIRCUIT = new SlimefunItemStack(
