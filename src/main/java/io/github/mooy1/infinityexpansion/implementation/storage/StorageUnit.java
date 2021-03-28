@@ -150,7 +150,7 @@ public final class StorageUnit extends AbstractContainer {
         this.max = max;
         this.displayMax = displayMax;
         this.maxString = " / " + LorePreset.format(max) + " &7(";
-        this.emptyString = "&6Stored: &e0" + (displayMax ? " / " + LorePreset.format(max) + " &7(0%)" : "");
+        this.emptyString = "&6储存的物品: &e0" + (displayMax ? " / " + LorePreset.format(max) + " &7(0%)" : "");
 
         addItemHandler(new BlockTicker() {
             @Override

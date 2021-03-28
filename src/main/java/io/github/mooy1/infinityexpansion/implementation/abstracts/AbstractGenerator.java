@@ -1,7 +1,12 @@
 package io.github.mooy1.infinityexpansion.implementation.abstracts;
 
-import io.github.mooy1.infinitylib.abstracts.AbstractTicker;
-import io.github.mooy1.infinitylib.presets.MenuPreset;
+import javax.annotation.Nonnull;
+
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
+
+import io.github.mooy1.infinityexpansion.infinitylib.abstracts.AbstractTicker;
+import io.github.mooy1.infinityexpansion.infinitylib.presets.MenuPreset;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNet;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
@@ -10,10 +15,6 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 public abstract class AbstractGenerator extends AbstractTicker implements EnergyNetProvider {
     
