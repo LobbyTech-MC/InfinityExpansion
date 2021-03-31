@@ -234,7 +234,7 @@ public final class EnergyGenerator extends AbstractContainer implements EnergyNe
                         Material.GREEN_STAINED_GLASS_PANE,
                         "&a正在发电",
                         "&7发电机类型: &6" + type.status,
-                        "&7发电量: &6" + LorePreset.roundHundreds(gen * TickerUtils.TPS) + " J/s ",
+                        "&7发电量: &6" + LorePreset.roundHundreds(gen) + " J/s ",
                         "&7已储存: &6" + LorePreset.format(getCharge(l)) + " J"
                 ));
             }
