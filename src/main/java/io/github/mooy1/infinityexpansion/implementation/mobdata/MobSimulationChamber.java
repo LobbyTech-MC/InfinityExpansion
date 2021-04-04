@@ -38,7 +38,7 @@ public final class MobSimulationChamber extends TickingContainer implements Ener
     public static final SlimefunItemStack ITEM = new SlimefunItemStack(
             "MOB_SIMULATION_CHAMBER",
             Material.GILDED_BLACKSTONE,
-            "&8怪物数据分析仪",
+            "&f怪物数据分析仪",
             "&7放入怪物数据卡来激活",
             "",
             LorePreset.energyBuffer(MobSimulationChamber.BUFFER),
