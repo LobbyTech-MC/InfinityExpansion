@@ -1,5 +1,20 @@
 package io.github.mooy1.infinityexpansion.implementation;
 
+import javax.annotation.Nonnull;
+
+import lombok.experimental.UtilityClass;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.RayTraceResult;
+
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
@@ -14,23 +29,10 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.electric.machines
 import io.github.thebusybiscuit.slimefun4.implementation.items.electric.reactors.NetherStarReactor;
 import io.github.thebusybiscuit.slimefun4.implementation.items.geo.GEOMiner;
 import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
-import lombok.experimental.UtilityClass;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.RayTraceResult;
-
-import javax.annotation.Nonnull;
 
 @UtilityClass
 public final class SlimefunExtension {
@@ -148,7 +150,7 @@ public final class SlimefunExtension {
             HeadTexture.CAPACITOR_25,
             "&8虚空电容",
             "",
-            "&8\u21E8 &e\u26A1 " + LorePreset.roundHundreds(VOID_CAPACITY) + " &7J 可储存"
+            "&8\u21E8 &e\u26A1 " + LorePreset.format(VOID_CAPACITY) + " &7J 可储存"
     );
     
     public static void setup(InfinityExpansion plugin) {

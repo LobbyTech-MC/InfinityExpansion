@@ -16,7 +16,6 @@ import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.SlimefunExtension;
 import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinitylib.items.LoreUtils;
 import io.github.mooy1.infinitylib.items.StackUtils;
 import io.github.mooy1.infinitylib.slimefun.abstracts.AbstractContainer;
 import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
@@ -215,12 +214,12 @@ public final class InfinityReactor extends AbstractContainer implements EnergyNe
         List<ItemStack> items = new ArrayList<>();
 
         ItemStack item = Items.INFINITY.clone();
-        LoreUtils.addLore(item, "", ChatColor.GOLD + "持续1天");
+        StackUtils.addLore(item, "", ChatColor.GOLD + "持续1天");
         items.add(item);
         items.add(null);
 
         item = Items.VOID_INGOT.clone();
-        LoreUtils.addLore(item, "", ChatColor.GOLD + "持续4小时");
+        StackUtils.addLore(item, "", ChatColor.GOLD + "持续4小时");
         items.add(item);
         items.add(null);
 

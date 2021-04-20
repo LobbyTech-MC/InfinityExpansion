@@ -181,8 +181,8 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
     };
     private static final int STATUS_SLOT = 4;
 
-    private static final int INTERVAL = (int) (10 * InfinityExpansion.inst().getDifficulty());
-    private static final boolean ALLOW_NETHER_IN_OVERWORLD = InfinityExpansion.inst().getConfig().getBoolean("balance-options.quarry-nether-materials-in-overworld");
+    private static final int INTERVAL = InfinityExpansion.inst().getConfig().getInt("quarry-options.ticks-per-output", 1, 100);
+    private static final boolean ALLOW_NETHER_IN_OVERWORLD = InfinityExpansion.inst().getConfig().getBoolean("quarry-options.output-nether-materials-in-overworld");
 
     private final ItemStack cobble;
     private final int chance;
@@ -266,6 +266,10 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
     
     @Override
     protected boolean process(@Nonnull BlockMenu inv, @Nonnull Block b, @Nonnull Config data) {
+        if (inv.hasViewer()) {
+            inv.replaceExistingItem(STATUS_SLOT, MINING);
+        }
+        
         if ((InfinityExpansion.inst().getGlobalTick() % INTERVAL) != 0) {
             return true;
         }
@@ -292,10 +296,7 @@ public final class Quarry extends AbstractMachine implements RecipeDisplayItem {
             }
             return false;
         }
-
-        if (inv.hasViewer()) {
-            inv.replaceExistingItem(STATUS_SLOT, MINING);
-        }
+        
         inv.pushItem(outputItem.clone(), OUTPUT_SLOTS);
         return true;
     }

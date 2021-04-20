@@ -1,10 +1,27 @@
 package io.github.mooy1.infinityexpansion.implementation.storage;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.categories.Categories;
 import io.github.mooy1.infinityexpansion.implementation.materials.Items;
-import io.github.mooy1.infinitylib.items.PersistentItemStack;
 import io.github.mooy1.infinitylib.items.StackUtils;
+import io.github.mooy1.infinitylib.persistence.PersistenceUtils;
 import io.github.mooy1.infinitylib.slimefun.abstracts.AbstractContainer;
 import io.github.mooy1.infinitylib.slimefun.presets.LorePreset;
 import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
@@ -19,21 +36,6 @@ import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import me.mrCookieSlime.Slimefun.cscorelib2.collections.Pair;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.block.Block;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
-
-import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * A block that stored large amounts of 1 item
@@ -84,25 +86,25 @@ public final class StorageUnit extends AbstractContainer {
             "BASIC_STORAGE",
             Material.OAK_WOOD,
             "&9基础 &8存储单元",
-            LorePreset.storesItem(StorageUnit.BASIC_STORAGE)
+            "&6容量: &e" + LorePreset.format(BASIC_STORAGE) + " &e个物品"
     );
     public static final SlimefunItemStack ADVANCED = new SlimefunItemStack(
             "ADVANCED_STORAGE",
             Material.DARK_OAK_WOOD,
             "&c高级 &8存储单元",
-            LorePreset.storesItem(StorageUnit.ADVANCED_STORAGE)
+            "&6容量: &e" + LorePreset.format(ADVANCED_STORAGE) + " &e个物品"
     );
     public static final SlimefunItemStack REINFORCED = new SlimefunItemStack(
             "REINFORCED_STORAGE",
             Material.ACACIA_WOOD,
             "&f强化 &8存储单元",
-            LorePreset.storesItem(StorageUnit.REINFORCED_STORAGE)
+            "&6容量: &e" + LorePreset.format(REINFORCED_STORAGE) + " &e个物品"
     );
     public static final SlimefunItemStack VOID = new SlimefunItemStack(
             "VOID_STORAGE",
             Material.CRIMSON_HYPHAE,
             "&8虚空 &8存储单元",
-            LorePreset.storesItem(StorageUnit.VOID_STORAGE)
+            "&6容量: &e" + LorePreset.format(VOID_STORAGE) + " &e个物品"
     );
     public static final SlimefunItemStack INFINITY = new SlimefunItemStack(
             "INFINITY_STORAGE",
@@ -172,7 +174,6 @@ public final class StorageUnit extends AbstractContainer {
 
     @Override
     protected void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
-        // TODO move creation to compute if absent
         this.caches.put(b.getLocation(), new StorageCache(StorageUnit.this, b, menu));
     }
 
@@ -238,7 +239,7 @@ public final class StorageUnit extends AbstractContainer {
             lore.add(ChatColor.GOLD + "存储的物品: " + displayName + ChatColor.YELLOW + " x " + amount);
             meta.setLore(lore);
         }
-        meta.getPersistentDataContainer().set(ITEM_KEY, PersistentItemStack.instance(), displayItem);
+        meta.getPersistentDataContainer().set(ITEM_KEY, PersistenceUtils.ITEM_STACK, displayItem);
         meta.getPersistentDataContainer().set(AMOUNT_KEY, PersistentDataType.INTEGER, amount);
         return meta;
     }
@@ -262,7 +263,7 @@ public final class StorageUnit extends AbstractContainer {
             }
 
             // get item
-            ItemStack item = meta.getPersistentDataContainer().get(ITEM_KEY, PersistentItemStack.instance());
+            ItemStack item = meta.getPersistentDataContainer().get(ITEM_KEY, PersistenceUtils.ITEM_STACK);
             if (item != null) {
                 return new Pair<>(item, amount);
             }
