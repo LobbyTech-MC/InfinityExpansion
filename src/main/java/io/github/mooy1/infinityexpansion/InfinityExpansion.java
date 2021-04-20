@@ -57,9 +57,5 @@ public final class InfinityExpansion extends AbstractAddon {
         instance = null;
     }
 
-	public double getDifficulty() {
-		// TODO Auto-generated method stub
-		return difficulty;
-	}
     
 }

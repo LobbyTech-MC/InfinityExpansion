@@ -22,11 +22,6 @@ public enum MobDataTier {
     // ender dragon
     BOSS(100, 9000, Material.NETHERITE_CHESTPLATE);
     
-    MobDataTier(int xp, int energy, Material material) {
-		this.xp = xp;
-		this.energy = energy;
-		this.material = material;
-	}
 	final int xp;
     final int energy;
     final Material material;
