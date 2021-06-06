@@ -55,7 +55,7 @@ final class StorageCache {
     
     /* Menu Items */
     private static final ItemStack EMPTY_ITEM = new CustomItem(Material.BARRIER, meta -> {
-        meta.setDisplayName(ChatColor.WHITE + "Empty");
+        meta.setDisplayName(ChatColor.WHITE + "空的");
         meta.getPersistentDataContainer().set(EMPTY_KEY, PersistentDataType.BYTE, (byte) 1);
     });
 
@@ -294,15 +294,15 @@ final class StorageCache {
             meta.setDisplayName(ChatColor.AQUA + "Status");
             List<String> lore = new ArrayList<>();
             if (this.amount == 0) {
-                lore.add(ChatColors.color("&6Stored: &e0 / " + LorePreset.format(this.storageUnit.max) + " &7(0%)"));
+                lore.add(ChatColors.color("&6已储存: &e0 / " + LorePreset.format(this.storageUnit.max) + " &7(0%)"));
             } else {
-                lore.add(ChatColors.color("&6Stored: &e" + LorePreset.format(this.amount)
+                lore.add(ChatColors.color("&6已储存: &e" + LorePreset.format(this.amount)
                         + " / " + LorePreset.format(this.storageUnit.max)
                         + " &7(" + LorePreset.format((double) this.amount / this.storageUnit.max) + "%)"
                 ));
             }
             lore.add(this.voidExcess ? VOID_EXCESS_TRUE : VOID_EXCESS_FALSE);
-            lore.add(ChatColor.GRAY + "(Click to toggle)");
+            lore.add(ChatColor.GRAY + "(点击开关)");
             meta.setLore(lore);
         }), false);
     }
@@ -410,5 +410,9 @@ final class StorageCache {
             }
         }
     }
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
 }

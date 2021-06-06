@@ -55,7 +55,7 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
             while (iterator.hasNext()) {
                 String line = iterator.next();
 
-                if (ChatColor.stripColor(line).contains("UUID: ")) {
+                if (ChatColor.stripColor(line).contains("飞行器绑定于: ")) {
                     String uuid = ChatColor.stripColor(line).substring(6);
 
                     if (!p.getUniqueId().toString().equals(uuid)) {
@@ -80,7 +80,7 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
                 }
             }
 
-            lore.add(ChatColor.GREEN + "UUID: " + p.getUniqueId());
+            lore.add(ChatColor.GREEN + "飞行器绑定于: " + p.getDisplayName());
             meta.setLore(lore);
             item.setItemMeta(meta);
             p.sendMessage( ChatColor.GOLD + "成功绑定!");

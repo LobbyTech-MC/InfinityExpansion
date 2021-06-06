@@ -41,8 +41,8 @@ public final class StoneworksFactory extends AbstractMachine implements RecipeDi
     private static final int STATUS_SLOT = 9;
     private static final int[] CHOICE_SLOTS = {11, 13, 15};
     private static final int[] PROCESS_SLOTS = {10, 12, 14};
-    private static final ItemStack COBBLE_GEN = new CustomItem(Material.GRAY_CONCRETE, "&8Cobblegen");
-    private static final ItemStack PROCESSING = new CustomItem(Material.GRAY_STAINED_GLASS_PANE, "&7Processing");
+    private static final ItemStack COBBLE_GEN = new CustomItem(Material.GRAY_CONCRETE, "&8原石生成器");
+    private static final ItemStack PROCESSING = new CustomItem(Material.GRAY_STAINED_GLASS_PANE, "&7生产中");
 
     private final int energy;
     

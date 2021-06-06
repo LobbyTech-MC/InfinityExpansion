@@ -41,8 +41,8 @@ public final class MobDataCard extends SlimefunItem implements RecipeDisplayItem
         super(Categories.MOB_SIMULATION, new SlimefunItemStack(
                 name.toUpperCase(Locale.ROOT).replace(" ", "_") + "_DATA_CARD",
                 tier.material,
-                "&b" + name + " Data Card",
-                "&7Place in a mob simulation chamber to activate",
+                "&b" + name + " 生物芯片",
+                "&7放在生物模拟室中使用",
                 "",
                 LorePreset.energyPerSecond(tier.energy)
         ), MobDataInfuser.TYPE, recipe);

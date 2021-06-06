@@ -62,15 +62,15 @@ public final class StorageUnit extends AbstractContainer {
 
     /* Menu items */
     private static final ItemStack INTERACTION_ITEM = new CustomItem(Material.LIME_STAINED_GLASS_PANE,
-            "&aQuick Actions",
-            "&bLeft Click: &7Withdraw 1 item",
-            "&bRight Click: &7Withdraw 1 stack",
-            "&bShift Left Click: &7Deposit inventory",
-            "&bShift Right Click: &7Withdraw inventory"
+            "&a快捷操作",
+            "&b左键: &7取出 1 个物品",
+            "&b右键: &7取出 1 组物品",
+            "&bShift + 左键: &7全部放入",
+            "&bShift + 右键: &7全部取出"
     );
     private static final ItemStack LOADING_ITEM = new CustomItem(Material.CYAN_STAINED_GLASS_PANE,
-            "&bStatus",
-            "&7Loading..."
+            "&b状态",
+            "&7加载中..."
     );
 
     /* Instance constants */
@@ -166,7 +166,7 @@ public final class StorageUnit extends AbstractContainer {
     static ItemMeta saveToStack(ItemMeta meta, ItemStack displayItem, String displayName, int amount) {
         if (meta.hasLore()) {
             List<String> lore = meta.getLore();
-            lore.add(ChatColor.GOLD + "Stored: " + displayName + ChatColor.YELLOW + " x " + amount);
+            lore.add(ChatColor.GOLD + "已储存: " + displayName + ChatColor.YELLOW + " x " + amount);
             meta.setLore(lore);
         }
         meta.getPersistentDataContainer().set(ITEM_KEY, PersistenceUtils.ITEM_STACK, displayItem);

@@ -114,7 +114,7 @@ public final class InfinityCategory extends FlexCategory {
             }
         }
         
-        ChestMenu menu = new ChestMenu("&bInfinity Recipes");
+        ChestMenu menu = new ChestMenu("&b无尽合成表");
 
         if (entry.history != null) {
             menu.addMenuClickHandler(1, (player1, i, itemStack, clickAction) -> {

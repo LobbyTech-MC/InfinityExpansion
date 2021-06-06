@@ -61,7 +61,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
     };
     private static final double RANGE = 1.5;
     private static final int MAX = 64;
-    private static final String LORE = ChatColor.AQUA + "超级矿脉挖矿";
+    private static final String LORE = ChatColor.AQUA + "Veinminer - Crouch to use";
     private static final NamespacedKey key = InfinityExpansion.inst().getKey("vein_miner");
     
     private final CoolDownMap cooldowns = new CoolDownMap(1000);
@@ -111,14 +111,14 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
                         setVeinMiner(itemStack, true);
                         l.getWorld().dropItemNaturally(l, itemStack);
 
-                        p.sendMessage(ChatColor.GREEN + "成功应用矿脉!");
+                        p.sendMessage(ChatColor.GREEN + "Added Vein Miner to tool!");
                     } else {
-                        p.sendMessage(ChatColor.RED + "矿脉模式加载失败!");
+                        p.sendMessage(ChatColor.RED + "Failed to add vein miner!");
                     }
                 }, 10L);
                 
             } else {
-                p.sendMessage(ChatColor.RED + "矿脉模式加载失败!");
+                p.sendMessage(ChatColor.RED + "Failed to add vein miner!");
             }
         }
     }
@@ -159,8 +159,8 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
 
         if (!makeVeinMiner && isVeinMiner) {
             container.remove(key);
-            List<String> lore = meta.getLore();
-            if (lore != null) {
+            if (meta.hasLore()) {
+                List<String> lore = meta.getLore();
                 lore.remove(LORE);
                 meta.setLore(lore);
                 item.setItemMeta(meta);
@@ -172,7 +172,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
     public void onBlockBreak(BlockBreakEvent e) {
         Block b = e.getBlock();
         
-        if (PROCESSING.contains(b)) return;
+        if (this.processing.contains(b)) return;
 
         Player p = e.getPlayer();
         
@@ -185,7 +185,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         }
             
         if (p.getFoodLevel() == 0) {
-            p.sendMessage(ChatColor.GOLD + "你太饿了，无法使用矿脉!");
+            p.sendMessage(ChatColor.GOLD + "You are too tired to vein-mine!");
             return;
         }
         
@@ -198,7 +198,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         if (BlockStorage.hasBlockInfo(l)) return;
         
         if (!this.cooldowns.checkAndReset(p.getUniqueId())) {
-            p.sendMessage(ChatColor.GOLD + "请等待一秒再次使用!");
+            p.sendMessage(ChatColor.GOLD + "You must wait 1 second before using again!");
             return;
         }
         
@@ -210,10 +210,10 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         World w = b.getWorld();
         
         for (Block mine : found) {
-            PROCESSING.add(mine);
+            this.processing.add(mine);
             BlockBreakEvent event = new BlockBreakEvent(mine, p);
-            Bukkit.getServer().getPluginManager().callEvent(event);
-            PROCESSING.remove(mine);
+            Bukkit.getPluginManager().callEvent(event);
+            this.processing.remove(mine);
             if (!event.isCancelled()) {
                 mine.setType(Material.AIR);
                 if (event.isDropItems() && !"SMELTERS_PICKAXE".equals(StackUtils.getID(item))) {

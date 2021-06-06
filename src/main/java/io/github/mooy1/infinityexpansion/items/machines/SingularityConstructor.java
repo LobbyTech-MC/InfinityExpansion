@@ -272,10 +272,15 @@ public final class SingularityConstructor extends AbstractMachine implements Rec
         return items;
     }
     
-    @AllArgsConstructor
     private static final class Recipe {
 
-        private final SlimefunItemStack output;
+        public Recipe(SlimefunItemStack output, ItemStack input, String id, int amount) {
+        	this.output = output;
+        	this.input = input;
+        	this.id = id;
+			this.amount = amount;
+		}
+		private final SlimefunItemStack output;
         private final ItemStack input;
         private final String id;
         private final int amount;
