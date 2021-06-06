@@ -20,12 +20,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import io.github.mooy1.infinityexpansion.InfinityExpansion;
-import io.github.mooy1.infinityexpansion.implementation.blocks.InfinityWorkbench;
+import io.github.mooy1.infinityexpansion.items.Blocks;
+import io.github.mooy1.infinityexpansion.items.blocks.InfinityWorkbench;
+import io.github.mooy1.infinitylib.categories.MultiCategory;
 import io.github.mooy1.infinitylib.items.StackUtils;
-import io.github.mooy1.infinitylib.players.LeaveListener;
-import io.github.mooy1.infinitylib.slimefun.presets.MenuPreset;
-import io.github.mooy1.infinitylib.slimefun.utils.MultiCategory;
+import io.github.mooy1.infinitylib.presets.MenuPreset;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.core.categories.FlexCategory;
 import io.github.thebusybiscuit.slimefun4.core.guide.GuideHistory;
@@ -91,7 +90,6 @@ public final class InfinityCategory extends FlexCategory {
 
     InfinityCategory(NamespacedKey key, ItemStack item, int tier) {
         super(key, item, tier);
-        LeaveListener.create(InfinityExpansion.inst(), history);
     }
 
     @Override
@@ -202,8 +200,8 @@ public final class InfinityCategory extends FlexCategory {
         }
 
         if (entry.bench == null) {
-            menu.addItem(INFINITY_BENCH, InfinityWorkbench.ITEM, (p, slot, item, action) -> {
-                SlimefunItem slimefunItem = InfinityWorkbench.ITEM.getItem();
+            menu.addItem(INFINITY_BENCH, Blocks.INFINITY_FORGE, (p, slot, item, action) -> {
+                SlimefunItem slimefunItem = Blocks.INFINITY_FORGE.getItem();
                 if (slimefunItem != null) {
                     LinkedList<SlimefunItem> list = new LinkedList<>();
                     list.add(slimefunItem);
@@ -238,7 +236,7 @@ public final class InfinityCategory extends FlexCategory {
             menu.addItem(slot, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
         for (int slot : INFINITY_OUTPUT_BORDER) {
-            menu.addItem(slot, MenuPreset.borderItemOutput, ChestMenuUtils.getEmptyClickHandler());
+            menu.addItem(slot, MenuPreset.OUTPUT_ITEM, ChestMenuUtils.getEmptyClickHandler());
         }
         menu.addItem(INFINITY_OUTPUT, pair.getFirstValue(), ChestMenuUtils.getEmptyClickHandler());
         for (int slot : WORKBENCH_BORDER) {

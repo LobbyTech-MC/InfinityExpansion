@@ -11,7 +11,9 @@ import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import io.github.mooy1.infinityexpansion.items.storage.StorageUnit;
 import io.github.mooy1.infinitylib.commands.AbstractCommand;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 public final class SetData extends AbstractCommand {
@@ -53,9 +55,18 @@ public final class SetData extends AbstractCommand {
             return;
         }
         
-        p.sendMessage(ChatColor.GREEN + "Successfully set key '" + strings[1] + "' to value '" + strings[2] + "' in " + id);
-        
-        BlockStorage.addBlockInfo(target, strings[1], strings[2]);
+        if (strings[2].equals("\\remove")) {
+            p.sendMessage(ChatColor.GREEN + "Successfully removed value of key '" + strings[1] + "' in " + id);
+            BlockStorage.addBlockInfo(target, strings[1], null);
+        } else {
+            p.sendMessage(ChatColor.GREEN + "Successfully set key '" + strings[1] + "' to value '" + strings[2] + "' in " + id);
+            BlockStorage.addBlockInfo(target, strings[1], strings[2]);
+        }
+
+        SlimefunItem unit = SlimefunItem.getByID(id);
+        if (unit instanceof StorageUnit) {
+            ((StorageUnit) unit).reloadCache(target);
+        }
     }
 
     @Override
@@ -81,6 +92,7 @@ public final class SetData extends AbstractCommand {
             String current = BlockStorage.getLocationInfo(target.getLocation(), strings[1]);
             if (current != null) {
                 list.add(current);
+                list.add("\\remove");
             }
         }
     }
