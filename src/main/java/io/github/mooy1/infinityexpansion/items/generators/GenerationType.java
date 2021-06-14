@@ -2,13 +2,11 @@ package io.github.mooy1.infinityexpansion.items.generators;
 
 import javax.annotation.Nonnull;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
 import io.github.mooy1.infinityexpansion.utils.Util;
+import lombok.Getter;
 
 public enum GenerationType {
 

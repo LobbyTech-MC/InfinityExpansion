@@ -56,9 +56,9 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
                 String line = iterator.next();
 
                 if (ChatColor.stripColor(line).contains("飞行器绑定于: ")) {
-                    String uuid = ChatColor.stripColor(line).substring(6);
+                    String  playername = ChatColor.stripColor(line).substring(8);
 
-                    if (!p.getUniqueId().toString().equals(uuid)) {
+                    if (!p.getName().equals(playername)) {
                         p.sendMessage( ChatColor.YELLOW + "这个飞行器不归你所有!");
                         return;
                     }
