@@ -76,7 +76,7 @@ public final class EnergyGenerator extends AbstractContainer implements EnergyNe
                         Material.GREEN_STAINED_GLASS_PANE,
                         "&a发电中",
                         "&7类型: &6" + this.type.getName(),
-                        "&7发电速度: &6" + LorePreset.format(gen) + " J/s ",
+                        "&7发电速度: &6" + gen + " J/s ",
                         "&7已储存: &6" + LorePreset.format(getCharge(l)) + " J"
                 ));
             }
