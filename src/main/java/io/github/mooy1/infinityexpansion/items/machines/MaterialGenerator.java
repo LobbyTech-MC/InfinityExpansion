@@ -103,7 +103,7 @@ public final class MaterialGenerator extends AbstractMachine implements RecipeDi
     @Nonnull
     @Override
     public String getRecipeSectionLabel(@Nonnull Player p) {
-        return "&7Generates";
+        return "&7产物";
     }
 
     @Override

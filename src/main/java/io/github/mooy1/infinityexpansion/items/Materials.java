@@ -173,109 +173,109 @@ public final class Materials {
     public static final SlimefunItemStack COPPER_SINGULARITY = new SlimefunItemStack(
             "COPPER_SINGULARITY",
             Material.BRICKS,
-            "&6Copper Singularity"
+            "&6铜结构"
     );
     public static final SlimefunItemStack ZINC_SINGULARITY = new SlimefunItemStack(
             "ZINC_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Zinc Singularity"
+            "&7锌结构"
     );
     public static final SlimefunItemStack TIN_SINGULARITY = new SlimefunItemStack(
             "TIN_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Tin Singularity"
+            "&7钛结构"
     );
     public static final SlimefunItemStack ALUMINUM_SINGULARITY = new SlimefunItemStack(
             "ALUMINUM_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Aluminum Singularity"
+            "&7铝结构"
     );
     public static final SlimefunItemStack SILVER_SINGULARITY = new SlimefunItemStack(
             "SILVER_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Silver Singularity"
+            "&7银结构"
     );
     public static final SlimefunItemStack MAGNESIUM_SINGULARITY = new SlimefunItemStack(
             "MAGNESIUM_SINGULARITY",
             Material.NETHER_BRICKS,
-            "&5Magnesium Singularity"
+            "&5镁结构"
     );
     public static final SlimefunItemStack LEAD_SINGULARITY = new SlimefunItemStack(
             "LEAD_SINGULARITY",
             Material.IRON_BLOCK,
-            "&8Lead Singularity"
+            "&8铅结构"
     );
     public static final SlimefunItemStack GOLD_SINGULARITY = new SlimefunItemStack(
             "GOLD_SINGULARITY",
             Material.GOLD_BLOCK,
-            "&6Gold Singularity"
+            "&6金结构"
     );
     public static final SlimefunItemStack IRON_SINGULARITY = new SlimefunItemStack(
             "IRON_SINGULARITY",
             Material.IRON_BLOCK,
-            "&7Iron Singularity"
+            "&7铁结构"
     );
     public static final SlimefunItemStack DIAMOND_SINGULARITY = new SlimefunItemStack(
             "DIAMOND_SINGULARITY",
             Material.DIAMOND_BLOCK,
-            "&bDiamond Singularity"
+            "&b钻石结构"
     );
     public static final SlimefunItemStack EMERALD_SINGULARITY = new SlimefunItemStack(
             "EMERALD_SINGULARITY",
             Material.EMERALD_BLOCK,
-            "&aEmerald Singularity"
+            "&a绿宝石结构"
     );
     public static final SlimefunItemStack NETHERITE_SINGULARITY = new SlimefunItemStack(
             "NETHERITE_SINGULARITY",
             Material.NETHERITE_BLOCK,
-            "&4Netherite Singularity"
+            "&4下界结构"
     );
     public static final SlimefunItemStack COAL_SINGULARITY = new SlimefunItemStack(
             "COAL_SINGULARITY",
             Material.COAL_BLOCK,
-            "&8Coal Singularity"
+            "&8煤炭结构"
     );
     public static final SlimefunItemStack REDSTONE_SINGULARITY = new SlimefunItemStack(
             "REDSTONE_SINGULARITY",
             Material.REDSTONE_BLOCK,
-            "&cRedstone Singularity"
+            "&c红石结构"
     );
     public static final SlimefunItemStack LAPIS_SINGULARITY = new SlimefunItemStack(
             "LAPIS_SINGULARITY",
             Material.LAPIS_BLOCK,
-            "&9Lapis Singularity"
+            "&9青金石结构"
     );
     public static final SlimefunItemStack QUARTZ_SINGULARITY = new SlimefunItemStack(
             "QUARTZ_SINGULARITY",
             Material.QUARTZ_BLOCK,
-            "&fQuartz Singularity"
+            "&f石英结构"
     );
     public static final SlimefunItemStack INFINITY_SINGULARITY = new SlimefunItemStack(
             "INFINITY_SINGULARITY",
             Material.SMOOTH_QUARTZ,
-            "&bInfinity Singularity"
+            "&b无尽结构"
     );
     public static final SlimefunItemStack BASIC_STRAINER = new SlimefunItemStack(
             "BASIC_STRAINER",
             Material.FISHING_ROD,
-            "&9Basic Strainer",
-            "&7Collects materials from flowing water",
+            "&9基础滤网",
+            "&7从流动的水中收集材料",
             "",
             LoreBuilder.speed(1)
     );
     public static final SlimefunItemStack ADVANCED_STRAINER = new SlimefunItemStack(
             "ADVANCED_STRAINER",
             Material.FISHING_ROD,
-            "&cAdvanced Strainer",
-            "&7Collects materials from flowing water",
+            "&c高级滤网",
+            "&7从流动的水中收集材料",
             "",
             LoreBuilder.speed(4)
     );
     public static final SlimefunItemStack REINFORCED_STRAINER = new SlimefunItemStack(
             "REINFORCED_STRAINER",
             Material.FISHING_ROD,
-            "&fReinforced Strainer",
-            "&7Collects materials from flowing water",
+            "&f强化合金滤网",
+            "&7从流动的水中收集材料",
             "",
             LoreBuilder.speed(20)
     );
