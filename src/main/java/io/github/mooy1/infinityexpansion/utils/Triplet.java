@@ -2,7 +2,7 @@ package io.github.mooy1.infinityexpansion.utils;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 
 @Data
 @NoArgsConstructor
@@ -17,15 +17,12 @@ public final class Triplet<A, B, C> {
 		this.c = i;
 	}
 	public SlimefunItemStack getA() {
-		// TODO Auto-generated method stub
 		return a;
 	}
 	public String getB() {
-		// TODO Auto-generated method stub
 		return b;
 	}
 	public int getC() {
-		// TODO Auto-generated method stub
 		return c;
 	}
     

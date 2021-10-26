@@ -277,7 +277,6 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
         return items;
     }
 
-    @AllArgsConstructor
     private static final class Recipe {
 
         public Recipe(SlimefunItemStack output, ItemStack input, String id, int amount) {
@@ -292,5 +291,12 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
         private final int amount;
 
     }
+
+	public AbstractMachineBlock speed(int speed) {
+		// TODO Auto-generated method stub
+		this.speed = speed;
+		return this;
+	}
+
 
 }

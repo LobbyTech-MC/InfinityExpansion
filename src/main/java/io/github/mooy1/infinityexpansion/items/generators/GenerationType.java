@@ -68,7 +68,7 @@ public enum GenerationType {
     };
 
     @Getter
-    private final String toString;
+    private final String name;
 
     GenerationType(String name) {
 		this.name = name;
@@ -77,7 +77,6 @@ public enum GenerationType {
 	protected abstract int generate(@Nonnull World world, @Nonnull Block block, int def);
 
 	String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 

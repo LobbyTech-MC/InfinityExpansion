@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinitylib.machines.AbstractMachineBlock;
+import io.github.mooy1.infinitylib.machines.MachineBlock;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -116,5 +117,15 @@ public final class GrowingMachine extends AbstractMachineBlock implements Recipe
     protected int[] getOutputSlots() {
         return OUTPUT_SLOTS;
     }
+
+	public GrowingMachine recipes(EnumMap<Material, ItemStack[]> recipes) {
+		this.recipes = recipes;
+		return this;
+	}
+
+	public AbstractMachineBlock ticksPerOutput(int ticksPerOutput) {
+		this.ticksPerOutput = ticksPerOutput;
+		return this;
+	}
 
 }

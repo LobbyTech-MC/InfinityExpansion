@@ -164,4 +164,9 @@ public final class ResourceSynthesizer extends AbstractMachineBlock implements R
         }
     }
 
+	public AbstractMachineBlock recipes(SlimefunItemStack[] recipes) {
+		this.recipes = recipes;
+		return this;
+	}
+
 }

@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.infinitylib.machines.AbstractMachineBlock;
+import io.github.mooy1.infinitylib.machines.MachineLore;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -104,5 +105,15 @@ public final class MaterialGenerator extends AbstractMachineBlock implements Rec
 
         return true;
     }
+
+	public MaterialGenerator material(Material material) {
+		this.material = material;
+		return this;
+	}
+
+	public AbstractMachineBlock speed(int speed) {
+		this.speed = speed;
+		return this;
+	}
 
 }

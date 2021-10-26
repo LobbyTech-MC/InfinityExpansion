@@ -225,7 +225,7 @@ public final class StoneworksFactory extends AbstractMachineBlock implements Rec
                 new Material[] { Material.ANDESITE, Material.DIORITE, Material.GRANITE }
         );
 
-        Choice(CustomItem item, Material[] inputs, Material[] outputs) {
+        Choice(CustomItemStack item, Material[] inputs, Material[] outputs) {
 			this.item = item;
 			this.inputs = inputs;
 			this.outputs = outputs;

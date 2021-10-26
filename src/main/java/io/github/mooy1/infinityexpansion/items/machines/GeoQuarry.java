@@ -124,4 +124,9 @@ public final class GeoQuarry extends AbstractMachineBlock implements RecipeDispl
         return displayRecipes;
     }
 
+	public AbstractMachineBlock ticksPerOutput(int ticksPerOutput) {
+		this.ticksPerOutput = ticksPerOutput;
+		return this;
+	}
+
 }
