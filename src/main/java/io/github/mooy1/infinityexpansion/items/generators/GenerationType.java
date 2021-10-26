@@ -54,7 +54,8 @@ public enum GenerationType {
                     }
                     return 0;
                 }
-                default: return 0;
+                default:
+                    return 0;
             }
         }
     },
@@ -67,7 +68,7 @@ public enum GenerationType {
     };
 
     @Getter
-    private final String name;
+    private final String toString;
 
     GenerationType(String name) {
 		this.name = name;

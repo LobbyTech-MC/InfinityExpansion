@@ -10,16 +10,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.mooy1.infinitylib.commands.AbstractCommand;
+import io.github.mooy1.infinitylib.commands.SubCommand;
 
-public final class PrintItem extends AbstractCommand {
+public final class PrintItem extends SubCommand {
 
     public PrintItem() {
         super("printitem", "Prints the internal data of an item for debugging purposes", true);
     }
 
     @Override
-    public void onExecute(@Nonnull CommandSender commandSender, @Nonnull String[] strings) {
+    protected void execute(@Nonnull CommandSender commandSender, @Nonnull String[] strings) {
         if (!(commandSender instanceof Player)) {
             return;
         }
@@ -27,18 +27,18 @@ public final class PrintItem extends AbstractCommand {
         Player p = (Player) commandSender;
 
         ItemStack item = p.getInventory().getItemInMainHand();
-        
+
         if (item.getType() == Material.AIR) {
             p.sendMessage(ChatColor.RED + "You must be holding an item!");
             return;
         }
-        
+
         p.sendMessage(item.toString());
     }
 
     @Override
-    public void onTab(@Nonnull CommandSender commandSender, @Nonnull String[] strings, @Nonnull List<String> list) {
-        
+    protected void complete(@Nonnull CommandSender commandSender, @Nonnull String[] strings, @Nonnull List<String> list) {
+
     }
 
 }

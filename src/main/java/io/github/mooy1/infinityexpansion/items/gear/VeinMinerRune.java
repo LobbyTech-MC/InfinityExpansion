@@ -36,24 +36,24 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
-import io.github.mooy1.infinitylib.items.StackUtils;
-import io.github.mooy1.infinitylib.players.CoolDownMap;
+import io.github.mooy1.infinitylib.common.CoolDowns;
+import io.github.mooy1.infinitylib.common.Events;
+import io.github.mooy1.infinitylib.common.Scheduler;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.implementation.items.magical.runes.SoulboundRune;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
  * A VeinMiner rune, most code from {@link SoulboundRune}
- * 
+ *
  * @author Mooy1
- * 
  */
 public final class VeinMinerRune extends SlimefunItem implements Listener, NotPlaceable {
-    
+
     private static final String[] ALLOWED = {
             "_ORE", "_LOG", "_WOOD", "GILDED", "SOUL", "GRAVEL",
             "MAGMA", "OBSIDIAN", "DIORITE", "ANDESITE", "GRANITE", "_LEAVES",
@@ -62,20 +62,20 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
     private static final double RANGE = 1.5;
     private static final int MAX = 64;
     private static final String LORE = ChatColor.AQUA + "Veinminer - Crouch to use";
-    private static final NamespacedKey key = InfinityExpansion.inst().getKey("vein_miner");
-    
-    private final CoolDownMap cooldowns = new CoolDownMap(1000);
-    private final Set<Block> processing = new HashSet<>();
-    
-    public VeinMinerRune(Category category, SlimefunItemStack item, RecipeType type, ItemStack[] recipe) {
+    private static final NamespacedKey key = InfinityExpansion.createKey("vein_miner");
+
+    private final CoolDowns cooldowns = new CoolDowns(1000);
+    private Block processing;
+
+    public VeinMinerRune(ItemGroup category, SlimefunItemStack item, RecipeType type, ItemStack[] recipe) {
         super(category, item, type, recipe);
-        InfinityExpansion.inst().registerListener(this);
+        Events.registerListener(this);
     }
-    
+
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {
         if (isItem(e.getItemDrop().getItemStack()) && e.getItemDrop().getItemStack().getAmount() == 1) {
-            InfinityExpansion.inst().runSync(() -> activate(e.getPlayer(), e.getItemDrop()), 20L);
+            Scheduler.run(20, () -> activate(e.getPlayer(), e.getItemDrop()));
         }
     }
 
@@ -90,7 +90,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         Optional<Entity> optional = entities.stream().findFirst();
 
         if (optional.isPresent()) {
-            
+
             Item item = (Item) optional.get();
             ItemStack itemStack = item.getItemStack();
 
@@ -98,7 +98,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
                 // This lightning is just an effect, it deals no damage.
                 l.getWorld().strikeLightningEffect(l);
 
-                InfinityExpansion.inst().runSync(() -> {
+                Scheduler.run(10, () -> {
                     // Being sure entities are still valid and not picked up or whatsoever.
                     if (rune.isValid() && item.isValid() && rune.getItemStack().getAmount() == 1) {
 
@@ -112,12 +112,14 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
                         l.getWorld().dropItemNaturally(l, itemStack);
 
                         p.sendMessage(ChatColor.GREEN + "Added Vein Miner to tool!");
-                    } else {
+                    }
+                    else {
                         p.sendMessage(ChatColor.RED + "Failed to add vein miner!");
                     }
-                }, 10L);
-                
-            } else {
+                });
+
+            }
+            else {
                 p.sendMessage(ChatColor.RED + "Failed to add vein miner!");
             }
         }
@@ -141,9 +143,11 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         }
         return item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.BYTE);
     }
-    
+
     public static void setVeinMiner(@Nullable ItemStack item, boolean makeVeinMiner) {
-        if (item == null) return;
+        if (item == null) {
+            return;
+        }
 
         ItemMeta meta = item.getItemMeta();
 
@@ -153,8 +157,16 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
 
         if (makeVeinMiner && !isVeinMiner) {
             container.set(key, PersistentDataType.BYTE, (byte) 1);
+            List<String> lore;
+            if (meta.hasLore()) {
+                lore = meta.getLore();
+            }
+            else {
+                lore = new ArrayList<>();
+            }
+            lore.add(LORE);
+            meta.setLore(lore);
             item.setItemMeta(meta);
-            StackUtils.addLore(item, LORE);
         }
 
         if (!makeVeinMiner && isVeinMiner) {
@@ -167,67 +179,74 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
             }
         }
     }
-    
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         Block b = e.getBlock();
-        
-        if (this.processing.contains(b)) return;
+
+        if (this.processing == b) {
+            return;
+        }
 
         Player p = e.getPlayer();
-        
-        if (!p.isSneaking()) return;
-        
+
+        if (!p.isSneaking()) {
+            return;
+        }
+
         ItemStack item = p.getInventory().getItemInMainHand();
-        
+
         if (!isVeinMiner(item)) {
             return;
         }
-            
+
         if (p.getFoodLevel() == 0) {
             p.sendMessage(ChatColor.GOLD + "You are too tired to vein-mine!");
             return;
         }
-        
+
         String type = b.getType().toString();
-        
-        if (!isAllowed(type)) return;
-        
+
+        if (!isAllowed(type)) {
+            return;
+        }
+
         Location l = b.getLocation();
 
-        if (BlockStorage.hasBlockInfo(l)) return;
-        
+        if (BlockStorage.hasBlockInfo(l)) {
+            return;
+        }
+
         if (!this.cooldowns.checkAndReset(p.getUniqueId())) {
             p.sendMessage(ChatColor.GOLD + "You must wait 1 second before using again!");
             return;
         }
-        
+
         Set<Block> found = new HashSet<>();
         Set<Location> checked = new HashSet<>();
         checked.add(l);
         getVein(checked, found, l, b);
 
         World w = b.getWorld();
-        
+
         for (Block mine : found) {
-            this.processing.add(mine);
+            this.processing = mine;
             BlockBreakEvent event = new BlockBreakEvent(mine, p);
             Bukkit.getPluginManager().callEvent(event);
-            this.processing.remove(mine);
             if (!event.isCancelled()) {
-                mine.setType(Material.AIR);
-                if (event.isDropItems() && !"SMELTERS_PICKAXE".equals(StackUtils.getID(item))) {
+                if (event.isDropItems()) {
                     for (ItemStack drop : mine.getDrops(item)) {
                         w.dropItemNaturally(l, drop);
                     }
                 }
+                mine.setType(Material.AIR);
             }
         }
-        
+
         if (type.endsWith("ORE")) {
             w.spawn(b.getLocation(), ExperienceOrb.class).setExperience(found.size() * 2);
         }
-        
+
         if (ThreadLocalRandom.current().nextBoolean()) {
             FoodLevelChangeEvent event = new FoodLevelChangeEvent(p, p.getFoodLevel() - 1);
             Bukkit.getPluginManager().callEvent(event);
@@ -236,7 +255,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
             }
         }
     }
-    
+
     private static boolean isAllowed(String mat) {
         for (String test : ALLOWED) {
             if (mat.contains(test)) {
@@ -245,10 +264,12 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         }
         return false;
     }
-    
+
     private static void getVein(Set<Location> checked, Set<Block> found, Location l, Block b) {
-        if (found.size() >= MAX) return;
-        
+        if (found.size() >= MAX) {
+            return;
+        }
+
         for (Location check : getAdjacentLocations(l)) {
             if (checked.add(check) && check.getBlock().getType() == b.getType() && !BlockStorage.hasBlockInfo(b)) {
                 found.add(b);
@@ -256,7 +277,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
             }
         }
     }
-    
+
     private static List<Location> getAdjacentLocations(Location l) {
         List<Location> list = new ArrayList<>();
         list.add(l.clone().add(1, 0, 0));
@@ -268,5 +289,5 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         Collections.shuffle(list);
         return list;
     }
-    
+
 }

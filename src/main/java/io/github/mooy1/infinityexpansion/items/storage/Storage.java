@@ -1,4 +1,4 @@
-package io.github.mooy1.infinityexpansion.items;
+package io.github.mooy1.infinityexpansion.items.storage;
 
 import lombok.experimental.UtilityClass;
 
@@ -6,16 +6,15 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
-import io.github.mooy1.infinityexpansion.categories.Categories;
-import io.github.mooy1.infinityexpansion.items.storage.StorageForge;
-import io.github.mooy1.infinityexpansion.items.storage.StorageUnit;
-import io.github.mooy1.infinitylib.presets.LorePreset;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import io.github.mooy1.infinityexpansion.categories.Groups;
+import io.github.mooy1.infinityexpansion.items.materials.Materials;
+import io.github.mooy1.infinitylib.machines.MachineLore;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 
 @UtilityClass
 public final class Storage {
-    
+
     public static final SlimefunItemStack STORAGE_FORGE = new SlimefunItemStack(
             "STORAGE_FORGE",
             Material.BEEHIVE,
@@ -34,55 +33,55 @@ public final class Storage {
             "BASIC_STORAGE",
             Material.OAK_WOOD,
             "&9基础 &8存储单元",
-            "&6容量: &e" + LorePreset.format(BASIC_AMOUNT) + " &e个物品"
+            "&6容量: &e" + MachineLore.format(BASIC_AMOUNT) + " &e个物品"
     );
     public static final SlimefunItemStack ADVANCED_STORAGE = new SlimefunItemStack(
             "ADVANCED_STORAGE",
             Material.DARK_OAK_WOOD,
             "&c高级 &8存储单元",
-            "&6容量: &e" + LorePreset.format(ADVANCED_AMOUNT) + " &e个物品"
+            "&6容量: &e" + MachineLore.format(ADVANCED_AMOUNT) + " &e个物品"
     );
     public static final SlimefunItemStack REINFORCED_STORAGE = new SlimefunItemStack(
             "REINFORCED_STORAGE",
             Material.ACACIA_WOOD,
             "&f超级 &8存储单元",
-            "&6容量: &e" + LorePreset.format(REINFORCED_AMOUNT) + " &e个物品"
+            "&6容量: &e" + MachineLore.format(REINFORCED_AMOUNT) + " &e个物品"
     );
     public static final SlimefunItemStack VOID_STORAGE = new SlimefunItemStack(
             "VOID_STORAGE",
             Material.CRIMSON_HYPHAE,
             "&8虚空 &8存储单元",
-            "&6容量: &e" + LorePreset.format(VOID_AMOUNT) + " &e个物品"
+            "&6容量: &e" + MachineLore.format(VOID_AMOUNT) + " &e个物品"
     );
     public static final SlimefunItemStack INFINITY_STORAGE = new SlimefunItemStack(
             "INFINITY_STORAGE",
             Material.WARPED_HYPHAE,
             "&b无尽 &8存储单元",
-            "&6容量: &e" + LorePreset.format(INFINITY_AMOUNT) + " &e个物品"
+            "&6容量: &e" + MachineLore.format(INFINITY_AMOUNT) + " &e个物品"
     );
-    
+
     public static void setup(InfinityExpansion plugin) {
-        new StorageForge(Categories.STORAGE, STORAGE_FORGE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+        new StorageForge(Groups.STORAGE, STORAGE_FORGE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
                 Materials.MAGSTEEL, new ItemStack(Material.ANVIL), Materials.MAGSTEEL,
                 Materials.MAGSTEEL, new ItemStack(Material.CRAFTING_TABLE), Materials.MAGSTEEL,
                 Materials.MAGSTEEL, new ItemStack(Material.BARREL), Materials.MAGSTEEL,
         }).register(plugin);
-        new StorageUnit(BASIC_STORAGE, BASIC_AMOUNT,  new ItemStack[] {
+        new StorageUnit(BASIC_STORAGE, BASIC_AMOUNT, new ItemStack[] {
                 new ItemStack(Material.OAK_LOG), Materials.MAGSTEEL, new ItemStack(Material.OAK_LOG),
                 new ItemStack(Material.OAK_LOG), new ItemStack(Material.BARREL), new ItemStack(Material.OAK_LOG),
                 new ItemStack(Material.OAK_LOG), Materials.MAGSTEEL, new ItemStack(Material.OAK_LOG)
         }).register(plugin);
-        new StorageUnit(ADVANCED_STORAGE, ADVANCED_AMOUNT,  new ItemStack[] {
+        new StorageUnit(ADVANCED_STORAGE, ADVANCED_AMOUNT, new ItemStack[] {
                 Materials.MAGSTEEL, Materials.MACHINE_CIRCUIT, Materials.MAGSTEEL,
                 Materials.MAGSTEEL, BASIC_STORAGE, Materials.MAGSTEEL,
                 Materials.MAGSTEEL, Materials.MACHINE_CIRCUIT, Materials.MAGSTEEL
         }).register(plugin);
-        new StorageUnit(REINFORCED_STORAGE, REINFORCED_AMOUNT,  new ItemStack[] {
+        new StorageUnit(REINFORCED_STORAGE, REINFORCED_AMOUNT, new ItemStack[] {
                 Materials.MAGSTEEL_PLATE, Materials.MACHINE_CIRCUIT, Materials.MAGSTEEL_PLATE,
                 Materials.MAGSTEEL_PLATE, ADVANCED_STORAGE, Materials.MAGSTEEL_PLATE,
                 Materials.MAGSTEEL_PLATE, Materials.MACHINE_PLATE, Materials.MAGSTEEL_PLATE
         }).register(plugin);
-        new StorageUnit(VOID_STORAGE, VOID_AMOUNT,  new ItemStack[] {
+        new StorageUnit(VOID_STORAGE, VOID_AMOUNT, new ItemStack[] {
                 Materials.VOID_INGOT, Materials.MACHINE_PLATE, Materials.VOID_INGOT,
                 Materials.MAGNONIUM, REINFORCED_STORAGE, Materials.MAGNONIUM,
                 Materials.VOID_INGOT, Materials.MACHINE_CORE, Materials.VOID_INGOT
@@ -93,5 +92,5 @@ public final class Storage {
                 Materials.INFINITE_INGOT, Materials.VOID_INGOT, Materials.INFINITE_INGOT
         }).register(plugin);
     }
-    
+
 }

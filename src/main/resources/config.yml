@@ -1,3 +1,4 @@
+
 # You should enable this to get bug fixes and receive support asap!
 auto-update: true
 
@@ -9,10 +10,13 @@ balance-options:
   # Will allow the gear transformer to change slimefun gear's material. Diamond tools can already be upgraded to netherite, 
   # but some addon developers do not want there gear to be transformable so change this at your own risk.
   allow-sf-item-transform: false
+
+  # Enables/Disables Researches which requires players to spend xp to unlock items
+  enable-researches: false
   
 mob-simulation-options:
 
-  # The number of slimefun ticks it takes to output xp and drops. 1 slimefun ticks = .6 seconds by default
+  # The number of slimefun ticks it takes to output xp and drops. 1 slimefun tick = .5 seconds by default
   ticks-per-output: 20
 
   # Multiplies amount of xp gained from mob simulation
@@ -25,6 +29,23 @@ quarry-options:
 
   # Allow quarries to mine quartz, netherite, netherrack in any world
   output-nether-materials-in-overworld: false
+
+  # Enable/Disable resources from being produced
+  resources:
+
+    coal: true
+    iron: true
+    gold: true
+    lapis: true
+
+    # Vanilla Copper (1.17+)
+    copper: true
+    quartz: true
+    diamond: true
+    emerald: true
+    redstone: true
+    netherite: true
+    netherrack: true
   
 # These are the maximum level of enchants that can be obtained by combining 2 of the same enchant of the same level.
 advanced-anvil-max-levels:

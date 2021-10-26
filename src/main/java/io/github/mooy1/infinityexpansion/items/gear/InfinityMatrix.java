@@ -11,29 +11,29 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import io.github.mooy1.infinityexpansion.InfinityExpansion;
+import io.github.mooy1.infinitylib.common.Events;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Soulbound;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> implements Listener, Soulbound, NotPlaceable {
-    
-    public InfinityMatrix(Category category, SlimefunItemStack item, RecipeType type, ItemStack[] recipe) {
+
+    public InfinityMatrix(ItemGroup category, SlimefunItemStack item, RecipeType type, ItemStack[] recipe) {
         super(category, item, type, recipe);
-        InfinityExpansion.inst().registerListener(this);
+        Events.registerListener(this);
     }
 
     private static void disableFlight(Player p) {
-        p.sendMessage( ChatColor.RED + "无尽飞行已关闭!");
+        p.sendMessage(ChatColor.RED + "无尽飞行已关闭!");
         p.setAllowFlight(false);
     }
 
     private static void enableFlight(Player p) {
-        p.sendMessage( ChatColor.GREEN + "无尽飞行已开启!");
+        p.sendMessage(ChatColor.GREEN + "无尽飞行已开启!");
         p.setAllowFlight(true);
     }
 
@@ -58,8 +58,8 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
                 if (ChatColor.stripColor(line).contains("飞行器绑定于: ")) {
                     String  playername = ChatColor.stripColor(line).substring(8);
 
-                    if (!p.getName().equals(playername)) {
-                        p.sendMessage( ChatColor.YELLOW + "这个飞行器不归你所有!");
+                    if (!p.getUniqueId().toString().equals(uuid)) {
+                        p.sendMessage(ChatColor.YELLOW + "这个飞行器不归你所有!");
                         return;
                     }
 
@@ -67,12 +67,14 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
                         iterator.remove();
                         meta.setLore(lore);
                         item.setItemMeta(meta);
-                        p.sendMessage( ChatColor.GOLD + "已解除绑定!");
+                        p.sendMessage(ChatColor.GOLD + "已解除绑定!");
                         disableFlight(p);
 
-                    } else if (p.getAllowFlight()) {
+                    }
+                    else if (p.getAllowFlight()) {
                         disableFlight(p);
-                    } else {
+                    }
+                    else {
                         enableFlight(p);
                     }
 
@@ -83,7 +85,7 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
             lore.add(ChatColor.GREEN + "飞行器绑定于: " + p.getDisplayName());
             meta.setLore(lore);
             item.setItemMeta(meta);
-            p.sendMessage( ChatColor.GOLD + "成功绑定!");
+            p.sendMessage(ChatColor.GOLD + "成功绑定!");
             enableFlight(p);
         };
     }

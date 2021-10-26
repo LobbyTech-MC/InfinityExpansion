@@ -2,6 +2,7 @@ package io.github.mooy1.infinityexpansion.items.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import lombok.Setter;
 
@@ -20,14 +21,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
-import io.github.mooy1.infinitylib.items.StackUtils;
-import io.github.mooy1.infinitylib.presets.LorePreset;
+import io.github.mooy1.infinitylib.common.Scheduler;
+import io.github.mooy1.infinitylib.machines.MachineLore;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.cscorelib2.chat.ChatColors;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 
 import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.DISPLAY_KEY;
 import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.DISPLAY_SLOT;
@@ -52,21 +54,25 @@ final class StorageCache {
     /* BlockStorage keys */
     private static final String STORED_AMOUNT = "stored"; // amount key in block data
     private static final String VOID_EXCESS = "void_excess"; // void excess true or null key
-    
+
     /* Menu Items */
-    private static final ItemStack EMPTY_ITEM = new CustomItem(Material.BARRIER, meta -> {
+    private static final ItemStack EMPTY_ITEM = new CustomItemStack(Material.BARRIER, meta -> {
         meta.setDisplayName(ChatColor.WHITE + "空的");
         meta.getPersistentDataContainer().set(EMPTY_KEY, PersistentDataType.BYTE, (byte) 1);
     });
 
+    /* Space Pattern for Sign Display Names */
+    private static final Pattern SPACE = Pattern.compile(" ");
+
     /* Instance Constants */
     private final StorageUnit storageUnit;
     private final BlockMenu menu;
-    
+
     /* Instance Variables */
+    private final String[] signDisplay = new String[2];
+    private String displayName;
     private Material material;
     private ItemMeta meta;
-    private String displayName;
     private boolean voidExcess;
     @Setter
     private int amount;
@@ -74,15 +80,16 @@ final class StorageCache {
     StorageCache(StorageUnit storageUnit, BlockMenu menu) {
         this.storageUnit = storageUnit;
         this.menu = menu;
-        
+
         // load data
         reloadData();
 
         if (isEmpty()) {
             // empty
-            this.displayName = EMPTY_DISPLAY_NAME;
+            setEmptyDisplayName();
             menu.replaceExistingItem(DISPLAY_SLOT, EMPTY_ITEM);
-        } else {
+        }
+        else {
             // something is stored
             ItemStack display = menu.getItemInSlot(DISPLAY_SLOT);
             if (display != null) {
@@ -94,13 +101,15 @@ final class StorageCache {
                     if (output != null) {
                         setStored(output);
                         menu.replaceExistingItem(OUTPUT_SLOT, null);
-                    } else {
+                    }
+                    else {
                         // no output to recover
                         menu.replaceExistingItem(DISPLAY_SLOT, EMPTY_ITEM);
-                        this.displayName = EMPTY_DISPLAY_NAME;
+                        setEmptyDisplayName();
                         this.amount = 0;
                     }
-                } else {
+                }
+                else {
                     // load the item in menu
                     load(display, copy);
                 }
@@ -124,20 +133,25 @@ final class StorageCache {
             if (this.amount == 1) {
                 if (action.isShiftClicked() && !action.isRightClicked()) {
                     depositAll(p);
-                } else {
+                }
+                else {
                     withdrawLast(p);
                 }
-            } else if (!isEmpty()) {
+            }
+            else if (!isEmpty()) {
                 if (action.isRightClicked()) {
                     if (action.isShiftClicked()) {
                         withdraw(p, this.amount - 1);
-                    } else {
+                    }
+                    else {
                         withdraw(p, Math.min(this.material.getMaxStackSize(), this.amount - 1));
                     }
-                } else {
+                }
+                else {
                     if (action.isShiftClicked()) {
                         depositAll(p);
-                    } else {
+                    }
+                    else {
                         withdraw(p, 1);
                     }
                 }
@@ -148,15 +162,80 @@ final class StorageCache {
         // load status slot
         updateStatus();
     }
-    
-    void destroy(Location l, BlockBreakEvent e) {
-        if (isEmpty()) {
+
+    private void setDisplayName(String name) {
+        this.displayName = name;
+
+        int len = name.length();
+        if (len == 0) {
+            this.signDisplay[0] = "";
+            this.signDisplay[1] = "";
             return;
         }
-        
-        e.setCancelled(true);
-        e.getBlock().setType(Material.AIR);
-        BlockStorage.clearBlockInfo(e.getBlock());
+
+        String color;
+        if (len >= 2 && name.charAt(0) == ChatColor.COLOR_CHAR) {
+            char second = name.charAt(1);
+            if (len >= 14 && second == 'x') {
+                color = name.substring(0, 14);
+            }
+            else {
+                color = new String(new char[] {
+                        ChatColor.COLOR_CHAR, second
+                });
+            }
+        }
+        else {
+            color = null;
+        }
+
+        if (name.length() <= 15) {
+            this.signDisplay[0] = color != null ? name : ChatColor.WHITE + name;
+            this.signDisplay[1] = "";
+            return;
+        }
+
+        String[] words = SPACE.split(name);
+        int i = 1;
+        StringBuilder firstLine = new StringBuilder();
+        if (color == null) {
+            firstLine.append(ChatColor.WHITE);
+        }
+        firstLine.append(words[0]);
+        while (i < words.length && words[i].length() + firstLine.length() < 15) {
+            firstLine.append(' ').append(words[i++]);
+        }
+        this.signDisplay[0] = firstLine.toString();
+
+        if (i < words.length) {
+            StringBuilder secondLine = new StringBuilder();
+            String first = words[i++];
+            if (first.length() <= 1 || first.charAt(0) != ChatColor.COLOR_CHAR) {
+                if (color == null) {
+                    secondLine.append(ChatColor.WHITE);
+                }
+                else {
+                    secondLine.append(color);
+                }
+            }
+            secondLine.append(first);
+            while (i < words.length) {
+                secondLine.append(' ').append(words[i++]);
+            }
+            this.signDisplay[1] = secondLine.toString();
+        }
+        else {
+            this.signDisplay[1] = "";
+        }
+    }
+
+    private void setEmptyDisplayName() {
+        this.displayName = EMPTY_DISPLAY_NAME;
+        this.signDisplay[0] = EMPTY_DISPLAY_NAME;
+        this.signDisplay[1] = "";
+    }
+
+    void destroy(Location l, BlockBreakEvent e, List<ItemStack> drops) {
 
         // add output slot
         ItemStack output = this.menu.getItemInSlot(OUTPUT_SLOT);
@@ -171,7 +250,7 @@ final class StorageCache {
         ItemStack drop = this.storageUnit.getItem().clone();
         drop.setItemMeta(StorageUnit.saveToStack(drop.getItemMeta(), this.menu.getItemInSlot(DISPLAY_SLOT), this.displayName, this.amount));
         e.getPlayer().sendMessage(ChatColor.GREEN + "Stored items transferred to dropped item");
-        e.getBlock().getWorld().dropItemNaturally(l, drop);
+        drops.add(drop);
     }
 
     void reloadData() {
@@ -179,8 +258,9 @@ final class StorageCache {
         String amt = config.getString(STORED_AMOUNT);
         if (amt == null) {
             this.amount = 0;
-            InfinityExpansion.inst().runSync(() -> BlockStorage.addBlockInfo(this.menu.getLocation(), STORED_AMOUNT, "0"));
-        } else {
+            Scheduler.run(() -> BlockStorage.addBlockInfo(this.menu.getLocation(), STORED_AMOUNT, "0"));
+        }
+        else {
             this.amount = Integer.parseInt(amt);
         }
         this.voidExcess = "true".equals(config.getString(VOID_EXCESS));
@@ -195,11 +275,11 @@ final class StorageCache {
         // check if the copy has anything besides the display key
         if (copy.equals(Bukkit.getItemFactory().getItemMeta(stored.getType()))) {
             this.meta = null;
-            this.displayName = StackUtils.getInternalName(stored);
-        } else {
-            this.meta = copy;
-            this.displayName = StackUtils.getDisplayName(stored, copy);
         }
+        else {
+            this.meta = copy;
+        }
+        setDisplayName(ItemUtils.getItemName(stored));
         this.material = stored.getType();
     }
 
@@ -213,20 +293,23 @@ final class StorageCache {
             this.amount = input.getAmount();
             setStored(input);
             this.menu.replaceExistingItem(INPUT_SLOT, null, false);
-        } else if (matches(input)) {
+        }
+        else if (matches(input)) {
             if (this.voidExcess) {
                 // input and void excess
                 if (this.amount < this.storageUnit.max) {
                     this.amount = Math.min(this.amount + input.getAmount(), this.storageUnit.max);
                 }
                 input.setAmount(0);
-            } else if (this.amount < this.storageUnit.max) {
+            }
+            else if (this.amount < this.storageUnit.max) {
                 // input as much as possible
                 if (input.getAmount() + this.amount >= this.storageUnit.max) {
                     // last item
                     input.setAmount(input.getAmount() - (this.storageUnit.max - this.amount));
                     this.amount = this.storageUnit.max;
-                } else {
+                }
+                else {
                     this.amount += input.getAmount();
                     input.setAmount(0);
                 }
@@ -243,12 +326,14 @@ final class StorageCache {
             if (this.amount == 1) {
                 this.menu.replaceExistingItem(OUTPUT_SLOT, createItem(1), false);
                 setEmpty();
-            } else {
+            }
+            else {
                 int amt = Math.min(this.material.getMaxStackSize(), this.amount - 1);
                 this.menu.replaceExistingItem(OUTPUT_SLOT, createItem(amt), false);
                 this.amount -= amt;
             }
-        } else if (this.amount > 1) {
+        }
+        else if (this.amount > 1) {
             int amt = Math.min(this.material.getMaxStackSize() - outputSlot.getAmount(), this.amount - 1);
             if (amt != 0 && matches(outputSlot)) {
                 outputSlot.setAmount(outputSlot.getAmount() + amt);
@@ -271,7 +356,7 @@ final class StorageCache {
         }
 
         // sings
-        if ((InfinityExpansion.inst().getGlobalTick() & 15) == 0) {
+        if (InfinityExpansion.slimefunTickCount() % 20 == 0) {
             Block check = block.getRelative(0, 1, 0);
             if (SlimefunTag.SIGNS.isTagged(check.getType())
                     || checkWallSign(check = block.getRelative(1, 0, 0), block)
@@ -280,25 +365,26 @@ final class StorageCache {
                     || checkWallSign(check = block.getRelative(0, 0, -1), block)
             ) {
                 Sign sign = (Sign) check.getState();
-                sign.setLine(0, ChatColor.GRAY + "--------------");
-                sign.setLine(1, this.displayName);
-                sign.setLine(2, ChatColor.YELLOW.toString() + this.amount);
-                sign.setLine(3, ChatColor.GRAY + "--------------");
+                sign.setLine(0, this.signDisplay[0]);
+                sign.setLine(1, this.signDisplay[1]);
+                sign.setLine(2, ChatColor.GRAY + "------------");
+                sign.setLine(3, ChatColor.YELLOW.toString() + this.amount);
                 sign.update();
             }
         }
     }
 
     private void updateStatus() {
-        this.menu.replaceExistingItem(STATUS_SLOT, new CustomItem(Material.CYAN_STAINED_GLASS_PANE, meta -> {
+        this.menu.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.CYAN_STAINED_GLASS_PANE, meta -> {
             meta.setDisplayName(ChatColor.AQUA + "Status");
             List<String> lore = new ArrayList<>();
             if (this.amount == 0) {
-                lore.add(ChatColors.color("&6已储存: &e0 / " + LorePreset.format(this.storageUnit.max) + " &7(0%)"));
-            } else {
-                lore.add(ChatColors.color("&6已储存: &e" + LorePreset.format(this.amount)
-                        + " / " + LorePreset.format(this.storageUnit.max)
-                        + " &7(" + LorePreset.format((double) this.amount * 100.D / this.storageUnit.max) + "%)"
+                lore.add(ChatColors.color("&6已储存: &e0 / " + MachineLore.format(this.storageUnit.max) + " &7(0%)"));
+            }
+            else {
+                lore.add(ChatColors.color("&6已储存: &e" + MachineLore.format(this.amount)
+                        + " / " + MachineLore.format(this.storageUnit.max)
+                        + " &7(" + MachineLore.format((double) this.amount * 100.D / this.storageUnit.max) + "%)"
                 ));
             }
             lore.add(this.voidExcess ? VOID_EXCESS_TRUE : VOID_EXCESS_FALSE);
@@ -313,13 +399,8 @@ final class StorageCache {
     }
 
     private void setStored(ItemStack input) {
-        if (input.hasItemMeta()) {
-            this.meta = input.getItemMeta();
-            this.displayName = StackUtils.getDisplayName(input, this.meta);
-        } else {
-            this.meta = null;
-            this.displayName = StackUtils.getInternalName(input);
-        }
+        this.meta = input.hasItemMeta() ? input.getItemMeta() : null;
+        setDisplayName(ItemUtils.getItemName(input));
         this.material = input.getType();
 
         // add the display key to the display input and set amount 1
@@ -332,7 +413,7 @@ final class StorageCache {
     }
 
     private void setEmpty() {
-        this.displayName = EMPTY_DISPLAY_NAME;
+        setEmptyDisplayName();
         this.meta = null;
         this.material = null;
         this.menu.replaceExistingItem(DISPLAY_SLOT, EMPTY_ITEM);
@@ -352,7 +433,7 @@ final class StorageCache {
         }
         return item;
     }
-    
+
     boolean isEmpty() {
         return this.amount == 0;
     }
@@ -364,7 +445,8 @@ final class StorageCache {
                 if (remaining.getAmount() != withdraw) {
                     this.amount += remaining.getAmount() - withdraw;
                 }
-            } else {
+            }
+            else {
                 this.amount -= withdraw;
             }
             return;
@@ -378,10 +460,12 @@ final class StorageCache {
             if (remaining != null) {
                 toWithdraw -= amt - remaining.getAmount();
                 break;
-            } else {
+            }
+            else {
                 toWithdraw -= amt;
             }
-        } while (toWithdraw > 0);
+        }
+        while (toWithdraw > 0);
         if (toWithdraw != withdraw) {
             this.amount += toWithdraw - withdraw;
         }
@@ -402,7 +486,8 @@ final class StorageCache {
                         item.setAmount(item.getAmount() - (this.storageUnit.max - this.amount));
                         this.amount = this.storageUnit.max;
                         break;
-                    } else {
+                    }
+                    else {
                         this.amount += item.getAmount();
                         item.setAmount(0);
                     }
