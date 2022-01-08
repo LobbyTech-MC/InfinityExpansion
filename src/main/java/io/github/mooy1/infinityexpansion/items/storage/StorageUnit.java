@@ -107,7 +107,7 @@ public final class StorageUnit extends MenuBlock {
                 BlockMenu menu = BlockStorage.getInventory(e.getBlock());
                 StorageCache cache = StorageUnit.this.caches.remove(menu.getLocation());
                 if (cache != null && !cache.isEmpty()) {
-                    cache.destroy(menu.getLocation(), e, drops);
+                    cache.destroy(e, drops);
                 }
                 else {
                     drops.add(getItem().clone());
@@ -184,6 +184,11 @@ public final class StorageUnit extends MenuBlock {
 
     public void reloadCache(Block b) {
         this.caches.get(b.getLocation()).reloadData();
+    }
+
+    @Nullable
+    public StorageCache getCache(Location location) {
+        return this.caches.get(location);
     }
 
     static void transferToStack(@Nonnull ItemStack source, @Nonnull ItemStack target) {
