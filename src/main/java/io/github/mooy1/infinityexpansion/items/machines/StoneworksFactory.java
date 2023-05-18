@@ -206,6 +206,7 @@ public final class StoneworksFactory extends AbstractMachineBlock implements Rec
         COMPACT(new CustomItemStack(Material.PISTON, "&8压实", "", "&7 > 点击切换"),
                 new Material[] { Material.STONE, Material.GRANITE, Material.DIORITE, Material.ANDESITE },
                 new Material[] { Material.STONE_BRICKS, Material.POLISHED_GRANITE, Material.POLISHED_DIORITE, Material.POLISHED_ANDESITE }
+        ),
         TRANSFORM(new CustomItemStack(Material.ANDESITE, "&8转化", "", "&7 > 点击切换"),
                 new Material[] { Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE },
                 new Material[] { Material.ANDESITE, Material.DIORITE, Material.GRANITE }
