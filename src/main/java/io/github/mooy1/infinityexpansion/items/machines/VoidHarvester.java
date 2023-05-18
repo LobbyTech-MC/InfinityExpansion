@@ -70,7 +70,7 @@ public final class VoidHarvester extends AbstractMachineBlock implements RecipeD
         setProgress(b, progress);
         if (inv.hasViewer()) { //update status
             inv.replaceExistingItem(getStatusSlot(), new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
-                    "&a生产中 - " + progress * 100 / TIME + "%",
+                    "&a收集中 - " + progress * 100 / TIME + "%",
                     "&7(" + progress + "/" + TIME + ")"
             ));
         }
@@ -129,7 +129,7 @@ public final class VoidHarvester extends AbstractMachineBlock implements RecipeD
     @Nonnull
     @Override
     public String getRecipeSectionLabel(@Nonnull Player p) {
-        return "&7生产:";
+        return "&7收集:";
     }
 
 }

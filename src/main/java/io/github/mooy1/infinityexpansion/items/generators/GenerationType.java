@@ -10,13 +10,13 @@ import lombok.Getter;
 
 public enum GenerationType {
 
-    HYDROELECTRIC("Hydroelectric") {
+    HYDROELECTRIC("水力") {
         @Override
         protected int generate(@Nonnull World world, @Nonnull Block block, int def) {
             return Util.isWaterLogged(block) ? def : 0;
         }
     },
-    GEOTHERMAL("Geothermal") {
+    GEOTHERMAL("地热") {
         @Override
         protected int generate(@Nonnull World world, @Nonnull Block block, int def) {
             switch (world.getEnvironment()) {
@@ -29,7 +29,7 @@ public enum GenerationType {
             }
         }
     },
-    SOLAR("Day") {
+    SOLAR("太阳能") {
         @Override
         protected int generate(@Nonnull World world, @Nonnull Block block, int def) {
             if (world.getEnvironment() == World.Environment.NORMAL
@@ -40,7 +40,7 @@ public enum GenerationType {
             return 0;
         }
     },
-    LUNAR("Night") {
+    LUNAR("虚空") {
         @Override
         protected int generate(@Nonnull World world, @Nonnull Block block, int def) {
             switch (world.getEnvironment()) {
@@ -59,7 +59,7 @@ public enum GenerationType {
             }
         }
     },
-    INFINITY("Infinity") {
+    INFINITY("无尽") {
         @Override
         protected int generate(@Nonnull World world, @Nonnull Block block, int def) {
             return def;

@@ -57,7 +57,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
     @Override
     protected void setup(@Nonnull BlockMenuPreset blockMenuPreset) {
         blockMenuPreset.drawBackground(new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE,
-                "&fInfinity Ingot Input"), new int[] {
+                "&f放入无尽锭"), new int[] {
                 0, 1, 2,
                 9, 11,
                 18, 19, 20
@@ -68,7 +68,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
                 21, 22, 23
         });
         blockMenuPreset.drawBackground(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE,
-                "&8Void Ingot Input"), new int[] {
+                "&8放入虚空锭"), new int[] {
                 6, 7, 8,
                 15, 17,
                 24, 25, 26
@@ -158,7 +158,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
             if (voidInput == null || !Materials.VOID_INGOT.getItemId().equals(StackUtils.getId(voidInput))) { //wrong input
 
                 if (inv.hasViewer()) {
-                    inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&cInput more &8Void Ingots"));
+                    inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&c放入更多 &8虚空锭"));
                 }
                 return 0;
 
@@ -167,7 +167,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
             //right input
             if (inv.hasViewer()) {
                 inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
-                        "&a正在发电...",
+                        "&a发电中...",
                         "&a无尽锭可支撑的发电时长: " + (INFINITY_INTERVAL - progress),
                         "&a虚空锭可支撑的发电时长: " + (VOID_INTERVAL - Math.floorMod(progress, VOID_INTERVAL))
                 ));
@@ -182,7 +182,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
 
         if (inv.hasViewer()) {
             inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
-                            "&a正在发电...",
+                            "&a发电中...",
                             "&a无尽锭可支撑的发电时长: " + (INFINITY_INTERVAL - progress),
                             "&a虚空锭可支撑的发电时长: " + (VOID_INTERVAL - Math.floorMod(progress, VOID_INTERVAL))
                     )
@@ -208,7 +208,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
         items.add(null);
 
         item = new CustomItemStack(Materials.VOID_INGOT, Materials.VOID_INGOT.getDisplayName(),
-                ChatColor.GOLD + "持续 4 小时");
+                "", ChatColor.GOLD + "持续 4 小时");
         items.add(item);
         items.add(null);
 

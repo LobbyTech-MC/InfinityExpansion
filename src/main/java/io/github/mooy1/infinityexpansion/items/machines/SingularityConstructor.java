@@ -165,7 +165,7 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
                 if (menu.hasViewer()) {
                     menu.replaceExistingItem(STATUS_SLOT, new CustomItemStack(
                             Material.LIME_STAINED_GLASS_PANE,
-                            "&a生产 " + triplet.output.getDisplayName() + "...",
+                            "&a正在生产 " + triplet.output.getDisplayName() + "...",
                             "&7完成"
                     ));
                 }
@@ -173,7 +173,7 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
             else if (menu.hasViewer()) {
                 menu.replaceExistingItem(STATUS_SLOT, new CustomItemStack(
                         Material.LIME_STAINED_GLASS_PANE,
-                        "&a生产 " + triplet.output.getDisplayName() + "...",
+                        "&a正在生产 " + triplet.output.getDisplayName() + "...",
                         "&7" + progress + " / " + triplet.amount
                 ));
             }
@@ -231,7 +231,7 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
     private static void invalidInput(BlockMenu menu) {
         menu.replaceExistingItem(STATUS_SLOT, new CustomItemStack(
                 Material.RED_STAINED_GLASS_PANE,
-                "&c清放入正确的材料"
+                "&c请放入正确的材料"
         ));
     }
 

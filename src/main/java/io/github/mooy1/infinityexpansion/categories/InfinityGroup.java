@@ -82,11 +82,11 @@ public final class InfinityGroup extends FlexItemGroup {
             7, 16, 17
     };
     private static final ItemStack BENCH = new CustomItemStack(Material.NETHER_STAR,
-            "&b从库存中的项目创建配方: ",
-            "&a左键移动一组",
-            "&a右键一键移动(尽可能多)"
+            "&b使用物品栏中的物品摆放配方: ",
+            "&a左键点击放入1次合成所用的物品",
+            "&a右键点击放入尽可能多的物品"
     );
-    private static final ItemStack INFO = new CustomItemStack(Material.CYAN_STAINED_GLASS_PANE, "&3Info");
+    private static final ItemStack INFO = new CustomItemStack(Material.CYAN_STAINED_GLASS_PANE, "&3信息");
     private static final SlimefunGuideImplementation GUIDE = Slimefun.getRegistry().getSlimefunGuide(SlimefunGuideMode.SURVIVAL_MODE);
     private static final Map<UUID, String> HISTORY = new HashMap<>();
     private static final LinkedHashMap<String, Pair<SlimefunItemStack, ItemStack[]>> ITEMS = new LinkedHashMap<>();
@@ -127,8 +127,7 @@ public final class InfinityGroup extends FlexItemGroup {
             }
         }
 
-        ChestMenu menu = new ChestMenu("&b无尽合成表");
-
+        ChestMenu menu = new ChestMenu("&b无尽合成配方");
         if (entry.bench != null) {
             menu.addMenuClickHandler(1, (player1, i, itemStack, clickAction) -> {
                 entry.bench.open(player1);
@@ -176,9 +175,9 @@ public final class InfinityGroup extends FlexItemGroup {
                         ChatColor.WHITE + ItemUtils.getItemName(sfItem.getItem()),
                         "&4&l" + Slimefun.getLocalization().getMessage(player, "guide.locked"),
                         "",
-                        "&a> Click to unlock",
+                        "&a> 单击解锁",
                         "",
-                        "&7Cost: &b" + research.getCost() + " Level(s)"
+                        "&7需要 &b" + research.getCost() + " 级经验"
                 );
                 menu.addItem(i, resItem, (p, slot, item1, action) -> {
                     research.unlockFromGuide(GUIDE, p, entry.profile, sfItem, Groups.INFINITY, 0);

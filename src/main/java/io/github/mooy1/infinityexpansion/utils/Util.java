@@ -59,8 +59,8 @@ public final class Util {
                     section.set(path, 0);
                     InfinityExpansion.log(Level.WARNING,
                             "附魔等级 " + level
-                                    + " 超出限制: " + e.getKey()
-                                    + ", 重置为默认!"
+                                    + " 超出限制 " + e.getKey()
+                                    + ", 正在恢复为默认值!"
                     );
                 }
             }

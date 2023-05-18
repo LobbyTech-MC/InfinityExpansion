@@ -71,7 +71,7 @@ public final class SlimefunExtension {
     public static final SlimefunItemStack ADVANCED_GEO_MINER = new SlimefunItemStack(
             "ADVANCED_GEO_MINER",
             HeadTexture.GEO_MINER,
-            "&c高级 &fGeo矿机",
+            "&c高级&fGEO矿机",
             "&7一个更快的GEO矿机",
             "",
             MachineLore.speed(SlimefunExtension.ADVANCED_GEO_SPEED),
@@ -80,8 +80,8 @@ public final class SlimefunExtension {
     public static final SlimefunItemStack ADVANCED_SMELTERY = new SlimefunItemStack(
             "ADVANCED_SMELTERY",
             Material.FURNACE,
-            "&cAdvanced &7Smeltery",
-            "&7A faster smeltery",
+            "&c高级&7冶炼炉",
+            "&7一个更快的冶炼炉",
             "",
             MachineLore.speed(ADVANCED_SMELTERY_SPEED),
             MachineLore.energyPerSecond(ADVANCED_SMELTERY_ENERGY)
@@ -102,7 +102,7 @@ public final class SlimefunExtension {
             "&7快速为物品充电",
             "",
             MachineLore.speed(SlimefunExtension.INFINITY_CHARGER_SPEED),
-            MachineLore.energy(SlimefunExtension.INFINITY_CHARGER_ENERGY) + "per use"
+            MachineLore.energy(SlimefunExtension.INFINITY_CHARGER_ENERGY) + "每次使用"
     );
     public static final SlimefunItemStack ADVANCED_NETHER_STAR_REACTOR = new SlimefunItemStack(
             "ADVANCED_NETHER_STAR_REACTOR",
@@ -119,7 +119,7 @@ public final class SlimefunExtension {
     public static final SlimefunItemStack ADVANCED_ENCHANTER = new SlimefunItemStack(
             "ADVANCED_ENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&c高级附魔台",
+            "&c高级&5自动附魔机",
             "",
             MachineLore.speed(SlimefunExtension.ADVANCED_EN_SPEED),
             MachineLore.energyPerSecond(SlimefunExtension.ADVANCED_EN_ENERGY)
@@ -127,7 +127,7 @@ public final class SlimefunExtension {
     public static final SlimefunItemStack ADVANCED_DISENCHANTER = new SlimefunItemStack(
             "ADVANCED_DISENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&c高级祛魔台",
+            "&c高级&5自动祛魔机",
             "",
             MachineLore.speed(SlimefunExtension.ADVANCED_DIS_SPEED),
             MachineLore.energyPerSecond(SlimefunExtension.ADVANCED_DIS_ENERGY)
@@ -135,24 +135,24 @@ public final class SlimefunExtension {
     public static final SlimefunItemStack INFINITY_ENCHANTER = new SlimefunItemStack(
             "INFINITY_ENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&b无尽附魔台",
+            "&b无尽&5自动附魔机",
             "",
             MachineLore.speed(SlimefunExtension.INFINITY_EN_SPEED),
-            MachineLore.energy(SlimefunExtension.INFINITY_EN_ENERGY) + "per use"
+            MachineLore.energy(SlimefunExtension.INFINITY_EN_ENERGY) + "每次使用"
     );
     public static final SlimefunItemStack INFINITY_DISENCHANTER = new SlimefunItemStack(
             "INFINITY_DISENCHANTER",
             Material.ENCHANTING_TABLE,
-            "&b无尽祛魔台",
+            "&b无尽&5自动祛魔机",
             "",
             MachineLore.speed(SlimefunExtension.INFINITY_DIS_SPEED),
-            MachineLore.energy(SlimefunExtension.INFINITY_DIS_ENERGY) + "per use"
+            MachineLore.energy(SlimefunExtension.INFINITY_DIS_ENERGY) + "每次使用"
     );
     public static final SlimefunItemStack INFINITY_CAPACITOR = new SlimefunItemStack(
             "INFINITY_CAPACITOR",
             HeadTexture.CAPACITOR_25,
             "&b无尽电容",
-            "&c&o每个区块不要 ",
+            "&c&o每个能源网络不要",
             "&c&o使用超过一个",
             "",
             "&8\u21E8 &e\u26A1 " + MachineLore.format(INFINITY_CAPACITY) + " &7J 可储存"

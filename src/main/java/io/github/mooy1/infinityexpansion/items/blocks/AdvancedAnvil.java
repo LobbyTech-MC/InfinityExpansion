@@ -118,12 +118,12 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         }
 
         if(sfItem2 != null && !sfItem2.isDisenchantable()){
-            p.sendMessage(ChatColor.RED + "Slimefun item is not disenchantable!");
+            p.sendMessage(ChatColor.RED + "该粘液物品无法祛魔!");
             return;
         }
 
         if(sfItem1 != null && !sfItem1.isEnchantable()){
-            p.sendMessage(ChatColor.RED + "Slimefun item is not enchantable!");
+            p.sendMessage(ChatColor.RED + "该粘液物品无法附魔!");
             return;
         }
 
@@ -241,7 +241,7 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         ItemStack item2 = inv.getItemInSlot(INPUT_SLOTS[1]);
 
         if (item1 == null || item2 == null || (item2.getType() != Material.ENCHANTED_BOOK && item1.getType() != item2.getType())) {
-            inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.BARRIER, "&c不存在的物品!"));
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.BARRIER, "&c无效物品!"));
             return;
         }
 

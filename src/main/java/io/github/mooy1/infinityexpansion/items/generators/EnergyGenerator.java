@@ -73,7 +73,7 @@ public final class EnergyGenerator extends MenuBlock implements EnergyNetProvide
             if (gen == 0) {
                 inv.replaceExistingItem(4, new CustomItemStack(
                         Material.GREEN_STAINED_GLASS_PANE,
-                        "&c不在发电",
+                        "&c未发电",
                         "&7已储存: &6" + MachineLore.format(getCharge(l)) + " J"
                 ));
             }
@@ -81,7 +81,7 @@ public final class EnergyGenerator extends MenuBlock implements EnergyNetProvide
                 inv.replaceExistingItem(4, new CustomItemStack(
                         Material.GREEN_STAINED_GLASS_PANE,
                         "&a发电中",
-                        "&7类型: &6" + this.type.toString(),
+                        "&7类型: &6" + this.type,
                         "&7发电速度: &6" + MachineLore.formatEnergy(gen) + " J/s ",
                         "&7已储存: &6" + MachineLore.format(getCharge(l)) + " J"
                 ));

@@ -26,7 +26,7 @@ public final class Blocks {
             Material.SMITHING_TABLE,
             "&c高级铁砧",
             "&7将相同附魔合并升级",
-            "&b对粘液科技物品有效",
+            "&b可使用粘液科技物品",
             "",
             MachineLore.energy(100000) + "每次使用"
     );

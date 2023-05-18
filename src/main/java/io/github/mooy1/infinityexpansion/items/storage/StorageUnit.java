@@ -29,6 +29,7 @@ import io.github.mooy1.infinitylib.common.Scheduler;
 import io.github.mooy1.infinitylib.machines.MenuBlock;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.core.attributes.DistinctiveItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
@@ -41,6 +42,8 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
 
+import lombok.Getter;
+
 /**
  * A block that stored large amounts of 1 item
  *
@@ -49,12 +52,14 @@ import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
  * Thanks to FluffyBear for stuff to learn from
  */
 @ParametersAreNonnullByDefault
-public final class StorageUnit extends MenuBlock {
+public final class StorageUnit extends MenuBlock implements DistinctiveItem {
 
     /* Namespaced keys */
     static final NamespacedKey EMPTY_KEY = InfinityExpansion.createKey("empty"); // key for empty item
     static final NamespacedKey DISPLAY_KEY = InfinityExpansion.createKey("display"); // key for display item
+    @Getter
     private static final NamespacedKey ITEM_KEY = InfinityExpansion.createKey("item"); // item key for item pdc
+    @Getter
     private static final NamespacedKey AMOUNT_KEY = InfinityExpansion.createKey("stored"); // amount key for item pdc
 
     /* Menu slots */
@@ -199,7 +204,7 @@ public final class StorageUnit extends MenuBlock {
         }
     }
 
-    static ItemMeta saveToStack(ItemMeta meta, ItemStack displayItem, String displayName, int amount) {
+    public static ItemMeta saveToStack(ItemMeta meta, ItemStack displayItem, String displayName, int amount) {
         if (meta.hasLore()) {
             List<String> lore = meta.getLore();
             lore.add(ChatColor.GOLD + "已储存: " + displayName + ChatColor.YELLOW + " x " + amount);
@@ -225,4 +230,8 @@ public final class StorageUnit extends MenuBlock {
         return null;
     }
 
+    @Override
+    public boolean canStack(@Nonnull ItemMeta sfItemMeta, @Nonnull ItemMeta itemMeta) {
+        return sfItemMeta.getPersistentDataContainer().equals(itemMeta.getPersistentDataContainer());
+    }
 }

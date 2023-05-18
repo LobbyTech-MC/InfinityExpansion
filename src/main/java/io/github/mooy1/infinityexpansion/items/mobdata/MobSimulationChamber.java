@@ -30,7 +30,7 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
 
     static final double XP_MULTIPLIER = InfinityExpansion.config().getDouble("mob-simulation-options.xp-multiplier", 0, 1000);
 
-    private static final ItemStack NO_CARD = new CustomItemStack(Material.BARRIER, "&cInput a Mob Data Card!");
+    private static final ItemStack NO_CARD = new CustomItemStack(Material.BARRIER, "&c请放入生物芯片!");
     private static final int CARD_SLOT = 37;
     private static final int STATUS_SLOT = 10;
     private static final int[] OUTPUT_SLOTS = {
@@ -127,7 +127,7 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
     }
 
     private static ItemStack makeXpItem(int stored) {
-        return new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&a储存的经验值: " + stored, "", "&a> 点击领取");
+        return new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&a已储存经验值: " + stored, "", "&a> 点击领取");
     }
 
     @Override
@@ -162,7 +162,7 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
 
         if (inv.hasViewer()) {
             inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
-                    "&aSimulating... (" + MachineLore.formatEnergy(energy) + " J/s)")
+                    "&a模拟中... (" + MachineLore.formatEnergy(energy) + " J/s)")
             );
             inv.replaceExistingItem(XP_SLOT, makeXpItem(xp));
         }
@@ -181,5 +181,4 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
             inv.replaceExistingItem(STATUS_SLOT, NO_ROOM_ITEM);
         }
     }
-
 }

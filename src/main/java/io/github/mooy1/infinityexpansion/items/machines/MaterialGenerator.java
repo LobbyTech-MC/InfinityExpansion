@@ -100,7 +100,7 @@ public final class MaterialGenerator extends AbstractMachineBlock implements Rec
         inv.pushItem(output, OUTPUT_SLOTS);
 
         if (inv.hasViewer()) {
-            inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&aGenerating..."));
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&a生产中..."));
         }
 
         return true;

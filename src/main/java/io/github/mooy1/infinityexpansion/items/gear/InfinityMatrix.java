@@ -28,12 +28,12 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
     }
 
     private static void disableFlight(Player p) {
-        p.sendMessage(ChatColor.RED + "无尽飞行已关闭!");
+        p.sendMessage(ChatColor.RED + "无尽飞行已禁用!");
         p.setAllowFlight(false);
     }
 
     private static void enableFlight(Player p) {
-        p.sendMessage(ChatColor.GREEN + "无尽飞行已开启!");
+        p.sendMessage(ChatColor.GREEN + "无尽飞行已启用!");
         p.setAllowFlight(true);
     }
 
@@ -58,8 +58,8 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
                 if (ChatColor.stripColor(line).contains("飞行器绑定于: ")) {
                     String  playername = ChatColor.stripColor(line).substring(8);
 
-                    if (!p.getUniqueId().toString().equals(playername)) {
-                        p.sendMessage(ChatColor.YELLOW + "这个飞行器不归你所有!");
+                    if (!p.getUniqueId().toString().equals(uuid)) {
+                        p.sendMessage(ChatColor.YELLOW + "你不是飞行器的主人!");
                         return;
                     }
 
@@ -67,7 +67,7 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
                         iterator.remove();
                         meta.setLore(lore);
                         item.setItemMeta(meta);
-                        p.sendMessage(ChatColor.GOLD + "已解除绑定!");
+                        p.sendMessage(ChatColor.GOLD + "已解除绑定飞行器!");
                         disableFlight(p);
 
                     }
@@ -85,7 +85,7 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
             lore.add(ChatColor.GREEN + "飞行器绑定于: " + p.getDisplayName());
             meta.setLore(lore);
             item.setItemMeta(meta);
-            p.sendMessage(ChatColor.GOLD + "成功绑定!");
+            p.sendMessage(ChatColor.GOLD + "已绑定飞行器!");
             enableFlight(p);
         };
     }
