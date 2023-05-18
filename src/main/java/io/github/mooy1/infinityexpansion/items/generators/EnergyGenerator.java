@@ -1,7 +1,5 @@
 package io.github.mooy1.infinityexpansion.items.generators;
 
-import java.util.Objects;
-
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -68,11 +66,10 @@ public final class EnergyGenerator extends MenuBlock implements EnergyNetProvide
 
     @Override
     public int getGeneratedOutput(Location l, Config data) {
+        int gen = this.type.generate(l.getWorld(), l.getBlock(), this.generation);
+
         BlockMenu inv = BlockStorage.getInventory(l);
-
-        int gen = this.type.generate(Objects.requireNonNull(l.getWorld()), l.getBlock(), this.generation);
-
-        if (inv.hasViewer()) {
+        if (inv != null && inv.hasViewer()) {
             if (gen == 0) {
                 inv.replaceExistingItem(4, new CustomItemStack(
                         Material.GREEN_STAINED_GLASS_PANE,
