@@ -29,20 +29,18 @@ import io.github.mooy1.infinitylib.common.Scheduler;
 import io.github.mooy1.infinitylib.machines.MenuBlock;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import io.github.thebusybiscuit.slimefun4.core.attributes.DistinctiveItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
-
-import lombok.Getter;
 
 /**
  * A block that stored large amounts of 1 item
@@ -52,7 +50,7 @@ import lombok.Getter;
  * Thanks to FluffyBear for stuff to learn from
  */
 @ParametersAreNonnullByDefault
-public final class StorageUnit extends MenuBlock implements DistinctiveItem {
+public final class StorageUnit extends MenuBlock {
 
     /* Namespaced keys */
     static final NamespacedKey EMPTY_KEY = InfinityExpansion.createKey("empty"); // key for empty item
@@ -230,8 +228,16 @@ public final class StorageUnit extends MenuBlock implements DistinctiveItem {
         return null;
     }
 
-    @Override
     public boolean canStack(@Nonnull ItemMeta sfItemMeta, @Nonnull ItemMeta itemMeta) {
         return sfItemMeta.getPersistentDataContainer().equals(itemMeta.getPersistentDataContainer());
     }
+
+	public static NamespacedKey ITEM_KEY() {
+		return ITEM_KEY;
+	}
+
+	public static NamespacedKey AMOUNT_KEY() {
+		// TODO Auto-generated method stub
+		return AMOUNT_KEY;
+	}
 }

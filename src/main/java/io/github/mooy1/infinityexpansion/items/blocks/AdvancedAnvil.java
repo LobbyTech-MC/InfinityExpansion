@@ -21,7 +21,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
-
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.items.abstracts.AbstractEnergyCrafter;
 import io.github.mooy1.infinityexpansion.utils.Util;
@@ -91,6 +90,7 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
     protected int[] getOutputSlots() {
         return OUTPUT_SLOTS;
     }
+
     @Override
     protected void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
         menu.addMenuClickHandler(STATUS_SLOT, (player, i, itemStack, clickAction) -> {
@@ -156,7 +156,7 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         }
         return combineEnchants(Maps.difference(enchants1, enchants2), item1, item2);
     }
-    
+
     @Nonnull
     private static Map<Enchantment, Integer> getEnchants(@Nonnull ItemMeta meta) {
         if (meta instanceof EnchantmentStorageMeta) {
@@ -171,7 +171,7 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
 
         return new HashMap<>();
     }
-    
+
     private static void setEnchants(@Nonnull ItemStack item, @Nonnull ItemMeta meta, @Nonnull Map<Enchantment, Integer> enchants) {
         if (meta instanceof EnchantmentStorageMeta) {
             EnchantmentStorageMeta book = (EnchantmentStorageMeta) meta;
@@ -234,7 +234,7 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
             return null;
         }
     }
-    
+
     @Override
     public void update(@Nonnull BlockMenu inv) {
         ItemStack item1 = inv.getItemInSlot(INPUT_SLOTS[0]);

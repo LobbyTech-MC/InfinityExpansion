@@ -98,6 +98,6 @@ public final class MobDataCard extends SlimefunItem implements RecipeDisplayItem
 
     @Override
     public void postRegister() {
-        addWikiPage(WIKI_PAGE);
+        addOfficialWikipage(WIKI_PAGE);
     }
 }

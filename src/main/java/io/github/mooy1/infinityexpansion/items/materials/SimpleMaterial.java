@@ -23,6 +23,6 @@ public class SimpleMaterial extends SlimefunItem {
 
     @Override
     public void postRegister() {
-        addWikiPage(WIKI_PAGE);
+        addOfficialWikipage(WIKI_PAGE);
     }
 }

@@ -31,7 +31,6 @@ import io.github.mooy1.infinitylib.metrics.bukkit.Metrics;
 import io.github.mooy1.infinitylib.metrics.charts.SimplePie;
 
 import net.guizhanss.guizhanlibplugin.updater.GuizhanBuildsUpdaterWrapper;
-import net.guizhanss.slimefun4.utils.WikiUtils;
 
 public final class InfinityExpansion extends AbstractAddon {
 
@@ -83,8 +82,6 @@ public final class InfinityExpansion extends AbstractAddon {
         Storage.setup(this);
         Generators.setup(this);
         SlimefunExtension.setup(this);
-
-        WikiUtils.setupJson(this);
 
         if (getConfig().getBoolean("balance-options.enable-researches")) {
             Researches.setup();
