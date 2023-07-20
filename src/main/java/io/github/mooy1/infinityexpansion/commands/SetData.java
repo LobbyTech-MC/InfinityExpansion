@@ -19,7 +19,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 public final class SetData extends SubCommand {
 
     public SetData() {
-        super("setdata", "设置你指向的 Slimefun 方块的数据", "infinityexpansion.setdata");
+        super("setdata", "设置你指向的粘液科技方块的数据", "infinityexpansion.setdata");
     }
 
     @Override
@@ -46,7 +46,7 @@ public final class SetData extends SubCommand {
         String id = BlockStorage.getLocationInfo(target.getLocation(), "id");
 
         if (id == null) {
-            p.sendMessage(ChatColor.RED + "你必须指着一个 Slimefun 方块才能执行该指令!");
+            p.sendMessage(ChatColor.RED + "你必须指着一个粘液科技方块才能执行该指令!");
             return;
         }
 
