@@ -381,7 +381,6 @@ public final class InfinityGroup extends FlexItemGroup {
         menu.open(player);
     }
 
-    @AllArgsConstructor
     private static final class BackEntry {
 
         public BackEntry(BlockMenu bench, PlayerProfile profile, SlimefunGuideImplementation impl) {
