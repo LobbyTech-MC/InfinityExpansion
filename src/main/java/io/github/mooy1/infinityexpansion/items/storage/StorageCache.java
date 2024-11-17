@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import lombok.Setter;
 
 import org.bukkit.Bukkit;
@@ -25,7 +28,6 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
 import net.guizhanss.guizhanlib.minecraft.helper.inventory.ItemStackHelper;
@@ -47,8 +49,8 @@ public final class StorageCache {
 
     /* Menu strings */
     private static final String EMPTY_DISPLAY_NAME = ChatColor.WHITE + "空";
-    private static final String VOID_EXCESS_TRUE = ChatColors.color("&7存储满时清空输入:&e 开");
-    private static final String VOID_EXCESS_FALSE = ChatColors.color("&7存储满时清空输入:&e 关");
+    private static final String VOID_EXCESS_TRUE = ChatColors.color("&7满载时清空输入:&e 开");
+    private static final String VOID_EXCESS_FALSE = ChatColors.color("&7满载时清空输入:&e 关");
 
     /* BlockStorage keys */
     private static final String STORED_AMOUNT = "stored"; // amount key in block data
@@ -118,7 +120,12 @@ public final class StorageCache {
         // void excess handler
         menu.addMenuClickHandler(STATUS_SLOT, (p, slot, item, action) -> {
             this.voidExcess = !this.voidExcess;
-            BlockStorage.addBlockInfo(this.menu.getLocation(), VOID_EXCESS, this.voidExcess ? "true" : null);
+            if (this.voidExcess) {
+                StorageCacheUtils.setData(this.menu.getLocation(), VOID_EXCESS, "true");
+            } else {
+                StorageCacheUtils.removeData(this.menu.getLocation(), VOID_EXCESS);
+            }
+
             ItemMeta meta = item.getItemMeta();
             List<String> lore = meta.getLore();
             lore.set(1, this.voidExcess ? VOID_EXCESS_TRUE : VOID_EXCESS_FALSE);
@@ -143,7 +150,8 @@ public final class StorageCache {
                         withdraw(p, this.amount - 1);
                     }
                     else {
-                        withdraw(p, Math.min(this.material.getMaxStackSize(), this.amount - 1));
+                        final int maxStackSize = this.material != null ? this.material.getMaxStackSize() : 1;
+                        withdraw(p, Math.min(maxStackSize, this.amount - 1));
                     }
                 }
                 else {
@@ -247,16 +255,24 @@ public final class StorageCache {
         }
 
         ItemStack drop = this.storageUnit.getItem().clone();
-        drop.setItemMeta(StorageUnit.saveToStack(drop.getItemMeta(), this.menu.getItemInSlot(DISPLAY_SLOT), this.displayName, this.amount));
-        e.getPlayer().sendMessage(ChatColor.GREEN + "物品仍保存在存储单元中");
+        ItemStack displayItem = this.menu.getItemInSlot(DISPLAY_SLOT);
+        if (displayItem == null || displayItem.getType().isAir()) {
+            e.getPlayer().sendMessage(ChatColor.RED + "物品丢失，无法恢复");
+        } else {
+            drop.setItemMeta(StorageUnit.saveToStack(drop.getItemMeta(), this.menu.getItemInSlot(DISPLAY_SLOT), this.displayName, this.amount));
+            e.getPlayer().sendMessage(ChatColor.GREEN + "物品仍保存在存储单元中");
+        }
         drops.add(drop);
     }
 
     void reloadData() {
-        Config config = BlockStorage.getLocationInfo(this.menu.getLocation());
-        String amt = config.getString(STORED_AMOUNT);
+        SlimefunBlockData blockData = StorageCacheUtils.getBlock(this.menu.getLocation());
+        if (blockData == null || !blockData.isDataLoaded()) {
+            return;
+        }
+        String amt = blockData.getData(STORED_AMOUNT);
         this.amount = amt == null ? 0 : Integer.parseInt(amt);
-        this.voidExcess = "true".equals(config.getString(VOID_EXCESS));
+        this.voidExcess = "true".equals(blockData.getData(VOID_EXCESS));
     }
 
     void load(ItemStack stored, ItemMeta copy) {
@@ -311,7 +327,7 @@ public final class StorageCache {
     }
 
     private void output() {
-        if (this.amount == 0) {
+        if (this.amount == 0 || this.material == null) {
             return;
         }
         ItemStack outputSlot = this.menu.getItemInSlot(OUTPUT_SLOT);
@@ -341,7 +357,7 @@ public final class StorageCache {
         output();
 
         // store amount
-        BlockStorage.addBlockInfo(this.menu.getLocation(), STORED_AMOUNT, String.valueOf(this.amount));
+        StorageCacheUtils.setData(this.menu.getLocation(), STORED_AMOUNT, String.valueOf(this.amount));
 
         // status
         if (this.menu.hasViewer()) {
@@ -372,16 +388,16 @@ public final class StorageCache {
             meta.setDisplayName(ChatColor.AQUA + "状态");
             List<String> lore = new ArrayList<>();
             if (this.amount == 0) {
-                lore.add(ChatColors.color("&6已储存: &e0 / " + MachineLore.format(this.storageUnit.max) + " &7(0%)"));
+                lore.add(ChatColors.color("&6已储存：&e0 / " + MachineLore.format(this.storageUnit.max) + " &7(0%)"));
             }
             else {
-                lore.add(ChatColors.color("&6已储存: &e" + MachineLore.format(this.amount)
+                lore.add(ChatColors.color("&6已储存：&e" + MachineLore.format(this.amount)
                         + " / " + MachineLore.format(this.storageUnit.max)
                         + " &7(" + MachineLore.format((double) this.amount * 100.D / this.storageUnit.max) + "%)"
                 ));
             }
             lore.add(this.voidExcess ? VOID_EXCESS_TRUE : VOID_EXCESS_FALSE);
-            lore.add(ChatColor.GRAY + "(点击开关)");
+            lore.add(ChatColor.GRAY + "(点击切换)");
             meta.setLore(lore);
         }), false);
     }

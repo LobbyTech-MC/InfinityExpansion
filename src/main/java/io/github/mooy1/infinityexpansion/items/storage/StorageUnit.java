@@ -10,6 +10,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,7 +41,6 @@ import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -71,10 +73,10 @@ public final class StorageUnit extends MenuBlock implements DistinctiveItem {
     /* Menu items */
     private static final ItemStack INTERACTION_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             "&a快捷操作",
-            "&b左键: &7取出 1 个物品",
-            "&b右键: &7取出 1 组物品",
-            "&bShift + 左键: &7全部放入",
-            "&bShift + 右键: &7全部取出"
+            "&b左键：&7取出 1 个物品",
+            "&b右键：&7取出 1 组物品",
+            "&bShift+左键：&7全部放入",
+            "&bShift+右键：&7全部取出"
     );
     private static final ItemStack LOADING_ITEM = new CustomItemStack(Material.CYAN_STAINED_GLASS_PANE,
             "&b状态",
@@ -97,7 +99,7 @@ public final class StorageUnit extends MenuBlock implements DistinctiveItem {
             }
 
             @Override
-            public void tick(Block b, SlimefunItem item, Config data) {
+            public void tick(Block b, SlimefunItem item, SlimefunBlockData data) {
                 StorageCache cache = StorageUnit.this.caches.get(b.getLocation());
                 if (cache != null) {
                     cache.tick(b);
@@ -108,7 +110,7 @@ public final class StorageUnit extends MenuBlock implements DistinctiveItem {
 
             @Override
             public void onPlayerBreak(BlockBreakEvent e, ItemStack item, List<ItemStack> drops) {
-                BlockMenu menu = BlockStorage.getInventory(e.getBlock());
+                BlockMenu menu = StorageCacheUtils.getMenu(e.getBlock().getLocation());
                 StorageCache cache = StorageUnit.this.caches.remove(menu.getLocation());
                 if (cache != null && !cache.isEmpty()) {
                     cache.destroy(e, drops);
@@ -124,7 +126,7 @@ public final class StorageUnit extends MenuBlock implements DistinctiveItem {
 
     @Override
     protected void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
-        if (BlockStorage.getInventory(b) == menu) {
+        if (StorageCacheUtils.getMenu(b.getLocation()) == menu) {
             this.caches.put(b.getLocation(), new StorageCache(this, menu));
         }
     }
@@ -206,7 +208,7 @@ public final class StorageUnit extends MenuBlock implements DistinctiveItem {
     public static ItemMeta saveToStack(ItemMeta meta, ItemStack displayItem, String displayName, int amount) {
         if (meta.hasLore()) {
             List<String> lore = meta.getLore();
-            lore.add(ChatColor.GOLD + "已储存: " + displayName + ChatColor.YELLOW + " x " + amount);
+            lore.add(ChatColor.GOLD + "已储存：" + displayName + ChatColor.YELLOW + " x " + amount);
             meta.setLore(lore);
         }
         meta.getPersistentDataContainer().set(ITEM_KEY, PersistentType.ITEM_STACK_OLD, displayItem);

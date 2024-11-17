@@ -3,6 +3,9 @@ package io.github.mooy1.infinityexpansion.items.generators;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +19,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -65,10 +67,10 @@ public final class EnergyGenerator extends MenuBlock implements EnergyNetProvide
     }
 
     @Override
-    public int getGeneratedOutput(Location l, Config data) {
+    public int getGeneratedOutput(Location l, SlimefunBlockData data) {
         int gen = this.type.generate(l.getWorld(), l.getBlock(), this.generation);
 
-        BlockMenu inv = BlockStorage.getInventory(l);
+        BlockMenu inv = StorageCacheUtils.getMenu(l);
         if (inv != null && inv.hasViewer()) {
             if (gen == 0) {
                 inv.replaceExistingItem(4, new CustomItemStack(

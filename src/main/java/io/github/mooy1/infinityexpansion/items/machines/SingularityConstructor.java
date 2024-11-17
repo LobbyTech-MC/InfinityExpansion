@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 
@@ -27,7 +29,6 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 
@@ -236,21 +237,20 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
     }
 
     private static void setProgress(Location l, int progress) {
-        BlockStorage.addBlockInfo(l, "progress", String.valueOf(progress));
+        StorageCacheUtils.setData(l, "progress", String.valueOf(progress));
     }
 
     private static void setProgressID(Location l, @Nullable Integer progressID) {
         if (progressID == null) {
-            BlockStorage.addBlockInfo(l, "progressid", null);
-        }
-        else {
-            BlockStorage.addBlockInfo(l, "progressid", String.valueOf(progressID));
+            StorageCacheUtils.removeData(l, "progressid");
+        } else {
+            StorageCacheUtils.setData(l, "progressid", String.valueOf(progressID));
         }
     }
 
     @Nullable
     private static Integer getProgressID(Location l) {
-        String id = BlockStorage.getLocationInfo(l, "progressid");
+        String id = StorageCacheUtils.getData(l, "progressid");
         if (id == null) {
             return null;
         }

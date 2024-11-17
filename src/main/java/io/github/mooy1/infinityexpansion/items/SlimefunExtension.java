@@ -2,6 +2,10 @@ package io.github.mooy1.infinityexpansion.items;
 
 import javax.annotation.Nonnull;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+
 import lombok.experimental.UtilityClass;
 
 import org.bukkit.Location;
@@ -33,7 +37,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.electric.reactors
 import io.github.thebusybiscuit.slimefun4.implementation.items.geo.GEOMiner;
 import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 @UtilityClass
 public final class SlimefunExtension {
@@ -296,8 +299,8 @@ public final class SlimefunExtension {
                                 if (result != null) {
                                     Block hit = result.getHitBlock();
                                     if (hit != null) {
-                                        String id = BlockStorage.getLocationInfo(hit.getLocation(), "id");
-                                        if (id != null && id.contains("WITHER_PROOF")) {
+                                        SlimefunItem item = StorageCacheUtils.getSfItem(hit.getLocation());
+                                        if (item != null && item.getId().contains("WITHER_PROOF")) {
                                             continue;
                                         }
                                     }

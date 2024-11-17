@@ -2,6 +2,9 @@ package io.github.mooy1.infinityexpansion.items.mobdata;
 
 import javax.annotation.Nonnull;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -21,7 +24,6 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -54,7 +56,7 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
     protected void onBreak(@Nonnull BlockBreakEvent e, @Nonnull BlockMenu menu) {
         super.onBreak(e, menu);
         e.getPlayer().giveExp(Util.getIntData("xp", menu.getLocation()));
-        BlockStorage.addBlockInfo(menu.getLocation(), "xp", "0");
+        StorageCacheUtils.setData(menu.getLocation(), "xp", "0");
     }
 
     @Nonnull
@@ -110,8 +112,9 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
     @Override
     public void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
         Location l = b.getLocation();
-        if (BlockStorage.getLocationInfo(l, "xp") == null) {
-            BlockStorage.addBlockInfo(l, "xp", "O");
+        SlimefunBlockData blockData = StorageCacheUtils.getBlock(l);
+        if (blockData.getData("xp") == null) {
+            blockData.setData("xp", "O");
         }
         menu.replaceExistingItem(XP_SLOT, makeXpItem(0));
         menu.addMenuClickHandler(XP_SLOT, (p, slot, item, action) -> {
@@ -119,7 +122,7 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
             if (xp > 0) {
                 p.giveExp(xp);
                 p.playSound(l, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                BlockStorage.addBlockInfo(l, "xp", "O");
+                blockData.setData("xp", "O");
                 menu.replaceExistingItem(XP_SLOT, makeXpItem(0));
             }
             return false;
@@ -171,7 +174,7 @@ public final class MobSimulationChamber extends TickingMenuBlock implements Ener
             return;
         }
 
-        BlockStorage.addBlockInfo(b.getLocation(), "xp", String.valueOf(xp + card.tier.xp));
+        StorageCacheUtils.setData(b.getLocation(), "xp", String.valueOf(xp + card.tier.xp));
 
         ItemStack item = card.drops.getRandom();
         if (inv.fits(item, OUTPUT_SLOTS)) {

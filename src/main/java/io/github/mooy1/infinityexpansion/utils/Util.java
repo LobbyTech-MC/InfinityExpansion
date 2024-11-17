@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import lombok.experimental.UtilityClass;
 
 import org.bukkit.ChatColor;
@@ -22,7 +24,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 @UtilityClass
 public final class Util {
@@ -117,11 +118,11 @@ public final class Util {
             if (blockData instanceof Waterlogged) {
                 Waterlogged waterLogged = (Waterlogged) blockData;
                 if (waterLogged.isWaterlogged()) {
-                    BlockStorage.addBlockInfo(b.getLocation(), "water_logged", "true");
+                    StorageCacheUtils.setData(b.getLocation(), "water_logged", "true");
                     return true;
                 }
                 else {
-                    BlockStorage.addBlockInfo(b.getLocation(), "water_logged", "false");
+                    StorageCacheUtils.setData(b.getLocation(), "water_logged", "false");
                     return false;
                 }
             }
@@ -131,20 +132,20 @@ public final class Util {
 
         }
         else {
-            return "true".equals(BlockStorage.getLocationInfo(b.getLocation(), "water_logged"));
+            return "true".equals(StorageCacheUtils.getData(b.getLocation(), "water_logged"));
         }
     }
 
     public static int getIntData(String key, Location block) {
-        String val = BlockStorage.getLocationInfo(block, key);
+        String val = StorageCacheUtils.getData(block, key);
         if (val == null) {
-            BlockStorage.addBlockInfo(block, key, "0");
+            StorageCacheUtils.setData(block, key, "0");
             return 0;
         }
         try {
             return Integer.parseInt(val);
         } catch (NumberFormatException x) {
-            BlockStorage.addBlockInfo(block, key, "0");
+            StorageCacheUtils.setData(block, key, "0");
             return 0;
         }
     }

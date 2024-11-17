@@ -12,6 +12,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Nullable;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -45,7 +47,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.implementation.items.magical.runes.SoulboundRune;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 /**
  * A VeinMiner rune, most code from {@link SoulboundRune}
@@ -213,7 +214,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
 
         Location l = b.getLocation();
 
-        if (BlockStorage.hasBlockInfo(l)) {
+        if (StorageCacheUtils.hasBlock(l)) {
             return;
         }
 
@@ -271,7 +272,7 @@ public final class VeinMinerRune extends SlimefunItem implements Listener, NotPl
         }
 
         for (Location check : getAdjacentLocations(l)) {
-            if (checked.add(check) && check.getBlock().getType() == b.getType() && !BlockStorage.hasBlockInfo(b)) {
+            if (checked.add(check) && check.getBlock().getType() == b.getType() && !StorageCacheUtils.hasBlock(b.getLocation())) {
                 found.add(b);
                 getVein(checked, found, check, check.getBlock());
             }

@@ -6,6 +6,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,7 +25,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -49,8 +51,8 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
 
     @Override
     protected void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
-        if (BlockStorage.getLocationInfo(b.getLocation(), "progress") == null) {
-            BlockStorage.addBlockInfo(b, "progress", "0");
+        if (StorageCacheUtils.getData(b.getLocation(), "progress") == null) {
+            StorageCacheUtils.setData(b.getLocation(), "progress", "0");
         }
     }
 
@@ -101,10 +103,10 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
     }
 
     @Override
-    public int getGeneratedOutput(@Nonnull Location l, @Nonnull Config config) {
-        BlockMenu inv = BlockStorage.getInventory(l);
+    public int getGeneratedOutput(@Nonnull Location l, @Nonnull SlimefunBlockData config) {
+        BlockMenu inv = StorageCacheUtils.getMenu(l);
 
-        int progress = Integer.parseInt(BlockStorage.getLocationInfo(l, "progress"));
+        int progress = Integer.parseInt(StorageCacheUtils.getData(l, "progress"));
         ItemStack infinityInput = inv.getItemInSlot(INPUT_SLOTS[0]);
         ItemStack voidInput = inv.getItemInSlot(INPUT_SLOTS[1]);
 
@@ -138,7 +140,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
             }
             inv.consumeItem(INPUT_SLOTS[0]);
             inv.consumeItem(INPUT_SLOTS[1]);
-            BlockStorage.addBlockInfo(l, "progress", "1");
+            StorageCacheUtils.setData(l, "progress", "1");
             return this.gen;
 
         }
@@ -148,7 +150,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
             if (inv.hasViewer()) {
                 inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&a发电完成"));
             }
-            BlockStorage.addBlockInfo(l, "progress", "0");
+            StorageCacheUtils.setData(l, "progress", "0");
             return this.gen;
 
         }
@@ -172,7 +174,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
                         "&a虚空锭可支撑的发电时长: " + (VOID_INTERVAL - Math.floorMod(progress, VOID_INTERVAL))
                 ));
             }
-            BlockStorage.addBlockInfo(l, "progress", String.valueOf(progress + 1));
+            StorageCacheUtils.setData(l, "progress", String.valueOf(progress + 1));
             inv.consumeItem(INPUT_SLOTS[1]);
             return this.gen;
 
@@ -188,7 +190,7 @@ public final class InfinityReactor extends MenuBlock implements EnergyNetProvide
                     )
             );
         }
-        BlockStorage.addBlockInfo(l, "progress", String.valueOf(progress + 1));
+        StorageCacheUtils.setData(l, "progress", String.valueOf(progress + 1));
         return this.gen;
     }
 

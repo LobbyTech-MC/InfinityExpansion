@@ -2,6 +2,8 @@ package io.github.mooy1.infinityexpansion.items.machines;
 
 import javax.annotation.Nonnull;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -37,7 +39,7 @@ public final class PoweredBedrock extends SlimefunItem implements EnergyNetCompo
             }
 
             @Override
-            public void tick(Block b, SlimefunItem item, Config data) {
+            public void tick(Block b, SlimefunItem item, SlimefunBlockData data) {
                 if (InfinityExpansion.slimefunTickCount() % 8 == 0) {
                     return;
                 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,7 +20,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 
@@ -108,11 +109,11 @@ public final class VoidHarvester extends AbstractMachineBlock implements RecipeD
     }
 
     private static void setProgress(Block b, int progress) {
-        BlockStorage.addBlockInfo(b, "progress", String.valueOf(progress));
+        StorageCacheUtils.setData(b.getLocation(), "progress", String.valueOf(progress));
     }
 
     private static String getProgress(Block b) {
-        return BlockStorage.getLocationInfo(b.getLocation(), "progress");
+        return StorageCacheUtils.getData(b.getLocation(), "progress");
     }
 
     @Nonnull

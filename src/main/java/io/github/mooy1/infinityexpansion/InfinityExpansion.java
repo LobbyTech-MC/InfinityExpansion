@@ -5,6 +5,8 @@ import java.util.logging.Level;
 
 import javax.annotation.Nonnull;
 
+import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -36,11 +38,11 @@ public final class InfinityExpansion extends AbstractAddon {
 
     public InfinityExpansion(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
         super(loader, description, dataFolder, file,
-                "ybw0014", "InfinityExpansion", "master", "auto-update");
+                "SlimefunGuguProject", "InfinityExpansion", "master", "auto-update");
     }
 
     public InfinityExpansion() {
-        super("ybw0014", "InfinityExpansion", "master", "auto-update");
+        super("SlimefunGuguProject", "InfinityExpansion", "master", "auto-update");
         StorageSaveFix.fixStuff(getLogger());
     }
 
@@ -52,7 +54,7 @@ public final class InfinityExpansion extends AbstractAddon {
         metrics.addCustomChart(new SimplePie("auto_updates", () -> autoUpdates));
 
         if (enableAutoUpdate && getDescription().getVersion().startsWith("Build")) {
-            GuizhanBuildsUpdaterWrapper.start(this, getFile(), "SlimefunGuguProject", "InfinityExpansion", "master", false);
+            GuizhanUpdater.start(this, getFile(), "SlimefunGuguProject", "InfinityExpansion", "master");
         }
 
         Plugin lx = getServer().getPluginManager().getPlugin("LiteXpansion");

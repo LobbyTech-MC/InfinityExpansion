@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import lombok.AllArgsConstructor;
 
 import org.bukkit.Location;
@@ -22,7 +24,6 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotHopperable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -58,7 +59,7 @@ public final class StoneworksFactory extends AbstractMachineBlock implements Rec
     public void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
         Location l = b.getLocation();
 
-        if (BlockStorage.getLocationInfo(l, "choice0") == null) {
+        if (StorageCacheUtils.getData(l, "choice0") == null) {
             setChoice(l, 0, Choice.NONE);
             setChoice(l, 1, Choice.NONE);
             setChoice(l, 2, Choice.NONE);
@@ -156,7 +157,7 @@ public final class StoneworksFactory extends AbstractMachineBlock implements Rec
     @Nonnull
     private static Choice getChoice(Location l, int i) {
         try {
-            return Choice.valueOf(BlockStorage.getLocationInfo(l, "choice" + i));
+            return Choice.valueOf(StorageCacheUtils.getData(l, "choice" + i));
         } catch (Exception e) {
             setChoice(l, i, Choice.NONE);
             return Choice.NONE;
@@ -164,7 +165,7 @@ public final class StoneworksFactory extends AbstractMachineBlock implements Rec
     }
 
     private static void setChoice(Location l, int i, Choice o) {
-        BlockStorage.addBlockInfo(l, "choice" + i, o.toString());
+        StorageCacheUtils.setData(l, "choice" + i, o.toString());
     }
 
     @Override
