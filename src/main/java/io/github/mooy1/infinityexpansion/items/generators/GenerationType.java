@@ -67,7 +67,6 @@ public enum GenerationType {
 
     };
 
-    @Getter
     private final String name;
 
     GenerationType(String name) {
@@ -76,7 +75,7 @@ public enum GenerationType {
 
 	protected abstract int generate(@Nonnull World world, @Nonnull Block block, int def);
 
-	String getName() {
+	protected String getName() {
 		return name;
 	}
 
