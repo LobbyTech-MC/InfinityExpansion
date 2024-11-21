@@ -9,7 +9,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.mooy1.infinityexpansion.categories.Groups;
@@ -20,9 +19,8 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.RandomizedSet;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-
+import io.github.thebusybiscuit.slimefun4.libraries.guizhanlib.utils.StringUtil;
 import net.guizhanss.guizhanlib.minecraft.helper.entity.EntityTypeHelper;
-import net.guizhanss.guizhanlib.utils.StringUtil;
 
 /**
  * A mob data card which will be able to be used in the {@link MobSimulationChamber}
