@@ -19,7 +19,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.RandomizedSet;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import io.github.thebusybiscuit.slimefun4.libraries.guizhanlib.utils.StringUtil;
+import net.guizhanss.guizhanlib.common.utils.StringUtil;
 import net.guizhanss.guizhanlib.minecraft.helper.entity.EntityTypeHelper;
 
 /**
