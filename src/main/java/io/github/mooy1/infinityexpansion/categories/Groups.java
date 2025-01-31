@@ -30,7 +30,7 @@ public final class Groups {
     public static final ItemGroup INFINITY_MATERIALS = new SubGroup("infinity_materials",
             new CustomItemStack(Material.NETHERITE_BLOCK, "&b无尽&a材料"));
     public static final ItemGroup MAIN_CATEGORY = new MultiGroup("main",
-            new CustomItemStack(Material.NETHER_STAR, "&kl&b无尽&4科技&kl"), 3,
+            new CustomItemStack(Material.NETHER_STAR, "&kl&b无尽&4贪婪&kl"), 3,
             MAIN_MATERIALS, BASIC_MACHINES, ADVANCED_MACHINES, STORAGE, MOB_SIMULATION, INFINITY_MATERIALS, INFINITY);
     public static final ItemGroup INFINITY_CHEAT = new SubGroup("infinity_cheat",
             new CustomItemStack(Material.RESPAWN_ANCHOR, "&b无尽&7物品 &c- 错误配方, 请从无尽工作台中查看正确配方"));

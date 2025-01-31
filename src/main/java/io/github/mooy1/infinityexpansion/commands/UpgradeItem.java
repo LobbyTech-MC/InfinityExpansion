@@ -5,24 +5,21 @@ import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
-import io.github.mooy1.infinitylib.common.PersistentType;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.items.storage.StorageUnit;
 import io.github.mooy1.infinitylib.commands.SubCommand;
+import io.github.mooy1.infinitylib.common.PersistentType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-
 import net.guizhanss.guizhanlib.common.Cooldown;
-
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 public final class UpgradeItem extends SubCommand {
 
@@ -55,10 +52,10 @@ public final class UpgradeItem extends SubCommand {
             return;
         }
 
-        // 无尽科技物品检测
+        // 无尽贪婪物品检测
         SlimefunItem sfItem = SlimefunItem.getByItem(item);
         if (sfItem == null || !(sfItem.getAddon() instanceof InfinityExpansion)) {
-            p.sendMessage(ChatColor.RED + "你手持的不是无尽科技的物品!");
+            p.sendMessage(ChatColor.RED + "你手持的不是无尽贪婪的物品!");
             return;
         }
 
@@ -72,7 +69,7 @@ public final class UpgradeItem extends SubCommand {
                 ItemStack displayItem = pdc.get(StorageUnit.ITEM_KEY(), PersistentType.ITEM_STACK_OLD);
                 SlimefunItem displaySfItem = SlimefunItem.getByItem(displayItem);
                 if (displaySfItem == null || !(sfItem.getAddon() instanceof InfinityExpansion)) {
-                    p.sendMessage(ChatColor.RED + "存储单元内的物品不是无尽科技物品, 不需要更新!");
+                    p.sendMessage(ChatColor.RED + "存储单元内的物品不是无尽贪婪物品, 不需要更新!");
                     return;
                 }
                 p.sendMessage(ChatColor.YELLOW + "正在检测存储单元内的物品...");

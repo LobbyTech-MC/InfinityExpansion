@@ -46,7 +46,7 @@ public final class Strainer extends SlimefunItem implements NotPlaceable {
 
     @Override
     public void postRegister() {
-        addOfficialWikipage(WIKI_PAGE);
+        addWikiPage(WIKI_PAGE);
     }
 
 }

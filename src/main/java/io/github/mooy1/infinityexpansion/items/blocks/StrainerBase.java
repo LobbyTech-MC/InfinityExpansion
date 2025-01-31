@@ -194,6 +194,7 @@ public final class StrainerBase extends TickingMenuBlock implements RecipeDispla
         //output
 
         inv.pushItem(output.clone(), OUTPUT_SLOTS);
+
         if (inv.hasViewer()) {
             inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, "&a打捞到材料!"));
         }

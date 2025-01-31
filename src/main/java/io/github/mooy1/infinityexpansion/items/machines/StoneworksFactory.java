@@ -6,14 +6,12 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
-
-import lombok.AllArgsConstructor;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
+
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinitylib.machines.AbstractMachineBlock;
@@ -24,6 +22,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.NotHopperable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import lombok.AllArgsConstructor;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -261,12 +260,7 @@ public final class StoneworksFactory extends AbstractMachineBlock implements Rec
             new Material[] { Material.ANDESITE, Material.DIORITE, Material.GRANITE}
         );
 
-        Choice(CustomItemStack item, Material[] inputs, Material[] outputs) {
-			this.item = item;
-			this.inputs = inputs;
-			this.outputs = outputs;
-		}
-		private final ItemStack item;
+        private final ItemStack item;
         private final Material[] inputs;
         private final Material[] outputs;
 

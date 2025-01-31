@@ -62,6 +62,8 @@ quarry-options:
 # 设置高级铁砧的附魔等级上限
 advanced-anvil-max-levels:
   sharpness: 9
+  bane-of-arthropods: 9
+  smite: 9
   protection: 10
   fortune: 6
   efficiency: 7

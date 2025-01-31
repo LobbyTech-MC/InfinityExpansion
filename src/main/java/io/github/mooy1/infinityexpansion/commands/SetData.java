@@ -4,12 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
-
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-
 import org.bukkit.ChatColor;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Material;
@@ -17,14 +11,19 @@ import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.callback.IAsyncReadCallback;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import io.github.mooy1.infinityexpansion.items.storage.StorageUnit;
 import io.github.mooy1.infinitylib.commands.SubCommand;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public final class SetData extends SubCommand {
 
     public SetData() {
-        super("setdata", "设置你指向的粘液科技方块的数据", "infinityexpansion.setdata");
+        super("setdata", "设置你指向的 Slimefun 方块的数据", "infinityexpansion.setdata");
     }
 
     @Override
@@ -50,7 +49,7 @@ public final class SetData extends SubCommand {
 
         SlimefunBlockData blockData = StorageCacheUtils.getBlock(target.getLocation());
         if (blockData == null) {
-            p.sendMessage(ChatColor.RED + "你必须指着一个粘液科技方块才能执行该指令!");
+            p.sendMessage(ChatColor.RED + "你必须指着一个 Slimefun 方块才能执行该指令!");
             return;
         }
 

@@ -26,6 +26,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -53,7 +54,7 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
         RECIPE_MAP.put(id, new Pair<>(RECIPE_LIST.size() - 1, recipe));
     });
 
-    private static final String PROGRESS = "进度";
+    private static final String PROGRESS = "progress";
     private static final int STATUS_SLOT = 13;
     private static final int[] INPUT_SLOT = {10};
     private static final int[] OUTPUT_SLOT = {16};
@@ -275,26 +276,14 @@ public final class SingularityConstructor extends AbstractMachineBlock implement
         return items;
     }
 
+    @AllArgsConstructor
     private static final class Recipe {
 
-        public Recipe(SlimefunItemStack output, ItemStack input, String id, int amount) {
-        	this.output = output;
-        	this.input = input;
-        	this.id = id;
-			this.amount = amount;
-		}
-		private final SlimefunItemStack output;
+        private final SlimefunItemStack output;
         private final ItemStack input;
         private final String id;
         private final int amount;
 
     }
-
-	public AbstractMachineBlock speed(int speed) {
-		// TODO Auto-generated method stub
-		this.speed = speed;
-		return this;
-	}
-
 
 }

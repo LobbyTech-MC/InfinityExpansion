@@ -1,7 +1,5 @@
 package io.github.mooy1.infinityexpansion.items.generators;
 
-import lombok.experimental.UtilityClass;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -14,6 +12,7 @@ import io.github.mooy1.infinitylib.machines.MachineLore;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public final class Generators {

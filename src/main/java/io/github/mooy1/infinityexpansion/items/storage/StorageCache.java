@@ -1,13 +1,16 @@
 package io.github.mooy1.infinityexpansion.items.storage;
 
+import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.DISPLAY_KEY;
+import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.DISPLAY_SLOT;
+import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.EMPTY_KEY;
+import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.INPUT_SLOT;
+import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.INTERACT_SLOT;
+import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.OUTPUT_SLOT;
+import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.STATUS_SLOT;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
-
-import lombok.Setter;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,23 +25,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinitylib.machines.MachineLore;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import lombok.Setter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-
 import net.guizhanss.guizhanlib.minecraft.helper.inventory.ItemStackHelper;
-
-import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.DISPLAY_KEY;
-import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.DISPLAY_SLOT;
-import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.EMPTY_KEY;
-import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.INPUT_SLOT;
-import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.INTERACT_SLOT;
-import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.OUTPUT_SLOT;
-import static io.github.mooy1.infinityexpansion.items.storage.StorageUnit.STATUS_SLOT;
 
 /**
  * Represents a single storage unit with cached data
@@ -518,9 +515,5 @@ public final class StorageCache {
             }
         }
     }
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
 
 }

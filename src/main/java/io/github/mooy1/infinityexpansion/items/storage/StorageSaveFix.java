@@ -10,9 +10,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lombok.experimental.UtilityClass;
-
 import io.github.thebusybiscuit.slimefun4.libraries.dough.common.CommonPatterns;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public final class StorageSaveFix {

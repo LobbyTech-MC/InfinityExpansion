@@ -6,8 +6,10 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 
 import io.github.mooy1.infinityexpansion.utils.Util;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@AllArgsConstructor
 public enum GenerationType {
 
     HYDROELECTRIC("水力") {
@@ -64,19 +66,11 @@ public enum GenerationType {
         protected int generate(@Nonnull World world, @Nonnull Block block, int def) {
             return def;
         }
-
     };
 
-    private final String name;
+    @Getter
+    private final String toString;
 
-    GenerationType(String name) {
-		this.name = name;
-	}
-
-	protected abstract int generate(@Nonnull World world, @Nonnull Block block, int def);
-
-	protected String getName() {
-		return name;
-	}
+    protected abstract int generate(@Nonnull World world, @Nonnull Block block, int def);
 
 }

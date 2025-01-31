@@ -8,8 +8,6 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import lombok.Setter;
-
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -27,6 +25,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.RandomizedSet;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.Setter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 
@@ -123,10 +122,5 @@ public final class GeoQuarry extends AbstractMachineBlock implements RecipeDispl
 
         return displayRecipes;
     }
-
-	public AbstractMachineBlock ticksPerOutput(int ticksPerOutput) {
-		this.ticksPerOutput = ticksPerOutput;
-		return this;
-	}
 
 }

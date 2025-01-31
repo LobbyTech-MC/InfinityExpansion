@@ -59,7 +59,7 @@ public final class Singularity extends UnplaceableBlock {
 
     @Override
     public void postRegister() {
-        addOfficialWikipage(WIKI_PAGE);
+        addWikiPage(WIKI_PAGE);
     }
 
 }

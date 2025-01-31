@@ -19,7 +19,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 public final class GiveRecipe extends SubCommand {
 
     public GiveRecipe() {
-        super("giverecipe", "给予一个粘液科技配方中的所有物品", "infinityexpansion.giverecipe");
+        super("giverecipe", "给予一个 Slimefun 配方中的所有物品", "infinityexpansion.giverecipe");
     }
 
     @Override
@@ -37,7 +37,7 @@ public final class GiveRecipe extends SubCommand {
         SlimefunItem sfItem = SlimefunItem.getById(args[0].toUpperCase());
 
         if (sfItem == null || sfItem instanceof MultiBlockMachine || sfItem.getRecipeType() == RecipeType.GEO_MINER) {
-            sender.sendMessage(ChatColor.RED + "无效的粘液科技物品!");
+            sender.sendMessage(ChatColor.RED + "无效的 Slimefun 物品!");
             return;
         }
 

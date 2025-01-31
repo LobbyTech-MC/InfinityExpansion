@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import lombok.Setter;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +16,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import lombok.Setter;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 
@@ -163,10 +162,5 @@ public final class ResourceSynthesizer extends AbstractMachineBlock implements R
 
         }
     }
-
-	public AbstractMachineBlock recipes(SlimefunItemStack[] recipes) {
-		this.recipes = recipes;
-		return this;
-	}
 
 }

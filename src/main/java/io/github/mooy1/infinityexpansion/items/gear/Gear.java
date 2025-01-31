@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 
-import lombok.experimental.UtilityClass;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -27,6 +25,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public final class Gear {
@@ -86,7 +85,7 @@ public final class Gear {
     public static final SlimefunItemStack BLADE = new SlimefunItemStack(
             "INFINITY_BLADE",
             Material.NETHERITE_SWORD,
-            "&b宇宙支配之刃"
+            "&b寰宇支配之剑"
     );
     public static final SlimefunItemStack PICKAXE = new SlimefunItemStack(
             "INFINITY_PICKAXE",

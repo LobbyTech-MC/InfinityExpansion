@@ -37,6 +37,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import lombok.AllArgsConstructor;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
@@ -127,6 +128,7 @@ public final class InfinityGroup extends FlexItemGroup {
         }
 
         ChestMenu menu = new ChestMenu("&b无尽合成配方");
+
         if (entry.bench != null) {
             menu.addMenuClickHandler(1, (player1, i, itemStack, clickAction) -> {
                 entry.bench.open(player1);
@@ -380,14 +382,10 @@ public final class InfinityGroup extends FlexItemGroup {
         menu.open(player);
     }
 
+    @AllArgsConstructor
     private static final class BackEntry {
 
-        public BackEntry(BlockMenu bench, PlayerProfile profile, SlimefunGuideImplementation impl) {
-        	this.bench = bench;
-        	this.profile = profile;
-        	this.impl = impl;
-		}
-		private final BlockMenu bench;
+        private final BlockMenu bench;
         private final PlayerProfile profile;
         private final SlimefunGuideImplementation impl;
 
