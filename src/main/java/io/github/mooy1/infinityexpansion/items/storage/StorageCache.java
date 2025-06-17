@@ -75,7 +75,7 @@ public final class StorageCache {
     @Setter
     private int amount;
 
-    StorageCache(StorageUnit storageUnit, BlockMenu menu) {
+    public StorageCache(StorageUnit storageUnit, BlockMenu menu) {
         this.storageUnit = storageUnit;
         this.menu = menu;
 
@@ -426,7 +426,7 @@ public final class StorageCache {
         this.amount = 0;
     }
 
-    boolean matches(ItemStack item) {
+    public boolean matches(ItemStack item) {
         return item.getType() == this.material
                 && item.hasItemMeta() == (this.meta != null)
                 && (this.meta == null || this.meta.equals(item.getItemMeta()));
@@ -514,6 +514,18 @@ public final class StorageCache {
                 }
             }
         }
+    }
+    
+    public int amount() {
+    	return amount;
+    }
+    
+    public Material material() {
+    	return material;
+    }
+    
+    public ItemMeta meta() {
+    	return meta;
     }
 
 }
