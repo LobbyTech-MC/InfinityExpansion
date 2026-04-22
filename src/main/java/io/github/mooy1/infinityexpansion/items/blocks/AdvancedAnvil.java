@@ -17,12 +17,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
 
 import io.github.mooy1.infinityexpansion.InfinityExpansion;
 import io.github.mooy1.infinityexpansion.items.abstracts.AbstractEnergyCrafter;
+import io.github.mooy1.infinityexpansion.utils.NbtProtectedSlot;
 import io.github.mooy1.infinityexpansion.utils.Util;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -94,7 +96,9 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
 
     @Override
     protected void onNewInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
+    	
         menu.addMenuClickHandler(STATUS_SLOT, (player, i, itemStack, clickAction) -> {
+        	NbtProtectedSlot.protectSlot(player, player.getOpenInventory().getTopInventory(), STATUS_SLOT, itemStack, JavaPlugin.getPlugin(InfinityExpansion.class));
             craft(menu, b, player);
             return false;
         });
