@@ -236,15 +236,94 @@ public final class AdvancedAnvil extends AbstractEnergyCrafter {
         }
     }
 
+    
+    public static boolean isEnchantable(ItemStack item) {
+        if (item == null || item.getType() == Material.AIR) return false;
+        if (item.getType() == Material.ENCHANTED_BOOK) return true;
+
+        Material material = item.getType();
+        String name = material.name();
+
+        // 基于名称模式匹配，兼容所有版本，包括1.21新增的MACE
+        return name.contains("MACE") ||           
+               name.contains("_SWORD") ||
+               name.contains("_PICKAXE") ||
+               name.contains("_AXE") ||
+               name.contains("_SHOVEL") ||
+               name.contains("_HOE") ||
+               name.contains("_HELMET") ||
+               name.contains("_CHESTPLATE") ||
+               name.contains("_LEGGINGS") ||
+               name.contains("_BOOTS") ||
+               name.equals("BOW") ||
+               name.equals("CROSSBOW") ||
+               name.equals("TRIDENT") ||
+               name.equals("FISHING_ROD") ||
+               name.equals("SHEARS") ||
+               name.equals("FLINT_AND_STEEL") ||
+               name.equals("CARROT_ON_A_STICK") ||
+               name.equals("WARPED_FUNGUS_ON_A_STICK") ||
+               name.equals("ELYTRA") ||
+               name.equals("SHIELD") ||
+               name.equals("TURTLE_HELMET");
+    }
+    
+    public static boolean hasAtLeastOneCompatibleEnchantment(ItemStack target, ItemStack sacrifice) {
+        if (target == null || sacrifice == null) return false;
+        
+        Map<Enchantment, Integer> sacrificeEnchants = getEnchants(sacrifice.getItemMeta());
+        
+        for (Enchantment enchant : sacrificeEnchants.keySet()) {
+            // 检查附魔是否适用于目标物品
+            if (enchant.canEnchantItem(target)) {
+                // 检查是否与现有附魔冲突
+                boolean hasConflict = false;
+                Map<Enchantment, Integer> targetEnchants = getEnchants(target.getItemMeta());
+                for (Enchantment existing : targetEnchants.keySet()) {
+                    if (enchant.conflictsWith(existing)) {
+                        hasConflict = true;
+                        break;
+                    }
+                }
+                if (!hasConflict) {
+                    return true; // 找到至少一个兼容的附魔
+                }
+            }
+        }
+        
+        return false;
+    }
+    
     @Override
     public void update(@Nonnull BlockMenu inv) {
         ItemStack item1 = inv.getItemInSlot(INPUT_SLOTS[0]);
         ItemStack item2 = inv.getItemInSlot(INPUT_SLOTS[1]);
 
-        if (item1 == null || item2 == null || (item2.getType() != Material.ENCHANTED_BOOK && item1.getType() != item2.getType())) {
+        // 在你的铁砧检查方法中
+        if (item1 == null || item2 == null) {
             inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.BARRIER, "&c无效物品!"));
             return;
         }
+
+        // 检查目标物品是否可被附魔
+        if (!isEnchantable(item1) && item2.getType() != Material.ENCHANTED_BOOK) {
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.BARRIER, "&c该物品无法被附魔!"));
+            return;
+        }
+
+        // 检查物品类型匹配（非附魔书的情况）
+        if (item2.getType() != Material.ENCHANTED_BOOK && item1.getType() != item2.getType()) {
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.BARRIER, "&c物品类型不匹配!"));
+            return;
+        }
+
+        // 核心检查：牺牲品的附魔是否兼容目标物品
+        if (!hasAtLeastOneCompatibleEnchantment(item1, item2)) {
+            inv.replaceExistingItem(STATUS_SLOT, new CustomItemStack(Material.BARRIER, "&c附魔不兼容!"));
+            return;
+        }
+
+        // 所有检查通过，继续处理...
 
         ItemStack output = getOutput(item1, item2);
 
