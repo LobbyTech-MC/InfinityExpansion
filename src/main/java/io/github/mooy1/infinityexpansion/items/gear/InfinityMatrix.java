@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -30,11 +31,13 @@ public final class InfinityMatrix extends SimpleSlimefunItem<ItemUseHandler> imp
     private static void disableFlight(Player p) {
         p.sendMessage(ChatColor.RED + "无尽飞行已禁用!");
         p.setAllowFlight(false);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cmi fly " + p.getName() + " false");
     }
 
     private static void enableFlight(Player p) {
         p.sendMessage(ChatColor.GREEN + "无尽飞行已启用!");
         p.setAllowFlight(true);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cmi fly " + p.getName() + " true");
     }
 
     @Nonnull
